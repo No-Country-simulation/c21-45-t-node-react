@@ -1,12 +1,13 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.js
+import React from 'react';
+import Links from './Components/Links'; // importar Links
 
 function App() {
- 
-   
-  
+  return (
+    <div className="App">
+      <Links /> 
+    </div>
+  );
 }
 
-export default App
+export default App;
