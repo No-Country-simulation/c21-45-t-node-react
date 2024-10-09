@@ -1,9 +1,9 @@
 import React from "react";
 import "../footer/footer.css";
 import logo from "../../images/huella.png";
-import facebookLogo from "../../images/ph_facebook-logo.png"; // Asegúrate de que la ruta sea correcta
-import twitterLogo from "../../images/ph_twitter-logo.png"; // Asegúrate de que la ruta sea correcta
-import instagramLogo from "../../images/ph_instagram-logo.png"; // Asegúrate de que la ruta sea correcta
+import facebookLogo from "../../images/ph_facebook-logo.png";
+import twitterLogo from "../../images/ph_twitter-logo.png";
+import instagramLogo from "../../images/ph_instagram-logo.png"; 
 
 const Footer = ({ logoText }) => {
   return (
