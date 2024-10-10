@@ -22,11 +22,15 @@
   height: 40px;
   margin-right: 10px;
 }
+a{
+  text-decoration: none;
+}
 
 .footer-logo-text {
   font-size: 1.5rem;
   font-weight: bold;
   color: #1E9DBA;
+  text-decoration: none;
 }
 
 .footer-column {

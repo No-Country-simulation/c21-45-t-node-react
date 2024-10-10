@@ -1,7 +1,7 @@
 import React from 'react';
-import Footer from './footer/footer'; 
-import HomePage from '../Components/pages/home/HomePage'; 
-
+import { Link } from 'react-router-dom';
+import Footer from './footer/footer';
+import HomePage from '../Components/pages/home/HomePage';
 function Links() {
   const footerLinks = [
     { href: '/mascotas', text: 'Mascotas' },
@@ -13,8 +13,15 @@ function Links() {
 
   return (
     <>
-      <HomePage /> 
-      <Footer logoText="AdoptMe" links={footerLinks} />
+      
+      <Footer
+        logoText="AdoptMe"
+        links={footerLinks.map((link, index) => (
+          <Link key={index} to={link.href}>
+            {link.text}
+          </Link>
+        ))}
+      />
     </>
   );
 }

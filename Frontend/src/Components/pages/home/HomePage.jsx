@@ -18,8 +18,10 @@ const HomePage = () => {
         <div className="search-section">
           <h2>¡Encuentra a tu compañero!</h2>
           <p>¿Qué mascota estás buscando?</p>
-          <img src={gato} alt="" srcset="" />
-          <img src={perro} alt="" srcset="" />
+          <div className="container-masc">
+          <a href="http:/mascotas-gato"><img src={gato} alt="" srcset="" /></a>
+          <a href="http:/mascotas-perro"><img src={perro} alt="" srcset="" /></a>
+          </div>
           <p>¿De dónde eres?</p>
           
           {/* Input de texto */}
