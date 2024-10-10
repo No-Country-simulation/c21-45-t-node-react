@@ -1,0 +1,92 @@
+
+
+.home-container {
+    background-color: #1E9DBA;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    height: 100vh; /* Ocupa todo el alto de la ventana */
+    padding: 20px;
+}
+  
+.home-left {
+    width: 50%; /* Ocupa la mitad izquierda */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    text-align: center; /* Centra el texto */
+    padding: 20px; /* Agrega un poco de espacio interno */
+}
+  
+.main-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    font-family: "Lilita One", sans-serif;
+    color: #fff;
+    font-size: 48px;
+}
+  
+.search-section h2 {
+    font-family: "Lilita One", sans-serif;
+    margin-bottom: 10px;
+    font-size: 36px;
+}
+  
+.search-section p {
+    margin: 5px 0; /* Espaciado entre párrafos */
+font-size: 20px;
+  font-family: "Manrope", sans-serif;
+  font-optical-sizing: auto;
+
+}
+  
+.search-section {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 10px; /* Agrega un padding para el recuadro */
+}
+  
+/* Espaciado para las imágenes de gatos y perros */
+.search-section img {
+    /*      width: 80px; Ajusta el tamaño según sea necesario */
+    margin: 10px; /* Espaciado entre las imágenes */
+}
+  
+/* Estilo del recuadro del buscador */
+.buscador {
+    height: 40px;
+    display: flex; /* Usa flexbox para alinear el input y la lupa */
+    align-items: center; /* Centra verticalmente */
+    margin-top: 10px; /* Espaciado superior */
+    border: 1px solid black; /* Borde del recuadro */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 5px; /* Espacio interno */
+}
+  
+.search-input {
+    width: 100%; /* El input ocupa todo el ancho disponible */
+    padding: 10px;
+    border: none; /* Sin borde para el input */
+    outline: none; /* Sin contorno al enfocar */
+}
+    
+.search-icon {
+    
+    width: 20px; /* Ajusta el tamaño del icono de lupa */
+    height: 20px; /* Ajusta el tamaño del icono de lupa */
+    cursor: pointer; /* Cambia el cursor para indicar que es clickeable */
+    margin-left: 5px; /* Agrega un margen a la izquierda para separar del input */
+}
+  
+.home-right {
+    width: 50%; /* Ocupa la mitad derecha */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.main-image {
+    height: 100vh; /* Mantiene la relación de aspecto */
+    width: 1000px;
+    object-fit: cover;
+}

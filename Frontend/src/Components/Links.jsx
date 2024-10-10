@@ -1,6 +1,6 @@
-// src/Components/Links.js
 import React from 'react';
 import Footer from './footer/footer'; // Asegúrate de que la ruta sea correcta
+import HomePage from '../Components/pages/home/HomePage'; // Descomenta e importa correctamente
 
 function Links() {
   const footerLinks = [
@@ -12,7 +12,10 @@ function Links() {
   ];
 
   return (
-    <Footer logoText="AdoptMe" links={footerLinks} />
+    <>
+      <HomePage /> 
+      <Footer logoText="AdoptMe" links={footerLinks} />
+    </>
   );
 }
 
