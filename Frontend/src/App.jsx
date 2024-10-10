@@ -1,6 +1,5 @@
-// src/App.js
 import React from 'react';
-import Links from './Components/Links'; // importar Links
+import Links from './Components/Links'; 
 
 function App() {
   return (

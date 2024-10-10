@@ -1,6 +1,6 @@
 import React from 'react';
-import Footer from './footer/footer'; // Asegúrate de que la ruta sea correcta
-import HomePage from '../Components/pages/home/HomePage'; // Descomenta e importa correctamente
+import Footer from './footer/footer'; 
+import HomePage from '../Components/pages/home/HomePage'; 
 
 function Links() {
   const footerLinks = [
