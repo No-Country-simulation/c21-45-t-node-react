@@ -1,6 +1,6 @@
 import React from 'react';
-import './HomePage.css'; // Asegúrate de que el archivo CSS esté en la ruta correcta
-import homeImage from '../../../images/home_image.png'; // Ruta ajustada para la imagen
+import './HomePage.css'; 
+import homeImage from '../../../images/home_image.png'; 
 import gato from '../../../images/Rectangulo_gato.png'
 import perro from '../../../images/rectangulo_perro.png'
 import lupa from '../../../images/ph_magnifying-glass.png'
