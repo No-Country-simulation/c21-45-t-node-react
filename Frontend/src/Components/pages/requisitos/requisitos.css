@@ -1,0 +1,57 @@
+.container-all {
+    height: 526px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between; /* Espacio entre la imagen y los requisitos */
+    align-items: flex-start; /* Alinea la imagen y los requisitos al principio */
+  }
+  
+  .container-all img {
+    max-width: 526px; /* Ajusta el tamaño de la imagen */
+    height: auto; /* Mantiene las proporciones */
+    border-top-right-radius: 50%; /* Bordes redondeados en la parte superior derecha */
+    border-bottom-right-radius: 50%; /* Bordes redondeados en la parte inferior derecha */
+  }
+  
+  
+    
+    .requisitos-list {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .requisito-item {
+        display: flex;
+        align-items: center;
+    }
+    
+    .requisito-imagen {
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+        margin-right: 10px; /* Espacio entre la imagen y el texto */
+    }
+    
+    .requisito-texto { /* Nueva clase para el contenedor del texto */
+        display: flex;
+        flex-direction: column; /* Coloca título y descripción en columna */
+    }
+    
+    h2 {
+        margin-top: -8px;
+        font-size: 36px;
+        font-family: "Lilita One", sans-serif;
+    }
+    
+    h3 {
+        font-family: "Lilita One", sans-serif;
+        font-size: 20px;
+        margin: 0;
+    }
+    
+    p {
+    font-family: "Manrope", sans-serif;
+    font-size: 20px;
+    margin-top: 5px;
+  }
+  
