@@ -1,7 +1,7 @@
-const mascotaService = require('../services/mascotaService');
+import * as mascotaService from '../services/mascotaService.js';
 
 // Crear una nueva mascota
-exports.addMascota = async (req, res) => {
+export const addMascota = async (req, res) => {
   try {
     const newMascota = req.body;
     const mascota = await mascotaService.addMascota(newMascota);
@@ -14,7 +14,7 @@ exports.addMascota = async (req, res) => {
 };
 
 // Obtener todas las mascotas
-exports.listMascotas = async (req, res) => {
+export const listMascotas = async (req, res) => {
   try {
     const mascotas = await mascotaService.listMascotas();
     // Retorna la lista de mascotas
@@ -26,7 +26,7 @@ exports.listMascotas = async (req, res) => {
 };
 
 // Obtener todas las mascotas de un refugio
-exports.listMascotasByRefugio = async (req, res) => {
+export const listMascotasByRefugio = async (req, res) => {
   try {
     const mascotas = await mascotaService.listMascotasByRefugio(req.params.id);
     // Retorna la lista de mascotas del refugio
@@ -38,7 +38,7 @@ exports.listMascotasByRefugio = async (req, res) => {
 };
 
 // Obtener una mascota por ID
-exports.getMascotaById = async (req, res) => {
+export const getMascotaById = async (req, res) => {
   try {
     const mascota = await mascotaService.getMascotaById(req.params.id);
     if (!mascota) {
@@ -53,7 +53,7 @@ exports.getMascotaById = async (req, res) => {
 };
 
 // Editar una mascota
-exports.editMascota = async (req, res) => {
+export const editMascota = async (req, res) => {
   try {
     const editedMascota = await mascotaService.editMascota(req.params.id, req.body);
     if (!editedMascota) {
@@ -68,7 +68,7 @@ exports.editMascota = async (req, res) => {
 };
 
 // Eliminar una mascota
-exports.deleteMascota = async (req, res) => {
+export const deleteMascota = async (req, res) => {
   try {
     const result = await mascotaService.deleteMascota(req.params.id);
     if (!result) {

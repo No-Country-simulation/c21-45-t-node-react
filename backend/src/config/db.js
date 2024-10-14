@@ -1,5 +1,5 @@
-const mysql = require('mysql2/promise');
-const dotenv = require('dotenv');
+import mysql from 'mysql2/promise';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
@@ -11,13 +11,12 @@ const pool = mysql.createPool({
   database: process.env.DB_NAME,
 });
 
-// Función para obtener una conexión del pool
 const getConnection = async () => {
   return await pool.getConnection();
 };
 
-// Exporta el pool y la función getConnection
-module.exports = {
+// Exporta el pool y la función getConnection como objeto predeterminado
+export default {
   pool,
   getConnection,
 };

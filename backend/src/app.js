@@ -1,7 +1,7 @@
-const express = require('express');
-const dotenv = require('dotenv');
-const db = require('./config/db.js');
-const mascotaRoutes = require('./routes/mascotaRoutes');
+import express from 'express';
+import dotenv from 'dotenv';
+import db from './config/db.js';
+import mascotaRoutes from './routes/mascotaRoutes.js';
 
 // Configuración de las variables de entorno
 dotenv.config();
