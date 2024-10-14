@@ -1,9 +1,8 @@
 import React from 'react';
-import './Lema.css'; // Asegúrate de importar el archivo CSS
+import './Lema.css'; 
 
-// Importa la imagen que deseas usar de fondo
-import perro from '../../images/ph_dog.png'; // Cambia la ruta según tu estructura de carpetas
-import gato from '../../images/ph_cat.png'; // Cambia la ruta según tu estructura de carpetas
+import perro from '../../images/ph_dog.png'; 
+import gato from '../../images/ph_cat.png'; 
 
 const Lema = () => {
   return (
