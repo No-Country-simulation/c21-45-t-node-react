@@ -1,8 +1,8 @@
-const mysql = require('mysql2/promise');
-const db = require('../config/db');
+import mysql from 'mysql2/promise';
+import db from '../config/db.js';
 
 // Crear una nueva mascota
-exports.addMascota = async (newMascota) => {
+export const addMascota = async (newMascota) => {
   // Se chequea que ninguno de los campos obligatorios esté vacío
     if (!newMascota.nombre || !newMascota.especie || !newMascota.raza || !newMascota.sexo || !newMascota.tamanio || !newMascota.fecha_nacimiento || !newMascota.castrado || !newMascota.vacunado || !newMascota.amigable_ninos || !newMascota.amigable_perros || !newMascota.amigable_gatos || !newMascota.enfermedades || !newMascota.detalle || !newMascota.foto || !newMascota.FK_Refugio) {
         return "Todos los campos son obligatorios.";
@@ -40,7 +40,7 @@ exports.addMascota = async (newMascota) => {
 };
 
 // Obtener todas las mascotas
-exports.listMascotas = async () => {
+export const listMascotas = async () => {
   const connection = await db.getConnection();
   try {
     const [rows] = await connection.execute('SELECT * FROM Mascota');
@@ -51,7 +51,7 @@ exports.listMascotas = async () => {
 };
 
 // Obtener todas las mascotas de un refugio
-exports.listMascotasByRefugio = async (refugioId) => {
+export const listMascotasByRefugio = async (refugioId) => {
   const connection = await db.getConnection();
   try {
     const [rows] = await connection.execute('SELECT * FROM refugio WHERE PK_Refugio = ?', [refugioId]);
@@ -67,7 +67,7 @@ exports.listMascotasByRefugio = async (refugioId) => {
 };
 
 // Obtener una mascota por ID
-exports.getMascotaById = async (id) => {
+export const getMascotaById = async (id) => {
   const connection = await db.getConnection();
   try {
     const [rows] = await connection.execute('SELECT * FROM Mascota WHERE PK_Mascota = ?', [id]);
@@ -78,7 +78,7 @@ exports.getMascotaById = async (id) => {
 };
 
 // Editar una mascota
-exports.editMascota = async (id, updatedMascota) => {
+export const editMascota = async (id, updatedMascota) => {
   // Se chequea que ninguno de los campos obligatorios esté vacío
     if (!updatedMascota.nombre || !updatedMascota.especie || !updatedMascota.raza || !updatedMascota.sexo || !updatedMascota.tamanio || !updatedMascota.fecha_nacimiento || !updatedMascota.castrado || !updatedMascota.vacunado || !updatedMascota.amigable_ninos || !updatedMascota.amigable_perros || !updatedMascota.amigable_gatos || !updatedMascota.enfermedades || !updatedMascota.detalle || !updatedMascota.foto) {
       return "Todos los campos son obligatorios.";
@@ -119,7 +119,7 @@ exports.editMascota = async (id, updatedMascota) => {
 };
 
 // Eliminar una mascota
-exports.deleteMascota = async (id) => {
+export const deleteMascota = async (id) => {
   const connection = await db.getConnection();
   try {
     const [result] = await connection.execute('DELETE FROM Mascota WHERE PK_Mascota = ?', [id]);

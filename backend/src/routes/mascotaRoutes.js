@@ -1,6 +1,6 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const mascotaController = require('../controllers/mascotaController');
+import * as mascotaController from '../controllers/mascotaController.js';
 
 
 // Ruta para crear una nueva mascota
@@ -16,4 +16,4 @@ router.put('/:id', mascotaController.editMascota);
 // Ruta para eliminar una mascota
 router.delete('/:id', mascotaController.deleteMascota);
 
-module.exports = router;
+export default router;
