@@ -4,6 +4,8 @@ import HomePage from './Components/pages/home/HomePage';
 import Links from './Components/Links'; 
 import Requisitos from './Components/pages/requisitos/requisitos';
 import Login from './Components/pages/login/Login';
+import FormularioRegistro from './Components/formularioRegistro/FormularioRegistro';
+import FormularioAdopcion from './Components/formularioAdopcion/FormularioAdopcion';
 
 
 function App() {
@@ -18,6 +20,9 @@ function App() {
         <Route path="/requisitos-adoptar" element={<Requisitos />} />
         <Route path='/login' element={<Login/>}/>
         <Route path="/publicar-mascota" element={<div>Publicar Mascota Page</div>} />
+        <Route path="/formulario-registro" element={<FormularioRegistro/>} />
+        <Route path="/formulario-adopcion" element={<FormularioAdopcion/>} />
+
       </Routes>
       <Links />
     </Router>
