@@ -4,6 +4,7 @@ import homeImage from '../../../images/home_image.png';
 import gato from '../../../images/Rectangulo_gato.png'
 import perro from '../../../images/rectangulo_perro.png'
 import lupa from '../../../images/ph_magnifying-glass.png'
+import CardMascota from '../../card/CardMascota';
 
 
 
@@ -37,6 +38,10 @@ const HomePage = () => {
       <div className="home-right">
         <img src={homeImage} alt="Mascotas Inicio" className="main-image" />
       </div>
+
+     
+
+    
     </div>
   );
 };
