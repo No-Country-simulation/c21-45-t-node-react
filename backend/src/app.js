@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import db from './config/db.js';
 import mascotaRoutes from './routes/mascotaRoutes.js';
+import enumRoutes from './routes/enumRoutes.js';
 
 // Configuración de las variables de entorno
 dotenv.config();
@@ -13,11 +14,7 @@ app.use(express.json());
 
 // Middleware para manejar las rutas
 app.use('/api/mascota', mascotaRoutes);
-
-// Ruta de prueba
-app.get('/', (req, res) => {
-  res.send('¡Bienvenido a la Plataforma de Adopción de Mascotas AdoptMe!');
-});
+app.use('/api/enum', enumRoutes);
 
 // Inicializar el servidor
 const PORT = process.env.PORT || 3000;
