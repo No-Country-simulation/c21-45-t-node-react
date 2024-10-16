@@ -91,3 +91,12 @@
     margin-left: 40px;
     
   }
+  .search-component {
+    background-color: #f0f0f0; /* Color de fondo, ajusta según sea necesario */
+    border-radius: 12px; /* Bordes redondeados */
+    width: 100%; /* Ocupará el 100% del ancho del contenedor padre */
+    display: flex;
+    justify-content: center; /* Centra el contenido */
+    align-items: center; /* Centra verticalmente */
+  }
+  

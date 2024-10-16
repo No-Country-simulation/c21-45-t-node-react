@@ -1,5 +1,6 @@
 .container-all {
     height: 526px;
+    background-color: aquamarine;
     width: 100%;
     display: flex;
     justify-content: space-between; /* Espacio entre la imagen y los requisitos */
