@@ -14,7 +14,7 @@ const Navbar = () => {
             <a href="/">FAQ</a>
             <a href="/">Historias</a>
             <a href="/">Quiero adoptar</a>
-            <a href="/">Quiero dar en adopción</a>
+            <a href="/formulario-registro">Quiero dar en adopción</a>
             <button type="submit" id="Login">Login</button>
             <button type="submit" id="Registro">Registro</button>
         </nav>

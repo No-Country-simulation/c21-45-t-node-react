@@ -10,6 +10,7 @@ import Search from "./pages/search/search";
 import Mascotagato from "./pages/search/gatos/mascotagato";
 import Mascotaperro from "./pages/search/perro/mascotaperro";
 import Mascotas from "./pages/search/mascotas/mascotas";
+import Preguntas from "./pages/preguntas/preguntas";
 function App() {
   return (
     <Router>
@@ -23,7 +24,7 @@ function App() {
         />
         <Route
           path="/preguntas-frecuentes"
-          element={<div>Preguntas Frecuentes Page</div>}
+          element={<Preguntas />}
         />
         <Route path="/requisitos-adoptar" element={<Requisitos />} />
         <Route path="/login" element={<Login />} />
