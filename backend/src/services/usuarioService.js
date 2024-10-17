@@ -4,7 +4,6 @@ const usuarioService = {
   // Obtener todos los usuarios
   async getUsuarios() {
     try {
-      console.log("service getUsuarios");
       const [rows] = await pool.query("SELECT * FROM usuario");
       return rows;
     } catch (error) {
@@ -99,6 +98,7 @@ const usuarioService = {
   async addUsuario(email, password, tipoUsuario, FK_Tipo) {
     try {
       let FK_Rol;
+      // TODO: Falta cambiar a buscar el rol por nombre y no por id!!
 
       // Determinamos el FK_Rol dependiendo del tipo de usuario
       if (tipoUsuario === "adoptante") {
