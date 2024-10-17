@@ -13,7 +13,7 @@ export const addMascota = async (req, res) => {
   }
 };
 
-// Obtener todas las mascotas
+// Listar todas las mascotas
 export const listMascotas = async (req, res) => {
   try {
     const mascotas = await mascotaService.listMascotas();
@@ -25,7 +25,7 @@ export const listMascotas = async (req, res) => {
   }
 };
 
-// Obtener todas las mascotas de un refugio
+// Listar todas las mascotas de un refugio
 export const listMascotasByRefugio = async (req, res) => {
   try {
     const mascotas = await mascotaService.listMascotasByRefugio(req.params.id);

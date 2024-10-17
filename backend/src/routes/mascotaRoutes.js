@@ -7,7 +7,7 @@ import * as mascotaController from '../controllers/mascotaController.js';
 router.post('/', mascotaController.addMascota);
 // Ruta para listar todas las mascotas
 router.get('/', mascotaController.listMascotas);
-// Ruta para obtener todas las mascotas de un refugio
+// Ruta para listar todas las mascotas de un refugio
 router.get('/refugio/:id', mascotaController.listMascotasByRefugio);
 // Ruta para obtener una mascota por ID
 router.get('/:id', mascotaController.getMascotaById);

@@ -1,4 +1,3 @@
-import mysql from 'mysql2/promise';
 import db from '../config/db.js';
 
 // Crear una nueva mascota

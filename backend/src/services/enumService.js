@@ -1,7 +1,6 @@
-import mysql from 'mysql2/promise';
 import db from '../config/db.js';
 
-// Obtener los valores ENUM de cada entidad para los select de la interfaz
+// Listar los valores ENUM de cada entidad para los select de la interfaz
 export const getEnumValues = async (column, table) => {
     const connection = await db.getConnection();
     try {
