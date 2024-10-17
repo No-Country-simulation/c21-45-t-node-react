@@ -9,22 +9,18 @@ const pool = mysql.createPool({
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
+  waitForConnections: true,
+  connectionLimit: 20,
+  queueLimit: 0,
 });
 
-const getConnection = async () => {
-  return await pool.getConnection();
-};
-
-// Exporta el pool y la función getConnection como objeto predeterminado
-export default {
-  pool,
-  getConnection,
-};
+// Exporta el pool
+export default pool;
 
 // Test de conexión
 (async () => {
   try {
-    const connection = await getConnection();
+    const connection = await pool.getConnection();
     console.log('Conexión a la base de datos exitosa.');
     connection.release();
   } catch (err) {

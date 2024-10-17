@@ -1,7 +1,7 @@
-import express from 'express';
-const router = express.Router();
+import { Router } from "express";
 import * as ubicacionController from '../controllers/ubicacionController.js';
 
+const router = Router();
 
 // Ruta para listar todos los países
 router.get('/pais', ubicacionController.listPaises);

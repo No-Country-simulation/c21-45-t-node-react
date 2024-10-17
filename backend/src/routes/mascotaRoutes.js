@@ -1,7 +1,7 @@
-import express from 'express';
-const router = express.Router();
+import { Router } from 'express';
 import * as mascotaController from '../controllers/mascotaController.js';
 
+const router = Router();
 
 // Ruta para crear una nueva mascota
 router.post('/', mascotaController.addMascota);

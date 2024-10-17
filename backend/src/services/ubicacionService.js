@@ -1,34 +1,42 @@
-import db from '../config/db.js';
+import pool from '../config/db.js';
 
-// Listar todos los países´
-export const listPaises = async () => {
-  const connection = await db.getConnection();
-  try {
-    const [rows] = await connection.execute(`SELECT * FROM Pais ORDER BY nombre`);
-    return rows;
-  } finally {
-    connection.release();
-  }
+const ubicacionService = {
+  
+  // Listar todos los países
+  async listPaises() {
+    try {
+      const [rows] = await pool.query("SELECT * FROM Pais ORDER BY nombre");
+      return rows;
+    } catch (error) {
+      throw new Error(`Error al obtener países: ${error.message}`);
+    }
+  },
+
+  // Listar todas las provincias de un país
+  async listProvinciasByPais(id) {
+    try {
+      const [rows] = await pool.query("SELECT * FROM Provincia WHERE FK_Pais = ? ORDER BY nombre", [id]);
+      if (rows.length === 0) {
+        throw new Error("Provincias no encontradas");
+      }
+      return rows;
+    } catch (error) {
+      throw new Error(`Error al obtener provincias del país con ID ${id}: ${error.message}`);
+    }
+  },
+
+  // Listar todas las localidades de una provincia
+  async listLocalidadesByProvincia(id) {
+    try {
+      const [rows] = await pool.query("SELECT * FROM Localidad WHERE FK_Provincia = ? ORDER BY nombre", [id]);
+      if (rows.length === 0) {
+        throw new Error("Localidades no encontradas");
+      }
+      return rows;
+    } catch (error) {
+      throw new Error(`Error al obtener localidades de la provincia con ID ${id}: ${error.message}`);
+    }
+  },
 };
 
-// Listar todas las provincias de un país
-export const listProvinciasByPais = async (id) => {
-  const connection = await db.getConnection();
-  try {
-    const [rows] = await connection.execute(`SELECT * FROM Provincia WHERE FK_Pais = ? ORDER BY nombre`, [id]);
-    return rows;
-  } finally {
-    connection.release();
-  }
-};
-
-// Listar todas las localidades de una provincia
-export const listLocalidadesByProvincia = async (id) => {
-  const connection = await db.getConnection();
-  try {
-    const [rows] = await connection.execute(`SELECT * FROM Localidad WHERE FK_Provincia = ? ORDER BY nombre`, [id]);
-    return rows;
-  } finally {
-    connection.release();
-  }
-};
+export default ubicacionService;

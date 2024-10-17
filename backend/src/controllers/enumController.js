@@ -1,12 +1,13 @@
-import * as enumService from '../services/enumService.js';
+import enumService from '../services/enumService.js';
 
 // Obtener los valores ENUM de cada entidad para los select de la interfaz (se debe enviar el atributo y la entidad)
 export const getEnumValues = async (req, res) => {
     try {
-      const enums = await enumService.getEnumValues(req.params.atributo, req.params.entidad);
-      res.json({ enums });
+      const atributo = req.params.atributo;
+      const entidad = req.params.entidad;
+      const enums = await enumService.getEnumValues(atributo, entidad);
+      res.status(200).json({ enums });
     } catch (error) {
-      console.error('Error obteniendo los valores ENUM:', error);
-      res.status(500).json({ error: 'Error obteniendo los valores ENUM.' });
+      res.status(404).json({ error: error.message });
     }
   };

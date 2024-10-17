@@ -1,13 +1,12 @@
-import * as ubicacionService from '../services/ubicacionService.js';
+import ubicacionService from '../services/ubicacionService.js';
 
 // Listar todos los países
 export const listPaises = async (req, res) => {
   try {
     const paises = await ubicacionService.listPaises();
-    res.json(paises);
+    res.status(200).json(paises);
   } catch (error) {
-    console.error('Error al obtener los países:', error);
-    res.status(500).json({ error: 'Error al obtener los países.' });
+    res.status(404).json({ error: error.message });
   }
 };
 
@@ -16,10 +15,9 @@ export const listProvinciasByPais = async (req, res) => {
   try {
     const id = req.params.id;
     const provincias = await ubicacionService.listProvinciasByPais(id);
-    res.json(provincias);
+    res.status(200).json(provincias);
   } catch (error) {
-    console.error('Error al obtener las provincias:', error);
-    res.status(500).json({ error: 'Error al obtener las provincias.' });
+    res.status(404).json({ error: error.message });
   }
 };
 
@@ -28,9 +26,8 @@ export const listLocalidadesByProvincia = async (req, res) => {
   try {
     const id = req.params.id;
     const localidades = await ubicacionService.listLocalidadesByProvincia(id);
-    res.json(localidades);
+    res.status(200).json(localidades);
   } catch (error) {
-    console.error('Error al obtener las localidades:', error);
-    res.status(500).json({ error: 'Error al obtener las localidades.' });
+    res.status(404).json({ error: error.message });
   }
 };
