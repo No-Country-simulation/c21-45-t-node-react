@@ -1,5 +1,5 @@
 import userService from "../services/usuarioService.js";
-import { usuarioDTO } from "../DTO/usuarioDTO.js";
+import { usuarioDTO } from "../dto/usuarioDTO.js";
 
 export const getUsuarios = async (req, res) => {
   console.log("Controller getUsuarios");

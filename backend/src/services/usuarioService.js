@@ -1,11 +1,11 @@
-import db from "../config/db.js";
+import pool from "../config/db.js";
 
 const usuarioService = {
   // Obtener todos los usuarios
   async getUsuarios() {
     try {
       console.log("service getUsuarios");
-      const [rows] = await db.pool.query("SELECT * FROM usuario");
+      const [rows] = await pool.query("SELECT * FROM usuario");
       return rows;
     } catch (error) {
       throw new Error(`Error al obtener usuarios: ${error.message}`);
@@ -15,7 +15,7 @@ const usuarioService = {
   // Obtener un usuario por ID
   async getUsuarioById(userId) {
     try {
-      const [rows] = await db.pool.query("SELECT * FROM usuario WHERE PK_Usuario = ?", [userId]);
+      const [rows] = await pool.query("SELECT * FROM usuario WHERE PK_Usuario = ?", [userId]);
       if (rows.length === 0) {
         throw new Error("Usuario no encontrado");
       }
@@ -28,7 +28,7 @@ const usuarioService = {
   // Obtener un usuario por email
   async getUsuarioByEmail(email) {
     try {
-      const [rows] = await db.pool.query("SELECT * FROM usuario WHERE email = ?", [email]);
+      const [rows] = await pool.query("SELECT * FROM usuario WHERE email = ?", [email]);
       if (rows.length === 0) {
         return null;
       }
@@ -44,7 +44,7 @@ const usuarioService = {
       const { nombre, apellido, fecha_nacimiento, tipo_doc, nro_doc, direccion } = adoptanteData;
 
       // Agregar dirección
-      const [direccionResult] = await db.pool.query(
+      const [direccionResult] = await pool.query(
         `
         INSERT INTO Direccion (calle, numero, FK_Localidad) 
         VALUES (?, ?, ?)`,
@@ -53,7 +53,7 @@ const usuarioService = {
       const FK_Direccion = direccionResult.insertId;
 
       // Agregar adoptante
-      const [adoptanteResult] = await db.pool.query(
+      const [adoptanteResult] = await pool.query(
         `
         INSERT INTO Adoptante (nombre, apellido, fecha_nacimiento, tipo_doc, nro_doc, FK_Direccion)
         VALUES (?, ?, ?, ?, ?, ?)`,
@@ -72,7 +72,7 @@ const usuarioService = {
       const { tipo, nombre, apellido, telefono, direccion } = refugioData;
 
       // Agregar dirección
-      const [direccionResult] = await db.pool.query(
+      const [direccionResult] = await pool.query(
         `
         INSERT INTO Direccion (calle, numero, FK_Localidad) 
         VALUES (?, ?, ?)`,
@@ -81,7 +81,7 @@ const usuarioService = {
       const FK_Direccion = direccionResult.insertId;
 
       // Agregar refugio
-      const [refugioResult] = await db.pool.query(
+      const [refugioResult] = await pool.query(
         `
         INSERT INTO Refugio (tipo, nombre, apellido, telefono, FK_Direccion)
         VALUES (?, ?, ?, ?, ?)`,
@@ -107,7 +107,7 @@ const usuarioService = {
         FK_Rol = 3; // Suponiendo que 3 es el rol de refugio
       }
 
-      await db.pool.query(
+      await pool.query(
         `
         INSERT INTO Usuario (email, password, FK_Rol, ${tipoUsuario === "adoptante" ? "FK_Adoptante" : "FK_Refugio"})
         VALUES (?, ?, ?, ?)`,
@@ -123,12 +123,7 @@ const usuarioService = {
   async updateUsuario(userId, userData) {
     try {
       const { name, email, password } = userData;
-      const [result] = await db.pool.query("UPDATE usuario SET name = ?, email = ?, password = ? WHERE PK_Usuario = ?", [
-        name,
-        email,
-        password,
-        userId,
-      ]);
+      const [result] = await pool.query("UPDATE usuario SET name = ?, email = ?, password = ? WHERE PK_Usuario = ?", [name, email, password, userId]);
 
       if (result.affectedRows === 0) {
         throw new Error("Usuario no encontrado o sin cambios");
@@ -142,7 +137,7 @@ const usuarioService = {
   // Eliminar un usuario por ID
   async deleteUsuario(userId) {
     try {
-      const [result] = await db.pool.query("DELETE FROM usuario WHERE PK_Usuario = ?", [userId]);
+      const [result] = await pool.query("DELETE FROM usuario WHERE PK_Usuario = ?", [userId]);
       if (result.affectedRows === 0) {
         throw new Error("Usuario no encontrado");
       }
@@ -155,7 +150,7 @@ const usuarioService = {
   // Obtener todos los Adoptantes
   async getAdoptantes() {
     try {
-      const [rows] = await db.pool.query(`
+      const [rows] = await pool.query(`
         SELECT Usuario.*, Adoptante.*
         FROM Usuario
         INNER JOIN Adoptante ON Usuario.FK_Adoptante = Adoptante.PK_Adoptante
@@ -169,7 +164,7 @@ const usuarioService = {
   // Obtener todos los Refugios
   async getRefugios() {
     try {
-      const [rows] = await db.pool.query(`
+      const [rows] = await pool.query(`
           SELECT Usuario.*, Refugio.*
           FROM Usuario
           INNER JOIN Refugio ON Usuario.FK_Refugio = Refugio.PK_Refugio
