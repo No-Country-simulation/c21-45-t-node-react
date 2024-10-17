@@ -4,16 +4,31 @@ import homeImage from '../../images/home_image.png';
 import axios from 'axios';
 
 const FormularioRegistro = () => {
-  // Estados para almacenar los países, provincias, localidades y el valor seleccionado
+  // Estados para almacenar los países, provincias, localidades y el tipo seleccionado
   const [paises, setPaises] = useState([]);
   const [provincias, setProvincias] = useState([]);
   const [localidades, setLocalidades] = useState([]);
-  const [paisSeleccionado, setPaisSeleccionado] = useState(''); // Estado para el país seleccionado
-  const [provinciaSeleccionada, setProvinciaSeleccionada] = useState(''); // Estado para la provincia seleccionada
-  const [localidadSeleccionada, setLocalidadSeleccionada] = useState(''); // Estado para la localidad seleccionada
+  const [paisSeleccionado, setPaisSeleccionado] = useState('');
+  const [provinciaSeleccionada, setProvinciaSeleccionada] = useState('');
+  const [localidadSeleccionada, setLocalidadSeleccionada] = useState('');
+  const [tiposEnum, setTiposEnum] = useState([]);
+  const [tipoSeleccionado, setTipoSeleccionado] = useState('');
 
+  // Llamada a la API para obtener los valores ENUM
+  useEffect(() => {
+    axios.get('http://localhost:3001/api/enum/tipo/refugio')
+      .then(response => {
+        setTiposEnum(response.data.enums);
+      })
+      .catch(error => {
+        console.error('Error al obtener los tipos ENUM:', error);
+      });
+  }, []);
 
-
+  // Manejar el cambio del tipo seleccionado
+  const handleTipoChange = (event) => {
+    setTipoSeleccionado(event.target.value);
+  };
   
   // Obtener los países cuando el componente se monta
   useEffect(() => {
@@ -95,6 +110,22 @@ const FormularioRegistro = () => {
 
                     <label htmlFor="telefono">Número de Teléfono</label>
                     <input type="number" id="telefono" />
+                    <br />
+
+                    <label htmlFor="tipo">Tipo de refugio</label>
+                    {tiposEnum.map((tipo, index) => (
+                      <div key={index}>
+                        <input
+                          type="radio"
+                          id={`tipo-${tipo}`}
+                          name="tipoRefugio"
+                          value={tipo}
+                          checked={tipoSeleccionado === tipo}
+                          onChange={handleTipoChange}
+                        />
+                        <label htmlFor={`tipo-${tipo}`}>{tipo}</label>
+                      </div>
+                    ))}
                     <br />
 
                     <label htmlFor="pais">País</label>
