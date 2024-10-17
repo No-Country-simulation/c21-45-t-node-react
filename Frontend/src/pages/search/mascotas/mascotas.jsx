@@ -1,7 +1,7 @@
 import Search from "../search";
 import Filtros from "../../../Components/filtros/filtros";
 
-const mascotagato = () => {
+const Mascotas = () => {
   const filtros = [
     {
       imagen: "/gato.png",
@@ -32,4 +32,4 @@ const mascotagato = () => {
   );
 };
 
-export default mascotagato;
+export default Mascotas;

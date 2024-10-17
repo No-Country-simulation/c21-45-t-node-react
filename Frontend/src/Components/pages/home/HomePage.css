@@ -1,102 +1,132 @@
 .home-container {
-    background-color: #1e9dba;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 100vh; /* Ocupa todo el alto de la ventana */
-  }
-  
-  .home-left {
-    width: 50%; /* Ocupa la mitad izquierda */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center; /* Centra el texto */
-    padding: 20px; /* Agrega un poco de espacio interno */
-  }
-  
-  .main-title {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    font-family: "Lilita One", sans-serif;
-    color: #fff;
-    font-size: 48px;
-  }
-  
-  .search-section h2 {
-    font-family: "Lilita One", sans-serif;
-    margin-bottom: 10px;
-    font-size: 36px;
-  }
-  
-  .search-section p {
-    margin: 5px 0; /* Espaciado entre párrafos */
-    font-size: 20px;
-    font-family: "Manrope", sans-serif;
-    font-optical-sizing: auto;
-  }
-  
-  .search-section {
-    background-color: #fff;
-    border-radius: 12px;
-    padding: 10px; /* Agrega un padding para el recuadro */
-  }
-  
-  /* Espaciado para las imágenes de gatos y perros */
-  .search-section img {
-    margin: 10px; /* Espaciado entre las imágenes */
-  }
-  
-  /* Estilo del recuadro del buscador */
-  .buscador {
-    height: 40px;
-    display: flex; /* Usa flexbox para alinear el input y la lupa */
-    align-items: center; /* Centra verticalmente */
-    margin-top: 10px; /* Espaciado superior */
-    border: 1px solid black; /* Borde del recuadro */
-    border-radius: 15px; /* Bordes redondeados */
-    padding: 5px; /* Espacio interno */
-  }
-  
-  .search-input {
-    width: 100%; /* El input ocupa todo el ancho disponible */
-    padding: 10px;
-    border: none; 
-    outline: none; /* Sin contorno al enfocar */
-  }
-  
-  .search-icon {
-    width: 20px; /* Ajusta el tamaño del icono de lupa */
-    height: 20px; /* Ajusta el tamaño del icono de lupa */
-    cursor: pointer; /* Cambia el cursor para indicar que es clickeable */
-    margin-left: 5px; /* Agrega un margen a la izquierda para separar del input */
-  }
-  
-  .home-right {
-    width: 50%; /* Ocupa la mitad derecha */
-    height: 100vh; /* Asegura que la altura sea del 100% de la pantalla */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0; /* Elimina cualquier padding/margen */
-  }
-  
-  .main-image {
-    width: 100%; /* Ocupará el 100% del contenedor */
-    height: 100%; /* Cubre el 100% del alto */
-    object-fit: cover; /* Asegura que la imagen cubra todo sin distorsión */
-  }
-  
-  .container-masc a img{
-    margin-left: 40px;
-    
-  }
-  .search-component {
-    background-color: #f0f0f0; /* Color de fondo, ajusta según sea necesario */
-    border-radius: 12px; /* Bordes redondeados */
-    width: 100%; /* Ocupará el 100% del ancho del contenedor padre */
-    display: flex;
-    justify-content: center; /* Centra el contenido */
-    align-items: center; /* Centra verticalmente */
-  }
-  
+  background-color: #1e9dba;
+  display: flex;
+  margin-top: 110px;
+  justify-content: space-between;
+  align-items: center;
+  height: 510px;
+}
+
+.home-left {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.main-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  font-family: "Lilita One", sans-serif;
+  color: #fff;
+  font-size: 48px;
+}
+
+.search-section h2 {
+  font-family: "Lilita One", sans-serif;
+  margin-bottom: 10px;
+  font-size: 36px;
+}
+
+.search-section p {
+  margin: 5px 0;
+  font-size: 20px;
+  font-family: "Manrope", sans-serif;
+  font-optical-sizing: auto;
+}
+
+.search-section {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.search-section img {
+  margin: 10px;
+}
+
+.buscador {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  border: 1px solid black;
+  border-radius: 15px;
+  padding: 5px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  outline: none;
+}
+
+.search-icon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.home-right {
+  width: 45%;
+  height: 510px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+.main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.container-masc a img {
+  margin-left: 40px;
+}
+
+.search-component {
+  background-color: #ffffff;
+  border-radius: 12px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.btn {
+  width: 150px;
+  height: 45px;
+  background-color: #FF6F61;
+  color: white;
+  font-size: 16px;
+  font-family: 'Lilita One', sans-serif;
+  border: none;
+  border-radius: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin: 20px;
+}
+
+.btn:hover {
+  background-color: #FF4A39;
+  transform: scale(1.05);
+}
+
+.btn:active {
+  background-color: #FF2A10;
+  transform: scale(0.98);
+}

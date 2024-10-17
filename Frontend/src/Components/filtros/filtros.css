@@ -1,81 +1,92 @@
 .filtros-container {
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Alinea el contenedor en el centro horizontalmente */
-    flex-wrap: wrap; /* Permite que los elementos se ajusten si no hay suficiente espacio */
-    background-color: rgba(255, 189, 97, 0.639); /* Fondo detrás de la nube */
-  }
-  
-  .filtros {
-    margin-bottom: 10px;
-    margin-left: 40px;
-    border-radius: 5px;
-    position: relative; /* Para posicionar la imagen de fondo */
-  }
-  
-  .filtros .content {
-    display: flex;
-    flex-direction: column; /* Coloca los elementos (imagen y texto) uno debajo del otro */
-    justify-content: center; /* Centra verticalmente */
-    align-items: center; /* Centra horizontalmente */
-    width: 200px;
-    height: 127px;
-    background-image: url("/nube.png"); /* Imagen PNG de la nube */
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    cursor: pointer;
-    padding: 10px;
-    border-radius: 5px;
-    text-align: center;
-    z-index: 1; /* Asegura que la nube se mantenga arriba del contenido desplegado */
-  }
-  
-  .filtros .content h1 {
-    font-family: "Lilita One", sans-serif;
-    font-size: 18px;
-    color: #323131;
-    margin: 12px;
-  }
-  
-  .filtros .caracteristicas {
-    width: 220px;
-    overflow: hidden;
-    transition: max-height 0.3s ease-out; /* Transición suave */
-    list-style: none; /* Quita las viñetas de la lista */
-    margin-top: -20px;
-    padding: 0;
-    z-index: 0; /* Asegura que el contenido se despliegue debajo de la nube */
-    position: absolute; /* Permite que el contenido se posicione sobre la nube */
-    background-color: rgb(255, 255, 255);
-  }
-  
-  /* Cuando se muestran las características, su altura se ajusta */
-  .filtros.show-options .caracteristicas {
-    height: 110px; /* Ajusta la altura según la cantidad de contenido */
-    margin-top: -30px;
-    transition: max-height 0.5s ease-in-out;
-    border-bottom-left-radius: 18px;
-    border-bottom-right-radius: 18px;
-  }
-  
-  .filtros .caracteristicas li {
-    font-family: "Lilita One", sans-serif;
-    font-size: 16px;
-    color: #8C8C8C;
-    text-decoration: none; /* Elimina cualquier subrayado en los textos */
-    list-style-type: none; /* Elimina cualquier estilo de lista (viñetas, números) */
-  }
-  
-  .filtros .caracteristicas li:last-child {
-    border-bottom: none;
-  }
-  
-  /* Para eliminar cualquier padding y ajustar la lista */
-  .filtros .caracteristicas li ul {
-    margin: 0;
-    list-style-type: none; /* Asegura que las sublistas tampoco tengan viñetas */
-    font-size: 16px;
-    color: #555;
-  }
-  
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Alinea el contenedor en el centro horizontalmente */
+  flex-wrap: wrap; /* Permite que los elementos se ajusten si no hay suficiente espacio */
+  background-color: #f3f5f7; /* Fondo detrás de la nube */
+}
+
+.filtros {
+  margin-bottom: 10px;
+  margin-left: 40px;
+  border-radius: 5px;
+  position: relative; /* Para posicionar la imagen de fondo */
+}
+
+.filtros .content {
+  display: flex;
+  flex-direction: column; /* Coloca los elementos (imagen y texto) uno debajo del otro */
+  justify-content: center; /* Centra verticalmente */
+  align-items: center; /* Centra horizontalmente */
+  width: 200px;
+  height: 127px;
+  background-image: url("/nube.png"); /* Imagen PNG de la nube */
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  z-index: 1; /* Asegura que la nube se mantenga arriba del contenido desplegado */
+}
+
+.filtros .content h1 {
+  font-family: "Lilita One", sans-serif;
+  font-size: 18px;
+  color: #323131;
+  margin: 12px;
+}
+
+.placeholder {
+  display: block; /* Hace que "Seleccionar" aparezca en una nueva línea */
+  font-size: 14px; /* Ajusta el tamaño del texto si es necesario */
+  color: #8c8c8c; /* Cambia el color según lo desees */
+  margin-top: 4px; /* Espacio entre el título y "Seleccionar" */
+}
+
+.filtros .caracteristicas {
+  width: 220px;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out; /* Transición suave */
+  list-style: none; /* Quita las viñetas de la lista */
+  margin-top: -20px;
+  padding: 0;
+  z-index: 0; /* Asegura que el contenido se despliegue debajo de la nube */
+  position: absolute; /* Permite que el contenido se posicione sobre la nube */
+}
+
+/* Cuando se muestran las características, su altura se ajusta */
+.filtros.show-options .caracteristicas {
+  height: 110px; /* Ajusta la altura según la cantidad de contenido */
+  margin-top: -30px;
+  transition: max-height 0.5s ease-in-out;
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+}
+.filtros .caracteristicas li {
+  font-family: "Lilita One", sans-serif;
+  margin-left: -30px;
+  text-align: center;
+  font-size: 16px;
+  color: #8c8c8c;
+  text-decoration: none; /* Elimina cualquier subrayado en los textos */
+  list-style-type: none; /* Elimina cualquier estilo de lista (viñetas, números) */
+}
+
+.filtros .caracteristicas li:last-child {
+  border-bottom: none;
+}
+
+.filtros .caracteristicas li ul {
+  margin: 0;
+  list-style-type: none; /* Asegura que las sublistas tampoco tengan viñetas */
+  font-size: 16px;
+  color: #555;
+}
+.filtros .content p {
+  font-family: "Lilita One", sans-serif;
+  font-size: 14px;
+  color: #8c8c8c;
+  margin-top: 0px; /* Ajusta el espacio entre el título y el atributo */
+}

@@ -9,14 +9,14 @@ import FormularioAdopcion from "./Components/formularioAdopcion/FormularioAdopci
 import Search from "./pages/search/search";
 import Mascotagato from "./pages/search/gatos/mascotagato";
 import Mascotaperro from "./pages/search/perro/mascotaperro";
-
+import Mascotas from "./pages/search/mascotas/mascotas";
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/*" element={<HomePage />} />
         <Route path="/" element={<HomePage />} />
-        <Route path="/mascotas" element={<Search />} />
+        <Route path="/mascotas" element={<Mascotas />} />
         <Route
           path="/proceso-adopcion"
           element={<div>Proceso de Adopción Page</div>}
