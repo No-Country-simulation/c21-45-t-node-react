@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import db from "./config/db.js";
 import mascotaRoutes from "./routes/mascotaRoutes.js";
+import enumRoutes from "./routes/enumRoutes.js";
 import usuarioRoutes from "./routes/usuario.routes.js";
 import authRouter from "./routes/auth.routes.js";
 
