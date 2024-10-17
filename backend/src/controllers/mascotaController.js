@@ -1,4 +1,4 @@
-import * as mascotaService from '../services/mascotaService.js';
+import mascotaService from '../services/mascotaService.js';
 
 // Crear una nueva mascota
 export const addMascota = async (req, res) => {
