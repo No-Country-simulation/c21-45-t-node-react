@@ -15,5 +15,6 @@ router.get('/:id', mascotaController.getMascotaById);
 router.put('/:id', mascotaController.editMascota);
 // Ruta para eliminar una mascota
 router.delete('/:id', mascotaController.deleteMascota);
+  
 
 export default router;

@@ -17,11 +17,7 @@ app.use(express.json());
 app.use("/api/mascota", mascotaRoutes);
 app.use("/api/usuarios", usuarioRoutes);
 app.use("/api/auth", authRouter);
-
-// Ruta de prueba
-app.get("/", (req, res) => {
-  res.send("¡Bienvenido a la Plataforma de Adopción de Mascotas AdoptMe!");
-});
+app.use("/api/enum", enumRoutes);
 
 // Inicializar el servidor
 const PORT = process.env.PORT || 3000;
