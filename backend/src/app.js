@@ -1,7 +1,9 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import db from './config/db.js';
-import mascotaRoutes from './routes/mascotaRoutes.js';
+import express from "express";
+import dotenv from "dotenv";
+import db from "./config/db.js";
+import mascotaRoutes from "./routes/mascotaRoutes.js";
+import usuarioRoutes from "./routes/usuario.routes.js";
+import authRouter from "./routes/auth.routes.js";
 
 // Configuración de las variables de entorno
 dotenv.config();
@@ -12,15 +14,17 @@ const app = express();
 app.use(express.json());
 
 // Middleware para manejar las rutas
-app.use('/api/mascota', mascotaRoutes);
+app.use("/api/mascota", mascotaRoutes);
+app.use("/api/usuarios", usuarioRoutes);
+app.use("/api/auth", authRouter);
 
 // Ruta de prueba
-app.get('/', (req, res) => {
-  res.send('¡Bienvenido a la Plataforma de Adopción de Mascotas AdoptMe!');
+app.get("/", (req, res) => {
+  res.send("¡Bienvenido a la Plataforma de Adopción de Mascotas AdoptMe!");
 });
 
 // Inicializar el servidor
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
