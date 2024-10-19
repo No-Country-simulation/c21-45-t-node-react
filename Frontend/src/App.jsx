@@ -7,6 +7,7 @@ import Login from './Components/pages/login/Login';
 import FormularioRegistro from './Components/formularioRegistro/FormularioRegistro';
 import FormularioAdopcion from './Components/formularioAdopcion/FormularioAdopcion';
 import Search from './pages/search/search';
+import RegistroRefugio from './Components/RegistroRefugio/RegistroRefugio';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path="/publicar-mascota" element={<div>Publicar Mascota Page</div>} />
         <Route path="/formulario-registro" element={<FormularioRegistro/>} />
         <Route path="/formulario-adopcion" element={<FormularioAdopcion/>} />
+        <Route path='/registro-refugio' element={<RegistroRefugio/>} />
         <Route path='/search' element= {<Search />} />
 
       </Routes>
