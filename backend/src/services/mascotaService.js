@@ -15,7 +15,7 @@ async addMascota(mascotaData) {
       `INSERT INTO Mascota 
       (nombre, especie, raza, sexo, tamanio, fecha_nacimiento, castrado, vacunado, 
        amigable_ninos, amigable_perros, amigable_gatos, enfermedades, detalle, foto, eliminada, FK_Usuario) 
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         mascotaData.nombre,
         mascotaData.especie,
@@ -31,7 +31,7 @@ async addMascota(mascotaData) {
         mascotaData.enfermedades,
         mascotaData.detalle,
         mascotaData.foto,
-        eliminada = 0,
+        eliminada,
         mascotaData.FK_Usuario
       ]
     );

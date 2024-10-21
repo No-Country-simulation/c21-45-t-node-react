@@ -12,11 +12,11 @@ router.get('/', mascotaController.listMascotas);
 // Ruta para listar todas las mascotas de un usuario
 router.get('/usuario/:FK_Usuario', mascotaController.listMascotasByUsuario);
 // Ruta para listar todas las mascotas de un país
-router.get('/usuario/:FK_Pais', mascotaController.listMascotasByPais);
+router.get('/pais/:FK_Pais', mascotaController.listMascotasByPais);
 // Ruta para listar todas las mascotas de una provincia
-router.get('/usuario/:FK_Provincia', mascotaController.listMascotasByProvincia);
+router.get('/provincia/:FK_Provincia', mascotaController.listMascotasByProvincia);
 // Ruta para listar todas las mascotas de una localidad
-router.get('/usuario/:FK_Localidad', mascotaController.listMascotasByLocalidad);
+router.get('/localidad/:FK_Localidad', mascotaController.listMascotasByLocalidad);
 // Ruta para obtener una mascota por ID
 router.get('/:id', mascotaController.getMascotaById);
 // Ruta para editar una mascota
