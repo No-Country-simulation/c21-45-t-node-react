@@ -12,6 +12,9 @@ import Mascotaperro from "./pages/search/perro/mascotaperro";
 import Mascotas from "./pages/search/mascotas/mascotas";
 import Preguntas from "./pages/preguntas/preguntas";
 import CaracteristicaMascota from "./pages/filtro_mascota/caracteristica_masc";
+import Filtro_mascota from "./Components/filtro_mascota/filtro_mascota";
+
+
 function App() {
   return (
     <Router>
@@ -19,26 +22,17 @@ function App() {
         <Route path="/*" element={<HomePage />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/mascotas" element={<Mascotas />} />
-        <Route
-          path="/proceso-adopcion"
-          element={<div>Proceso de Adopción Page</div>}
-        />
-        <Route
-          path="/preguntas-frecuentes"
-          element={<Preguntas />}
-        />
+        <Route path="/proceso-adopcion" element={<div>Proceso de Adopción Page</div>} />
+        <Route path="/preguntas-frecuentes" element={<Preguntas />} />
         <Route path="/requisitos-adoptar" element={<Requisitos />} />
         <Route path="/login" element={<Login />} />
-        <Route
-          path="/publicar-mascota"
-          element={<div>Publicar Mascota Page</div>}
-        />
+        <Route path="/publicar-mascota" element={<div>Publicar Mascota Page</div>} />
         <Route path="/formulario-registro" element={<FormularioRegistro />} />
         <Route path="/formulario-adopcion" element={<FormularioAdopcion />} />
         <Route path="/search" element={<Search />} />
         <Route path="/mascotas-gato" element={<Mascotagato />} />
         <Route path="/mascotas-perro" element={<Mascotaperro />} />
-        <Route path="/cards" element={<CaracteristicaMascota />} />
+        <Route path="/detalle-mascota" element={<Filtro_mascota />} />
       </Routes>
       <Links />
     </Router>

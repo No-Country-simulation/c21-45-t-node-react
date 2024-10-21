@@ -1,4 +1,4 @@
-import Filtromascota from "../../Components/filtro_mascota/filtro_mascota";
+import Filtro_mascota from "../../Components/filtro_mascota/filtro_mascota";
 
 const mascotaEjemplo = {
   nombre: "Rex",
@@ -14,7 +14,7 @@ const mascotaEjemplo = {
 const CaracteristicaMascota = () => {
   return (
     <div>
-      <Filtromascota mascota={mascotaEjemplo} />
+      <Filtro_mascota mascota={mascotaEjemplo} />
     </div>
   );
 };
