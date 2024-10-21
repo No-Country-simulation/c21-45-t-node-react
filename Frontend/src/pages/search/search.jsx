@@ -1,6 +1,10 @@
 import CardMascota from "../../Components/card/CardMascota";
-import "./search.css";
+import Filtros from "../../Components/filtros/filtros";
+
 function Search() {
+  const filtros = [
+    {imagen:'/perro_vector.png', titulo: "EDAD", atributos: ["Cachorro", "Joven","Adulto Joven","Adulto", "Senior"] },
+    {imagen:'/tamaño.png', titulo: "TAMAÑO", atributos: ["Grande", "Mediano","Pequeño"] }]
   const mascotas = [
     { nombre: "Fido", tipo: "Cachorro", ubicacion: "CABA", genero: "Macho" },
     { nombre: "Rex", tipo: "Cachorro", ubicacion: "CABA", genero: "Macho" },
@@ -17,6 +21,7 @@ function Search() {
         {mascotas.map((mascota, index) => (
           <CardMascota key={index} mascota={mascota} />
         ))}
+        
       </div>
     </div>
   );

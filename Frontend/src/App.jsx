@@ -11,6 +11,7 @@ import Mascotagato from "./pages/search/gatos/mascotagato";
 import Mascotaperro from "./pages/search/perro/mascotaperro";
 import Mascotas from "./pages/search/mascotas/mascotas";
 import Preguntas from "./pages/preguntas/preguntas";
+import CaracteristicaMascota from "./pages/filtro_mascota/caracteristica_masc";
 function App() {
   return (
     <Router>
@@ -37,6 +38,7 @@ function App() {
         <Route path="/search" element={<Search />} />
         <Route path="/mascotas-gato" element={<Mascotagato />} />
         <Route path="/mascotas-perro" element={<Mascotaperro />} />
+        <Route path="/cards" element={<CaracteristicaMascota />} />
       </Routes>
       <Links />
     </Router>
