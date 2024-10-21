@@ -25,15 +25,54 @@ export const listMascotas = async (req, res) => {
   }
 };
 
-// Listar todas las mascotas de un refugio
-export const listMascotasByRefugio = async (req, res) => {
+// Listar todas las mascotas de un usuario
+export const listMascotasByUsuario = async (req, res) => {
   try {
-    const mascotas = await mascotaService.listMascotasByRefugio(req.params.id);
-    // Retorna la lista de mascotas del refugio
+    const mascotas = await mascotaService.listMascotasByUsuario(req.params.FK_Usuario);
+    // Retorna la lista de mascotas del usuario
     res.json(mascotas);
   } catch (error) {
-    console.error('Error al obtener las mascotas del refugio:', error);
-    res.status(500).json({ error: 'Error al obtener las mascotas del refugio.' });
+    console.error('Error al obtener las mascotas del usuario:', error);
+    res.status(500).json({ error: 'Error al obtener las mascotas del usuario.' });
+  }
+};
+
+
+// Listar todas las mascotas de un país
+export const listMascotasByPais = async (req, res) => {
+  try {
+    const mascotas = await mascotaService.listMascotasByPais(req.params.FK_Pais);
+    // Retorna la lista de mascotas del país
+    res.json(mascotas);
+  } catch (error) {
+    console.error('Error al obtener las mascotas del país:', error);
+    res.status(500).json({ error: 'Error al obtener las mascotas del país.' });
+  }
+};
+
+
+// Listar todas las mascotas de una provincia
+export const listMascotasByProvincia = async (req, res) => {
+  try {
+    const mascotas = await mascotaService.listMascotasByProvincia(req.params.FK_Provincia);
+    // Retorna la lista de mascotas de la provincia
+    res.json(mascotas);
+  } catch (error) {
+    console.error('Error al obtener las mascotas de la provincia:', error);
+    res.status(500).json({ error: 'Error al obtener las mascotas de la provincia.' });
+  }
+};
+
+
+// Listar todas las mascotas de una localidad
+export const listMascotasByLocalidad = async (req, res) => {
+  try {
+    const mascotas = await mascotaService.listMascotasByLocalidad(req.params.FK_Localidad);
+    // Retorna la lista de mascotas de la localidad
+    res.json(mascotas);
+  } catch (error) {
+    console.error('Error al obtener las mascotas de la localidad:', error);
+    res.status(500).json({ error: 'Error al obtener las mascotas de la localidad.' });
   }
 };
 

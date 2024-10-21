@@ -6,11 +6,17 @@ const router = Router();
 
 // Ruta para crear una nueva mascota
 router.post('/', verifyRequiredBody(["nombre", "especie", "raza", "sexo", "tamanio", "fecha_nacimiento", "castrado", "vacunado", 
-    "amigable_ninos", "amigable_perros", "amigable_gatos", "enfermedades", "detalle", "foto", "FK_Refugio"]), mascotaController.addMascota);
+    "amigable_ninos", "amigable_perros", "amigable_gatos", "enfermedades", "detalle", "foto", "FK_Usuario"]), mascotaController.addMascota);
 // Ruta para listar todas las mascotas
 router.get('/', mascotaController.listMascotas);
-// Ruta para listar todas las mascotas de un refugio
-router.get('/refugio/:id', mascotaController.listMascotasByRefugio);
+// Ruta para listar todas las mascotas de un usuario
+router.get('/usuario/:FK_Usuario', mascotaController.listMascotasByUsuario);
+// Ruta para listar todas las mascotas de un país
+router.get('/pais/:FK_Pais', mascotaController.listMascotasByPais);
+// Ruta para listar todas las mascotas de una provincia
+router.get('/provincia/:FK_Provincia', mascotaController.listMascotasByProvincia);
+// Ruta para listar todas las mascotas de una localidad
+router.get('/localidad/:FK_Localidad', mascotaController.listMascotasByLocalidad);
 // Ruta para obtener una mascota por ID
 router.get('/:id', mascotaController.getMascotaById);
 // Ruta para editar una mascota
