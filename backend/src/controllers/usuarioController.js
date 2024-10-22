@@ -1,5 +1,6 @@
 import userService from "../services/usuarioService.js";
 import { usuarioDTO } from "../dto/usuarioDTO.js";
+import { isValidPassword } from "../utils.js";
 
 export const getUsuarios = async (req, res) => {
   console.log("Controller getUsuarios");
@@ -15,7 +16,15 @@ export const getUsuarioById = async (req, res) => {
   const userId = req.params.id;
   try {
     const user = await userService.getUsuarioById(userId);
-    res.status(200).json(user);
+
+    // Verificar si los campos obligatorios del perfil están completos
+    const { nombre, apellido, telefono, tipo_doc, nro_doc, nro_org, FK_Direccion, FK_Rol } = user;
+    let perfilCompleto = false;
+    if (FK_Rol == 2) perfilCompleto = nombre && apellido && telefono && tipo_doc && nro_doc && FK_Direccion ? true : false;
+    else perfilCompleto = nombre && telefono && (nro_doc || nro_org) && FK_Direccion ? true : false;
+
+    // Agregar el campo perfilCompleto al objeto de usuario
+    res.status(200).json({ ...user, perfilCompleto });
   } catch (error) {
     res.status(404).json({ error: error.message });
   }
@@ -23,20 +32,12 @@ export const getUsuarioById = async (req, res) => {
 
 export const addUsuario = async (req, res) => {
   console.log("Controller AddUsuario");
-  const { email, password, tipoUsuario, data } = req.body;
+  const { email, password, tipoUsuario, nombre, apellido, nro_org } = req.body;
   try {
     // Aplicar DTO
     const usuarioTransformado = usuarioDTO({ email, password });
 
-    if (tipoUsuario === "adoptante") {
-      const nuevoAdoptante = await userService.addAdoptante(data);
-      await userService.addUsuario(usuarioTransformado.email, usuarioTransformado.password, "adoptante", nuevoAdoptante);
-    } else if (tipoUsuario === "refugio") {
-      const nuevoRefugio = await userService.addRefugio(data);
-      await userService.addUsuario(usuarioTransformado.email, usuarioTransformado.password, "refugio", nuevoRefugio);
-    } else {
-      return res.status(400).json({ error: "Tipo de usuario no válido" });
-    }
+    await userService.addUsuario(usuarioTransformado.email, usuarioTransformado.password, tipoUsuario, nombre, apellido, nro_org);
 
     res.status(201).json({ message: "Usuario registrado exitosamente" });
   } catch (error) {
@@ -56,6 +57,42 @@ export const registrarUsuario = async (req, res) => {
   } catch (error) {
     console.log("Error en registerUser: " + error.message);
     throw new Error(error.message);
+  }
+};
+
+export const loginUsuario = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    const user = await userService.getUsuarioByEmail(email);
+    console.log("user", user);
+
+    console.log("email", email);
+    console.log("password", req.body.password);
+
+    if (user && user.password) {
+      const isMatch = await isValidPassword(req.body.password, user.password);
+      if (!isMatch) {
+        return res.status(400).send("Usuario o contraseña incorrectos");
+      }
+      console.log("is match");
+      // Guardo usuario en sesión
+      const { password, ...filteredUser } = user;
+      console.log("filteredUser", filteredUser);
+      req.session.user = filteredUser;
+      req.session.save((err) => {
+        if (err) {
+          console.log("Error en guardar session", err);
+          return res.status(500).send("Error al ingresar usuario");
+        }
+        return res.status(200).send({ status: "success", payload: filteredUser });
+      });
+    } else {
+      return res.status(400).send("Usuario o contraseña incorrectos");
+    }
+  } catch (err) {
+    console.log("Error en login:", err);
+    return res.status(400).send("Usuario o contraseña incorrectos");
   }
 };
 

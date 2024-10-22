@@ -37,82 +37,30 @@ const usuarioService = {
     }
   },
 
-  // Crear un nuevo usuario según el tipo
-  async addAdoptante(adoptanteData) {
-    try {
-      const { nombre, apellido, fecha_nacimiento, tipo_doc, nro_doc, direccion } = adoptanteData;
-
-      // Agregar dirección
-      const [direccionResult] = await pool.query(
-        `
-        INSERT INTO Direccion (calle, numero, FK_Localidad) 
-        VALUES (?, ?, ?)`,
-        [direccion.calle, direccion.numero, direccion.FK_Localidad]
-      );
-      const FK_Direccion = direccionResult.insertId;
-
-      // Agregar adoptante
-      const [adoptanteResult] = await pool.query(
-        `
-        INSERT INTO Adoptante (nombre, apellido, fecha_nacimiento, tipo_doc, nro_doc, FK_Direccion)
-        VALUES (?, ?, ?, ?, ?, ?)`,
-        [nombre, apellido, fecha_nacimiento, tipo_doc, nro_doc, FK_Direccion]
-      );
-
-      // Devolvemos el ID del adoptante creado
-      return adoptanteResult.insertId;
-    } catch (error) {
-      throw new Error(`Error al agregar adoptante: ${error.message}`);
-    }
-  },
-
-  async addRefugio(refugioData) {
-    try {
-      const { tipo, nombre, apellido, telefono, direccion } = refugioData;
-
-      // Agregar dirección
-      const [direccionResult] = await pool.query(
-        `
-        INSERT INTO Direccion (calle, numero, FK_Localidad) 
-        VALUES (?, ?, ?)`,
-        [direccion.calle, direccion.numero, direccion.FK_Localidad]
-      );
-      const FK_Direccion = direccionResult.insertId;
-
-      // Agregar refugio
-      const [refugioResult] = await pool.query(
-        `
-        INSERT INTO Refugio (tipo, nombre, apellido, telefono, FK_Direccion)
-        VALUES (?, ?, ?, ?, ?)`,
-        [tipo, nombre, apellido, telefono, FK_Direccion]
-      );
-
-      // Devolvemos el ID del refugio creado
-      return refugioResult.insertId;
-    } catch (error) {
-      throw new Error(`Error al agregar refugio: ${error.message}`);
-    }
-  },
-
   // Método para registrar el usuario
-  async addUsuario(email, password, tipoUsuario, FK_Tipo) {
+  async addUsuario(email, password, tipoUsuario, nombre, apellido, nro_org) {
     try {
       let FK_Rol;
       // TODO: Falta cambiar a buscar el rol por nombre y no por id!!
 
       // Determinamos el FK_Rol dependiendo del tipo de usuario
-      if (tipoUsuario === "adoptante") {
-        FK_Rol = 2; // Suponiendo que 2 es el rol de adoptante
-      } else if (tipoUsuario === "refugio") {
-        FK_Rol = 3; // Suponiendo que 3 es el rol de refugio
+      if (tipoUsuario === "particular") {
+        FK_Rol = 2; // Suponiendo que 2 es el rol de particular
+        await pool.query(
+          `
+          INSERT INTO Usuario (email, password, nombre, apellido, FK_Rol, FK_Direccion)
+          VALUES (?, ?, ?, ?, ?, null)`,
+          [email, password, nombre, apellido, FK_Rol]
+        );
+      } else if (tipoUsuario === "organizacion") {
+        FK_Rol = 3; // Suponiendo que 3 es el rol de org
+        await pool.query(
+          `
+          INSERT INTO Usuario (email, password, nro_org, FK_Rol, FK_Direccion)
+          VALUES (?, ?, ?, ?, null)`,
+          [email, password, nro_org, FK_Rol]
+        );
       }
-
-      await pool.query(
-        `
-        INSERT INTO Usuario (email, password, FK_Rol, ${tipoUsuario === "adoptante" ? "FK_Adoptante" : "FK_Refugio"})
-        VALUES (?, ?, ?, ?)`,
-        [email, password, FK_Rol, FK_Tipo]
-      );
     } catch (error) {
       console.log("error al agregar usuario", error);
       throw new Error(`Error al agregar usuario: ${error.message}`);
@@ -122,12 +70,85 @@ const usuarioService = {
   // Actualizar un usuario por ID
   async updateUsuario(userId, userData) {
     try {
-      const { name, email, password } = userData;
-      const [result] = await pool.query("UPDATE usuario SET name = ?, email = ?, password = ? WHERE PK_Usuario = ?", [name, email, password, userId]);
+      const { nombre, apellido, email, password, telefono, tipo_doc, nro_doc, nro_org, direccion } = userData;
+
+      let FK_Direccion;
+      if (direccion) {
+        // Obtener la dirección actual del usuario
+        const [user] = await pool.query("SELECT FK_Direccion FROM Usuario WHERE PK_Usuario = ?", [userId]);
+
+        FK_Direccion = user[0]?.FK_Direccion;
+
+        // Si el usuario ya tiene una dirección, la actualiza
+        if (FK_Direccion) {
+          await pool.query(`UPDATE Direccion SET calle = ?, numero = ?, FK_Localidad = ? WHERE PK_Direccion = ?`, [
+            direccion.calle,
+            direccion.numero,
+            direccion.FK_Localidad,
+            FK_Direccion,
+          ]);
+        }
+        // Si no tiene dirección, la inserta
+        else {
+          const [direccionResult] = await pool.query(`INSERT INTO Direccion (calle, numero, FK_Localidad) VALUES (?, ?, ?)`, [
+            direccion.calle,
+            direccion.numero,
+            direccion.FK_Localidad,
+          ]);
+          FK_Direccion = direccionResult.insertId;
+        }
+      }
+
+      // Actualizamos los datos del usuario
+      const updateFields = [];
+      const values = [];
+
+      if (nombre) {
+        updateFields.push("nombre = ?");
+        values.push(nombre);
+      }
+      if (apellido) {
+        updateFields.push("apellido = ?");
+        values.push(apellido);
+      }
+      if (email) {
+        updateFields.push("email = ?");
+        values.push(email);
+      }
+      if (password) {
+        updateFields.push("password = ?");
+        values.push(password);
+      }
+      if (telefono) {
+        updateFields.push("telefono = ?");
+        values.push(telefono);
+      }
+      if (tipo_doc) {
+        updateFields.push("tipo_doc = ?");
+        values.push(tipo_doc);
+      }
+      if (nro_doc) {
+        updateFields.push("nro_doc = ?");
+        values.push(nro_doc);
+      }
+      if (nro_org) {
+        updateFields.push("nro_org = ?");
+        values.push(nro_org);
+      }
+      if (FK_Direccion) {
+        updateFields.push("FK_Direccion = ?");
+        values.push(FK_Direccion);
+      }
+
+      values.push(userId);
+
+      const query = `UPDATE Usuario SET ${updateFields.join(", ")} WHERE PK_Usuario = ?`;
+      const [result] = await pool.query(query, values);
 
       if (result.affectedRows === 0) {
         throw new Error("Usuario no encontrado o sin cambios");
       }
+
       return { id: userId, ...userData };
     } catch (error) {
       throw new Error(`Error al actualizar usuario con ID ${userId}: ${error.message}`);

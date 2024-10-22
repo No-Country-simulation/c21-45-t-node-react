@@ -5,19 +5,9 @@ export const verifyRequiredBody = (requiredFields) => {
     const body = { ...req.body };
 
     // Verifico campos faltantes
-    const missingFields = requiredFields.filter((field) => {
-      const keys = field.split(".");
-      let value = body;
-
-      // Navegar por los campos anidados
-      for (let key of keys) {
-        if (value[key] === undefined || value[key] === null || value[key] === "") {
-          return true;
-        }
-        value = value[key];
-      }
-      return false;
-    });
+    const missingFields = requiredFields.filter(
+      (field) => !body.hasOwnProperty(field) || body[field] === "" || body[field] === null || body[field] === undefined
+    );
 
     if (missingFields.length > 0) {
       return res.status(400).send({
