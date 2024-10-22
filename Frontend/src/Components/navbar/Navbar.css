@@ -1,0 +1,78 @@
+.header {
+    width: 100%;
+    height: 70px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 20px 0px;
+    background: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+}
+
+.logo1 {
+    height: 100%;
+    justify-content: center;
+    place-content: center;
+    cursor: pointer;
+    margin-left: 20px;
+    border-radius: 50px;
+}
+
+.logo2 {
+    margin-right: 240px;
+}
+
+.navbar a {
+    text-decoration: none;
+    position: relative;
+    color: #FF6F61;
+    font-family: "Lilita One";
+    font-size: 18px;
+    margin-left: 40px;
+}
+
+.navbar a::before {
+    content: '';
+    position: absolute;
+    top:100%;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #FF6F61;
+    transition: 0.3s;
+}
+
+.navbar a:hover::before {
+    width: 100%;
+}
+
+#Login {
+    display: inline-flex;
+    padding: 12px 32px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    font-family: "Lilita One";
+    font-size: 18px;
+    color: black;
+    background-color: #fff;
+    border: 2px black;
+    cursor: pointer;
+}
+
+#Registro {
+    display: inline-flex;
+    padding: 12px 32px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    font-family: "Lilita One";
+    font-size: 18px;
+    color:#fff;
+    background-color: #7F8AFF;
+    border: 2px #7F8AFF;
+    cursor: pointer;
+}

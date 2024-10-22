@@ -1,0 +1,10 @@
+.container-proceso img {
+    width: 100%; 
+    height: auto; 
+    max-width: 90%; 
+}
+.container-proceso{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}

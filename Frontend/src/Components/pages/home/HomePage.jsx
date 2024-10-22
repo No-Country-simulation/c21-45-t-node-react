@@ -1,15 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; 
-import './HomePage.css'; 
 import homeImage from '../../../images/home_image.png'; 
 import gato from '../../../images/Rectangulo_gato.png';
 import perro from '../../../images/rectangulo_perro.png';
 import lupa from '../../../images/ph_magnifying-glass.png';
+import Navbar from '../../navbar/Navbar'
 import Search from '../../../pages/search/search'; 
+import './HomePage.css'; 
+
 
 const HomePage = () => {
   return (
     <>
+    <Navbar />
       <div className="home-container">
         {/* Sección izquierda con el texto */}
         <div className="home-left">
@@ -48,7 +51,10 @@ const HomePage = () => {
 
       {/* Componente Search debajo de HomePage */}
       <div className="search-component">
+      </div>
         <Search /> 
+        <div className="btn-container">
+        <Link to='/mascotas'><button className="btn">¡Comenzar!</button></Link>
       </div>
     </>
   );
