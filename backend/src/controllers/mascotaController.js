@@ -120,3 +120,16 @@ export const deleteMascota = async (req, res) => {
     res.status(500).json({ error: 'Error al eliminar la mascota.' });
   }
 };
+
+// Filtrar mascotas por especie, sexo, tamaño y edad
+export const filtroMascotas = async (req, res) => {
+  try {
+    const filterData = req.body;
+    const mascotas = await mascotaService.filtroMascotas(filterData);
+    // Retorna la lista de mascotas filtradas
+    res.json(mascotas);
+  } catch (error) {
+    console.error('Error al filtrar las mascotas:', error);
+    res.status(500).json({ error: 'Error al filtrar las mascotas.' });
+  }
+};

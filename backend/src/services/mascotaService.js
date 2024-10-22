@@ -45,14 +45,22 @@ async addMascota(mascotaData) {
 async listMascotas() {
   try {
     const query = `
-      SELECT m.*, l.nombre AS localidad, p.nombre AS provincia, pais.nombre AS pais 
-      FROM Mascota m
-      JOIN Usuario u ON m.FK_Usuario = u.PK_Usuario
-      JOIN Direccion d ON u.FK_Direccion = d.PK_Direccion
-      JOIN Localidad l ON d.FK_Localidad = l.PK_Localidad
-      JOIN Provincia p ON l.FK_Provincia = p.PK_Provincia
-      JOIN Pais pais ON p.FK_Pais = pais.PK_Pais
-      WHERE m.eliminada = 0
+            SELECT m.*, 
+              l.nombre AS localidad, 
+              p.nombre AS provincia, 
+              pais.nombre AS pais,
+              CASE
+                WHEN TIMESTAMPDIFF(MONTH, m.fecha_nacimiento, CURDATE()) <= 6 THEN 'Cachorro'
+                WHEN TIMESTAMPDIFF(YEAR, m.fecha_nacimiento, CURDATE()) <= 7 THEN 'Adulto'
+                ELSE 'Senior'
+              END AS edad
+            FROM Mascota m
+            JOIN Usuario u ON m.FK_Usuario = u.PK_Usuario
+            JOIN Direccion d ON u.FK_Direccion = d.PK_Direccion
+            JOIN Localidad l ON d.FK_Localidad = l.PK_Localidad
+            JOIN Provincia p ON l.FK_Provincia = p.PK_Provincia
+            JOIN Pais pais ON p.FK_Pais = pais.PK_Pais
+            WHERE m.eliminada = 0
     `;
     const [rows] = await pool.query(query);
     return rows.affectedRows > 0 ? rows : "No hay mascotas disponibles.";
@@ -80,7 +88,12 @@ async listMascotasByUsuario(FK_Usuario) {
 async listMascotasByPais(FK_Pais) {
   try {
     const query = `
-      SELECT m.*, l.nombre AS localidad, p.nombre AS provincia
+      SELECT m.*, l.nombre AS localidad, p.nombre AS provincia,
+      CASE
+        WHEN TIMESTAMPDIFF(MONTH, m.fecha_nacimiento, CURDATE()) <= 6 THEN 'Cachorro'
+        WHEN TIMESTAMPDIFF(YEAR, m.fecha_nacimiento, CURDATE()) <= 7 THEN 'Adulto'
+        ELSE 'Senior'
+        END AS edad
       FROM Mascota m
       JOIN Usuario u ON m.FK_Usuario = u.PK_Usuario
       JOIN Direccion d ON u.FK_Direccion = d.PK_Direccion
@@ -99,7 +112,12 @@ async listMascotasByPais(FK_Pais) {
 async listMascotasByProvincia(FK_Provincia) {
   try {
     const query = `
-      SELECT m.*, l.nombre AS localidad
+      SELECT m.*, l.nombre AS localidad,
+      CASE
+        WHEN TIMESTAMPDIFF(MONTH, m.fecha_nacimiento, CURDATE()) <= 6 THEN 'Cachorro'
+        WHEN TIMESTAMPDIFF(YEAR, m.fecha_nacimiento, CURDATE()) <= 7 THEN 'Adulto'
+        ELSE 'Senior'
+        END AS edad
       FROM Mascota m
       JOIN Usuario u ON m.FK_Usuario = u.PK_Usuario
       JOIN Direccion d ON u.FK_Direccion = d.PK_Direccion
@@ -117,7 +135,12 @@ async listMascotasByProvincia(FK_Provincia) {
 async listMascotasByLocalidad(FK_Localidad) {
   try {
     const query = `
-      SELECT * 
+      SELECT * ,
+      CASE
+        WHEN TIMESTAMPDIFF(MONTH, m.fecha_nacimiento, CURDATE()) <= 6 THEN 'Cachorro'
+        WHEN TIMESTAMPDIFF(YEAR, m.fecha_nacimiento, CURDATE()) <= 7 THEN 'Adulto'
+        ELSE 'Senior'
+        END AS edad
       FROM Mascota m
       JOIN Usuario u ON m.FK_Usuario = u.PK_Usuario
       JOIN Direccion d ON u.FK_Direccion = d.PK_Direccion
@@ -134,7 +157,12 @@ async listMascotasByLocalidad(FK_Localidad) {
 async getMascotaById(id) {
   try {
     const query = `
-      SELECT m.*, l.nombre AS localidad, p.nombre AS provincia, pais.nombre AS pais 
+      SELECT m.*, l.nombre AS localidad, p.nombre AS provincia, pais.nombre AS pais,
+      CASE
+        WHEN TIMESTAMPDIFF(MONTH, m.fecha_nacimiento, CURDATE()) <= 6 THEN 'Cachorro'
+        WHEN TIMESTAMPDIFF(YEAR, m.fecha_nacimiento, CURDATE()) <= 7 THEN 'Adulto'
+        ELSE 'Senior'
+        END AS edad
       FROM Mascota m
       JOIN Usuario u ON m.FK_Usuario = u.PK_Usuario
       JOIN Direccion d ON u.FK_Direccion = d.PK_Direccion
@@ -194,6 +222,56 @@ async deleteMascota(id) {
     throw new Error(`Error al eliminar mascota con ID ${id}: ${error.message}`);
   }
 },
+
+// Filtrar mascotas por edad, sexo, tamaño y especie
+async filtroMascotas(filterData) {
+  try {
+    const { edad, sexo, tamanio, especie } = filterData;
+
+    // Base de la consulta
+    let query = `
+      SELECT m.*, l.nombre AS localidad, p.nombre AS provincia, pais.nombre AS pais,
+      CASE
+        WHEN TIMESTAMPDIFF(MONTH, m.fecha_nacimiento, CURDATE()) <= 6 THEN 'Cachorro'
+        WHEN TIMESTAMPDIFF(YEAR, m.fecha_nacimiento, CURDATE()) <= 7 THEN 'Adulto'
+        ELSE 'Senior'
+      END AS edad
+      FROM Mascota m
+      JOIN Usuario u ON m.FK_Usuario = u.PK_Usuario
+      JOIN Direccion d ON u.FK_Direccion = d.PK_Direccion
+      JOIN Localidad l ON d.FK_Localidad = l.PK_Localidad
+      JOIN Provincia p ON l.FK_Provincia = p.PK_Provincia
+      JOIN Pais pais ON p.FK_Pais = pais.PK_Pais
+      WHERE m.eliminada = 0
+    `;
+
+    const params = [];
+
+    // Agregar filtros usando el alias `Edad` directamente
+    if (edad) {
+      query += ` AND edad = ?`;
+      params.push(edad);
+    }
+    if (sexo) {
+      query += ` AND m.sexo = ?`;
+      params.push(sexo);
+    }
+    if (tamanio) {
+      query += ` AND m.tamanio = ?`;
+      params.push(tamanio);
+    }
+    if (especie) {
+      query += ` AND m.especie = ?`;
+      params.push(especie);
+    }
+
+    const [rows] = await pool.query(query, params);
+    return rows.length > 0 ? rows : "No hay mascotas que cumplan con los filtros seleccionados.";
+  } catch (error) {
+    throw new Error(`Error al filtrar mascotas: ${error.message}`);
+  }
+},
+  
 };
 
 export default mascotaService;
