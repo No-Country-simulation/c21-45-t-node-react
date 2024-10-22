@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import HomePage from "./Components/pages/home/HomePage";
+import HomePage from "./pages/home/HomePage";
 import Links from "./Components/Links";
-import Requisitos from "./Components/pages/requisitos/requisitos";
-import Login from "./Components/pages/login/Login";
+import Requisitos from "./pages/requisitos/requisitos";
+import Login from "./pages/login/Login";
 import FormularioRegistro from "./Components/formularioRegistro/FormularioRegistro";
 import FormularioAdopcion from "./Components/formularioAdopcion/FormularioAdopcion";
 import Search from "./pages/search/search";

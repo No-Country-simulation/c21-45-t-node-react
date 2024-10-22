@@ -1,7 +1,9 @@
 import './Login.css'
-import homeImage from '../../images/home_image.png'; 
+
 
 function Login() {
+
+  const homeImage= "home_image.png"
     return (
       <>
         <div className='container-general-login'>

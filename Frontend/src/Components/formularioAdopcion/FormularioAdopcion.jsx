@@ -1,8 +1,9 @@
 import React from 'react';
 import './FormularioAdopcion.css';
-import homeImage from '../../images/home_image.png';
+
 
 export const FormularioAdopcion = () => {
+    const homeImage= "/home_image.png"
   return (
 
     <div className="container--componente">

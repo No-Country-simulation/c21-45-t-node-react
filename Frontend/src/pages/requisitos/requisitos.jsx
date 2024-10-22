@@ -1,11 +1,11 @@
 import React from 'react';
-import './Requisitos.css'; home_image.png
+import './Requisitos.css';
 
-
-import huella from '../../images/huella.png';
-import gatito from '../../images/gatito.png';
 
 const Requisitos = () => {
+
+  const huella= "/huella.png"
+  const gatito= "gatito.png"
 
   const requisitos = [
     {

@@ -1,9 +1,10 @@
 import { useLocation } from "react-router-dom";
 import Contacto from "../contacto/contacto";
 import "./Filtro_mascota.css";
-import gatito from '../../images/gatito.png';
+;
 
 const Filtro_mascota = () => {
+  const gatito= "/gatito.png"
   const location = useLocation();
   const { mascota } = location.state || {}; 
 
