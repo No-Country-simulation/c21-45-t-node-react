@@ -1,10 +1,9 @@
 import React from 'react';
 import './Lema.css'; 
 
-import perro from '../../images/ph_dog.png'; 
-import gato from '../../images/ph_cat.png'; 
-
 const Lema = () => {
+  const perro= "/ph_dog.png"
+  const gato= "/ph_cat.png"
   return (
     <div className="lema-container">
         <img src={gato} alt="" />

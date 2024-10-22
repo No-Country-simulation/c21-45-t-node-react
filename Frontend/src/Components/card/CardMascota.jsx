@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
 import "./CardMascota.css";
-import perro from '../../images/perro.png';
+
 
 function CardMascota({ mascota }) {
+
+  const perro= "/perro.png"
   return (
     <div className="container-card">
       <Link to='/cards' className="link-card">
