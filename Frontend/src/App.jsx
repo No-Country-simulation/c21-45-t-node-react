@@ -11,9 +11,8 @@ import Mascotagato from "./pages/search/gatos/mascotagato";
 import Mascotaperro from "./pages/search/perro/mascotaperro";
 import Mascotas from "./pages/search/mascotas/mascotas";
 import Preguntas from "./pages/preguntas/preguntas";
-import CaracteristicaMascota from "./pages/filtro_mascota/caracteristica_masc";
 import Filtro_mascota from "./Components/filtro_mascota/filtro_mascota";
-
+import Proceso from "./pages/Proceso_inscripcion/ProcesoInscripcion";
 
 function App() {
   return (
@@ -22,7 +21,7 @@ function App() {
         <Route path="/*" element={<HomePage />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/mascotas" element={<Mascotas />} />
-        <Route path="/proceso-adopcion" element={<div>Proceso de Adopción Page</div>} />
+        <Route path="/proceso-adopcion" element={<Proceso />} />
         <Route path="/preguntas-frecuentes" element={<Preguntas />} />
         <Route path="/requisitos-adoptar" element={<Requisitos />} />
         <Route path="/login" element={<Login />} />
