@@ -1,11 +1,8 @@
-import './Login.css'
-
 import "./Login.css";
 import { useState } from "react";
-import homeImage from "../../images/home_image.png";
 
 function Login() {
-  const homeImage= "home_image.png"
+  const homeImage = "home_image.png";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
