@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import axios from 'axios';
 import './AgregarMascota.css';
+import { UserContext } from '../../context/UserContext';
 
 // Enum para el tipo de mascota
 const TipoMascota = Object.freeze({
@@ -27,7 +29,16 @@ const PositivoNegativo = Object.freeze({
 });
 
 // Definiendo los campos del formulario
-const AgregarMascota = ({ addPet, userId }) => {
+const AgregarMascota = ({ addPet }) => {
+ /*  const { user } = useContext(UserContext);
+  
+  // Verifica si el usuario no está autenticado
+  if (!user) {
+   alert("Por favor, inicia sesión para agregar una mascota."); 
+  }*/
+
+  const PK_Usuario = 1;
+
   const [name, setName] = useState(''); // Nombre
   const [type, setType] = useState(''); // Si es perro o gato
   const [race, setRace] = useState(''); // Raza
@@ -41,32 +52,73 @@ const AgregarMascota = ({ addPet, userId }) => {
   const [amg, setAmg] = useState(''); // Si es amigable con gatos
   const [enf, setEnf] = useState(''); // Enfermedades
   const [details, setDetails] = useState(''); // Detalles
-  const [image, setImage] = useState(''); // Imagen
+  const [image, setImage] = useState('null'); // Imagen
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const petData={ name, type, race, size, birth, cas, vac, amn, amp, amg, enf, details, image, userId };
-    addPet(petData);
-    setName('');
-    setType('');
-    setRace('');
-    setSex('');
-    setSize('');
-    setBirth('');
-    setCas('');
-    setVac('');
-    setAmn('');
-    setAmp('');
-    setAmg('');
-    setEnf('');
-    setDetails('');
-    setImage(null);
+
+    // Convertir "Sí" o "No" a 1 o 0
+    const convertToBinary = (value) => value === 'Si' ? 1 : 0;
+
+    // Crear FormData para enviar el archivo y los datos
+    const formData = new FormData();
+    formData.append('nombre', name);
+    formData.append('especie', type);
+    formData.append('raza', race);
+    formData.append('sexo', sex);
+    formData.append('tamanio', size);
+    formData.append('fecha_nacimiento', birth);
+    formData.append('castrado', convertToBinary(cas));
+    formData.append('vacunado', convertToBinary(vac));
+    formData.append('amigable_ninos', convertToBinary(amn));
+    formData.append('amigable_perros', convertToBinary(amp));
+    formData.append('amigable_gatos', convertToBinary(amg));
+    formData.append('enfermedades', enf);
+    formData.append('detalle', details);
+    formData.append('FK_Usuario', PK_Usuario);
+
+    // Añadir el archivo de imagen si existe
+    if (image) {
+      formData.append('mascotaImages', image); // nombre del campo en el backend
+    }
+
+    // Enviar la solicitud POST al backend
+    try {
+      const response = await axios.post('http://localhost:3000/api/mascota', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      console.log(response.data);
+      if (response.data.success) {
+        alert('Mascota agregada con éxito');
+      }
+
+      // Limpiar los campos del formulario
+      setName('');
+      setType('');
+      setRace('');
+      setSex('');
+      setSize('');
+      setBirth('');
+      setCas('');
+      setVac('');
+      setAmn('');
+      setAmp('');
+      setAmg('');
+      setEnf('');
+      setDetails('');
+      setImage(null);
+    } catch (error) {
+      console.error('Error al agregar la mascota:', error);
+      alert('Hubo un error al agregar la mascota');
+    }
   };
 
   const handleImageChange = e => {
     const file = e.target.files[0];
     if (file) {
-        setImage(URL.createObjectURL(file)); // Previsualización
+      setImage(file); // Guardar el archivo de imagen
     }
   };
 
@@ -203,7 +255,7 @@ const AgregarMascota = ({ addPet, userId }) => {
         className='info--agregarMascotas'
         type="file"
         accept="image/*"
-        OnChange={handleImageChange}
+        onChange={handleImageChange}
         required
       />
       {image && <img src={image} alt="Previsualización" style={{ width: '100px', height: '100px', marginTop: '10px' }} />}
