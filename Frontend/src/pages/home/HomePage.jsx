@@ -11,7 +11,7 @@ const HomePage = () => {
   const homeImage= "home_image.png"
   const gato= "/Rectangulo_gato.png"
   const perro= "/rectangulo_perro.png"
-  const lupa= "/ph_magnifying-glass.png'"
+  const lupa= "/ph_magnifying-glass.png"
 
   return (
     <>

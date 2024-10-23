@@ -13,9 +13,9 @@ const Navbar = () => {
         <img src={logo2} alt="logo2" className="logo2" />
 
         <nav className="navbar">
-            <a href="/">FAQ</a>
+            <a href="/preguntas-frecuentes">FAQ</a>
             <a href="/">Historias</a>
-            <a href="/">Quiero adoptar</a>
+            <a href="/search">Quiero adoptar</a>
             <a href="/formulario-registro">Quiero dar en adopción</a>
             <button type="submit" id="Login">  <Link to={"/login"}>Login</Link></button>                            
             <button type="submit" id="Registro"><Link to={"/formulario-registro"}>Registro</Link></button> 
