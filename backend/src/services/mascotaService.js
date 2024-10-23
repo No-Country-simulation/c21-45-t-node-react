@@ -3,9 +3,9 @@ import pool from '../config/db.js';
 const mascotaService = {
 
 // Crear una nueva mascota
-async addMascota(mascotaData) {
+async addMascota(mascotaData, imageUrls) {
   try {
-    const { nombre, especie, raza, sexo, tamanio, fecha_nacimiento, castrado, vacunado, amigable_ninos, amigable_perros, amigable_gatos, enfermedades, detalle, foto, FK_Usuario } = mascotaData;
+    const { nombre, especie, raza, sexo, tamanio, fecha_nacimiento, castrado, vacunado, amigable_ninos, amigable_perros, amigable_gatos, enfermedades, detalle, FK_Usuario } = mascotaData;
 
     // Establecer eliminada en 0 cuando se crea una mascota
     const eliminada = 0;
@@ -30,7 +30,7 @@ async addMascota(mascotaData) {
         mascotaData.amigable_gatos,
         mascotaData.enfermedades,
         mascotaData.detalle,
-        mascotaData.foto,
+        JSON.stringify(imageUrls),
         eliminada,
         mascotaData.FK_Usuario
       ]

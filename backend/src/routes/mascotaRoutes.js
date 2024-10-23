@@ -1,12 +1,13 @@
 import { Router } from 'express';
 import * as mascotaController from '../controllers/mascotaController.js';
 import { verifyRequiredBody } from "../utils.js";
+import { imageUploader } from "../utils/uploader.js";
 
 const router = Router();
 
 // Ruta para crear una nueva mascota
-router.post('/', verifyRequiredBody(["nombre", "especie", "raza", "sexo", "tamanio", "fecha_nacimiento", "castrado", "vacunado", 
-    "amigable_ninos", "amigable_perros", "amigable_gatos", "enfermedades", "detalle", "foto", "FK_Usuario"]), mascotaController.addMascota);
+router.post('/', imageUploader.array("mascotaImages", 5), verifyRequiredBody(["nombre", "especie", "raza", "sexo", "tamanio", "fecha_nacimiento", "castrado", "vacunado", 
+    "amigable_ninos", "amigable_perros", "amigable_gatos", "enfermedades", "detalle", "FK_Usuario"]), mascotaController.addMascota);
 // Ruta para listar todas las mascotas
 router.get('/', mascotaController.listMascotas);
 // Ruta para listar todas las mascotas de un usuario

@@ -4,9 +4,10 @@ import mascotaService from '../services/mascotaService.js';
 export const addMascota = async (req, res) => {
   try {
     const newMascota = req.body;
-    const mascota = await mascotaService.addMascota(newMascota);
+    const imageUrls = req.files.map((file) => file.path);
+    const mascota = await mascotaService.addMascota(newMascota, imageUrls);
     // Retorna la nueva mascota creada
-    res.status(201).json(mascota);
+    res.status(201).json({ success: true, imageUrls });
   } catch (error) {
     console.error('Error al agregar mascota:', error);
     res.status(500).json({ error: 'Error al agregar la mascota.' });
@@ -19,7 +20,6 @@ export const listMascotas = async (req, res) => {
     const mascotas = await mascotaService.listMascotas();
     // Retorna la lista de mascotas
     res.json(mascotas);
-    console.log(mascotas);
   } catch (error) {
     console.error('Error al obtener las mascotas:', error);
     res.status(500).json({ error: 'Error al obtener las mascotas.' });
@@ -126,9 +126,10 @@ export const deleteMascota = async (req, res) => {
 export const filtroMascotas = async (req, res) => {
   try {
     const filterData = req.body;
-    const mascotas = await mascotaService.filtroMascotas(filterData);
+    const imageUrls = req.files.map((file) => file.path);
+    const mascotas = await mascotaService.filtroMascotas(filterData, imageUrls);
     // Retorna la lista de mascotas filtradas
-    res.json(mascotas);
+    res.json({ success: true, imageUrls });
   } catch (error) {
     console.error('Error al filtrar las mascotas:', error);
     res.status(500).json({ error: 'Error al filtrar las mascotas.' });
