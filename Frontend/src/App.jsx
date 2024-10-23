@@ -13,7 +13,7 @@ import Mascotas from "./pages/search/mascotas/mascotas";
 import Preguntas from "./pages/preguntas/preguntas";
 import Filtro_mascota from "./Components/filtro_mascota/filtro_mascota";
 import Proceso from "./pages/Proceso_inscripcion/ProcesoInscripcion";
-
+import AgregarMascota from "./pages/agregar_mascota/AgregarMascota";
 
 function App() {
   return (
@@ -33,6 +33,7 @@ function App() {
         <Route path="/mascotas-gato" element={<Mascotagato />} />
         <Route path="/mascotas-perro" element={<Mascotaperro />} />
         <Route path="/detalle-mascota" element={<Filtro_mascota />} />
+        <Route path="/agregar-mascota" element={< AgregarMascota/>} />
       </Routes>
       <Links />
     </Router>
