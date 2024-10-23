@@ -1,22 +1,23 @@
 import "./Login.css";
-import { useContext , useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { UserContext } from "../../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const homeImage = "home_image.png";
+  const { handleLogin } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useContext(UserContext);
+  const notificacionRef = useRef(null);
+  const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const requestBody = {
-      email: email,
-      password: password,
+      email,
+      password,
     };
-
-    console.log("Datos enviados:", requestBody);
 
     try {
       const response = await fetch("http://localhost:3000/api/auth/login", {
@@ -27,29 +28,30 @@ function Login() {
         body: JSON.stringify(requestBody),
       });
 
+      const data = await response.json();
+
       if (response.ok) {
-        const data = await response.json();
-        console.log("Login exitoso:", data);
-        // Guarda los datos del usuario en el estado global
-        login(data);
-      } else {
-        console.error("Error en el login:", response.statusText);
-        alert("Usuario o contraseña incorrectos"); // sacar y poner un mensaje en pantalla
-      }
+     
+          handleLogin(data);
+          navigate("/");}
+         else  {         
+          throw new Error("Acceso denegado: solo usuarios pueden iniciar sesión.");         
+        } 
+     
     } catch (error) {
-      console.error("Error en la petición:", error); // mostrar mensaje de error
+      notificacionRef.current.style.color = "red";
+      notificacionRef.current.innerHTML = error.message;
     }
   };
 
   return (
     <>
       <div className="container-general-login">
-
         <div className="main-content">
           <div className="container-form-login">
             <h2>Login</h2>
 
-            <form className="form-login" id="login-form" onSubmit={handleLogin}>
+            <form className="form-login" id="login-form" onSubmit={handleSubmit}>
               <label htmlFor="email" className="label-login">
                 Email
               </label>
@@ -62,7 +64,9 @@ function Login() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <label htmlFor="password">Contraseña</label>
+              <label htmlFor="password" className="label-login">
+                Contraseña
+              </label>
               <input
                 type="password"
                 name="password"
@@ -70,8 +74,10 @@ function Login() {
                 placeholder="Contraseña"
                 className="input-login"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)} // Actualiza el estado
+                onChange={(e) => setPassword(e.target.value)}
               />
+
+              <p id="notificacion" ref={notificacionRef}></p>
 
               <div className="forgot-password">
                 <p>¿olvidaste tu contraseña?</p>
@@ -94,7 +100,7 @@ function Login() {
           </div>
 
           <div className="container-img-login">
-            <img src={homeImage} alt="" />
+            <img src={homeImage} alt="home" />
           </div>
         </div>
       </div>

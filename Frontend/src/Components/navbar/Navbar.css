@@ -1,3 +1,8 @@
+.navbar{
+    display: flex;
+    align-items: center;
+}
+
 .header {
     width: 100%;
     height: 70px;
@@ -25,19 +30,30 @@
     margin-right: 240px;
 }
 
-.navbar a {
+.nav-links {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    margin-left: 40px;
+    color: #FF6F61; /* Color aplicado a todos los li */
+}
+
+.nav-links li a {
     text-decoration: none;
     position: relative;
     color: #FF6F61;
     font-family: "Lilita One";
     font-size: 18px;
-    margin-left: 40px;
 }
 
-.navbar a::before {
+.nav-links li a::before {
     content: '';
     position: absolute;
-    top:100%;
+    top: 100%;
     left: 0;
     width: 0;
     height: 2px;
@@ -45,7 +61,7 @@
     transition: 0.3s;
 }
 
-.navbar a:hover::before {
+.nav-links li a:hover::before {
     width: 100%;
 }
 
@@ -65,8 +81,8 @@
 
 #Registro {
     margin-right: 30px;
-        width: 150px;
-        height: 40px;
+    width: 150px;
+    height: 40px;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -79,17 +95,79 @@
     cursor: pointer;
 }
 
-.dropdown-menu li button, .dropdown-menu li a {
+.dropdown-link {
     text-decoration: none;
-    color: #333;
+    color: #FF6F61; /* Color aplicado al enlace del saludo */
+    font-family: "Lilita One"; /* Mantiene la misma fuente */
+    font-size: 18px; /* Tamaño de fuente igual */
+    position: relative; /* Necesario para el pseudo-elemento */
+}
+
+.dropdown-link::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #FF6F61;
+    transition: 0.3s;
+}
+
+.dropdown-link:hover::before {
+    width: 100%;
+}
+
+.user-menu-container {
+    display: flex;
+    align-items: center;
+}
+
+.user-dropdown{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.dropdown-menu {
+    list-style-type: none;
+    padding: 10px;
+    margin: 0;
+    background-color: #fff;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    position: absolute;
+    top: 70px;
+    right: 10px;
+    min-width: 200px;
+    z-index: 1000;
+}
+
+.dropdown-menu li .nav-links{
+    padding: 10px;
+    color: #FF6F61; /* Color aplicado a los li del dropdown */
+}
+
+.dropdown-menu li a,
+.dropdown-menu li button {
+    text-decoration: none;
+    color: #FF6F61; /* Color aplicado a los enlaces y botones del dropdown */
     font-size: 16px;
     background-color: transparent;
     border: none;
     cursor: pointer;
     width: 100%;
-    padding: 10px;
+    text-align: left;
 }
 
-.dropdown-menu li button:hover, .dropdown-menu li a:hover {
+.dropdown-menu li button:hover,
+.dropdown-menu li a:hover {
     background-color: #f1f1f1;
+}
+
+.dropdown-button {
+    background-color: transparent;
+    border: none;
+    font-family: "Lilita One";
+    font-size: 18px;
+    color: #FF6F61;
+    cursor: pointer;
 }
