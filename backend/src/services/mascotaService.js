@@ -63,7 +63,11 @@ async listMascotas() {
             WHERE m.eliminada = 0
     `;
     const [rows] = await pool.query(query);
-    return rows.affectedRows > 0 ? rows : "No hay mascotas disponibles.";
+    if (rows.length === 0) {
+      return "No hay mascotas disponibles.";
+    } else {
+      return rows;
+    }
   } catch (error) {
     throw new Error(`Error al obtener mascotas: ${error.message}`);
   }
@@ -77,7 +81,11 @@ async listMascotasByUsuario(FK_Usuario) {
       return "El usuario solicitado no existe.";
     } else {
         const [rows] = await pool.query('SELECT * FROM Mascota WHERE FK_Usuario = ? AND eliminada = 0', [FK_Usuario]);
-        return rows.affectedRows > 0 ? rows : "El usuario no tiene mascotas cargadas.";
+        if (rows.length === 0) {
+          return "El usuario no tiene mascotas cargadas.";
+        } else {
+          return rows;
+        };
     }
   } catch (error) {
     throw new Error(`Error al obtener mascotas del usuario con ID ${FK_Usuario}: ${error.message}`);
@@ -102,7 +110,11 @@ async listMascotasByPais(FK_Pais) {
       WHERE p.FK_Pais = ? AND m.eliminada = 0
     `;
     const [rows] = await pool.query(query, [FK_Pais]);
-    return rows.length > 0 ? rows : "No hay mascotas en este país.";
+    if (rows.length === 0) {
+      return "No hay mascotas en este país.";
+    } else {
+      return rows;
+    };
   } catch (error) {
     throw new Error(`Error al obtener mascotas por país con ID ${FK_Pais}: ${error.message}`);
   }
@@ -125,7 +137,11 @@ async listMascotasByProvincia(FK_Provincia) {
       WHERE l.FK_Provincia = ? AND m.eliminada = 0
     `;
     const [rows] = await pool.query(query, [FK_Provincia]);
-    return rows.length > 0 ? rows : "No hay mascotas en esta provincia.";
+    if (rows.length === 0) {
+      return "No hay mascotas en esta provincia.";
+    } else {
+      return rows;
+    };
   } catch (error) {
     throw new Error(`Error al obtener mascotas por provincia con ID ${FK_Provincia}: ${error.message}`);
   }
@@ -147,7 +163,11 @@ async listMascotasByLocalidad(FK_Localidad) {
       WHERE d.FK_Localidad = ? AND m.eliminada = 0
     `;
     const [rows] = await pool.query(query, [FK_Localidad]);
-    return rows.length > 0 ? rows : "No hay mascotas en esta localidad.";
+    if (rows.length === 0) {
+      return "No hay mascotas en esta localidad.";
+    } else {
+      return rows;
+    };
   } catch (error) {
     throw new Error(`Error al obtener mascotas por localidad con ID ${FK_Localidad}: ${error.message}`);
   }
@@ -172,7 +192,11 @@ async getMascotaById(id) {
       WHERE m.PK_Mascota = ? AND m.eliminada = 0
     `;
     const [rows] = await pool.query(query, [id]);
-    return rows[0] || null;
+    if (rows.length === 0) {
+      return "No se encontró la mascota solicitada.";
+    } else {
+      return rows[0];
+    };
   } catch (error) {
     throw new Error(`Error al obtener mascota con ID ${id}: ${error.message}`);
   }
@@ -206,7 +230,11 @@ async editMascota(id, mascotaUpdated) {
         id
       ]
     );
-    return result.affectedRows > 0 ? { id, ...mascotaUpdated } : null;
+    if (result.affectedRows === 0) {
+      return "No se encontró la mascota solicitada.";
+    } else {
+      return { id, ...mascotaUpdated };
+    };
   } catch (error) {
     throw new Error(`Error al actualizar mascota con ID ${id}: ${error.message}`);
   }
@@ -266,7 +294,11 @@ async filtroMascotas(filterData) {
     }
 
     const [rows] = await pool.query(query, params);
-    return rows.length > 0 ? rows : "No hay mascotas que cumplan con los filtros seleccionados.";
+    if (rows.length === 0) {
+      return "No hay mascotas que cumplan con los filtros seleccionados.";
+    } else {
+      return rows;
+    };
   } catch (error) {
     throw new Error(`Error al filtrar mascotas: ${error.message}`);
   }

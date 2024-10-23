@@ -1,46 +1,47 @@
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import CardMascota from "../../Components/card/CardMascota";
 
 function Search() {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
+  const [mascotas, setMascotas] = useState([]);
 
-  const mascotas = [
-    {
-      nombre: 'Fido',
-      especie: "Perro",
-      raza: "Labrador",
-      genero: "Macho",
-      tamanio: "Grande",
-      nacimiento: "2020-06-15",
-      castrado: "Sí",
-      ninos: "Sí",
-      perro: "Sí",
-      gatos: "No",
-      ubicacion:"CABA",
-      tipo:'cachorro'
-  
-    },
-    { nombre: "Rex", tipo: "Cachorro", ubicacion: "CABA", genero: "Macho" },
-    { nombre: "Max", tipo: "Cachorro", ubicacion: "CABA", genero: "Macho" },
-    { nombre: "Bella", tipo: "Grande", ubicacion: "CABA", genero: "Hembra" },
-    { nombre: "Luna", ubicacion: "CABA", genero: "Hembra", tipo: "mediano" },
-  ];
+  // Función para obtener mascotas desde el backend
+  const fetchMascotas = async () => {
+    try {
+      const response = await axios.get("http://localhost:3000/api/mascota/");
+      setMascotas(response.data); // Guardar las mascotas en el estado
+    } catch (error) {
+      console.error("Error al obtener las mascotas:", error);
+    }
+  };
 
+  // Llamar a la función fetchMascotas cuando se monta el componente
+  useEffect(() => {
+    fetchMascotas();
+  }, []);
+
+  // Función para manejar la selección de una mascota
   const handleSelectMascota = (mascota) => {
     navigate(`/detalle-mascota`, { state: { mascota } });
   };
 
   return (
     <div className="inicio">
-      <div className="mascota-grid">
-        {mascotas.map((mascota, index) => (
+    <div className="mascota-grid">
+      {Array.isArray(mascotas) && mascotas.length > 0 ? (
+        mascotas.map((mascota, index) => (
           <div key={index} onClick={() => handleSelectMascota(mascota)}>
             <CardMascota mascota={mascota} />
           </div>
-        ))}
-      </div>
+        ))
+      ) : (
+        <p>No hay mascotas disponibles.</p>
+      )}
     </div>
-  );
+  </div>
+);
 }
 
 export default Search;

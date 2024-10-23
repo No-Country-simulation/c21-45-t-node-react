@@ -19,6 +19,7 @@ export const listMascotas = async (req, res) => {
     const mascotas = await mascotaService.listMascotas();
     // Retorna la lista de mascotas
     res.json(mascotas);
+    console.log(mascotas);
   } catch (error) {
     console.error('Error al obtener las mascotas:', error);
     res.status(500).json({ error: 'Error al obtener las mascotas.' });

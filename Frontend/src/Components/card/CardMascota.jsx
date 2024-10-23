@@ -15,9 +15,9 @@ function CardMascota({ mascota }) {
         <div className="contenido-card">
           <p className="titulo">{mascota.nombre}</p>
           <div className="caracteristicas">
-            <p className="caracteristica">{mascota.genero}</p>
-            <p className="caracteristica">{mascota.ubicacion}</p>
-            <p className="caracteristica">{mascota.tipo}</p>
+            <p className="caracteristica">{mascota.sexo}</p>
+            <p className="caracteristica">{mascota.provincia}</p>
+            <p className="caracteristica">{mascota.raza}</p>
           </div>
         </div>
       </Link>

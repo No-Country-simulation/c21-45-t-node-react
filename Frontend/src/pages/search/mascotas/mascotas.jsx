@@ -9,7 +9,7 @@ const Mascotas = () => {
     {
       imagen: "/gato.png",
       titulo: "EDAD",
-      atributos: ["Cachorro", "Joven", "Adulto Joven", "Adulto", "Senior"],
+      atributos: ["Cachorro", "Adulto", "Senior"],
     },
     {
       imagen: "/tamaño.png",
