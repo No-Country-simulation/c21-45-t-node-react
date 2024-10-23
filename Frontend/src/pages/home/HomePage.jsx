@@ -7,7 +7,7 @@ import Search from '../../pages/search/search';
 import './HomePage.css';
 
 const HomePage = () => {
-  const homeImage = "home_image.png"; // Asegúrate de que la ruta de la imagen sea correcta
+  const homeImage = "home_image.png"; 
   const gato = "/Rectangulo_gato.png";
   const perro = "/rectangulo_perro.png";
   const lupa = "/lupa.png";
