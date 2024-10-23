@@ -57,10 +57,10 @@ const FormularioRegistro = () => {
 
   return (
     <div className="container-formulario-registro">
-      <div>
+      <div className=" rigth">
         <img src={homeImage} alt="home_image" className="imagenFormulario" />
       </div>
-      <div className="container--formulario">
+      <div className="container--formulario-left">
         <h2>Formulario de Registro</h2>
         <div className="container--datos">
           <form onSubmit={handleSubmit}>

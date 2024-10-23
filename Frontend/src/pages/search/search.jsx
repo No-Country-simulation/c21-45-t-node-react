@@ -6,7 +6,7 @@ import CardMascota from "../../Components/card/CardMascota";
 function Search() {
   const navigate = useNavigate();
   const [mascotas, setMascotas] = useState([]);
-
+  
   // Función para obtener mascotas desde el backend
   const fetchMascotas = async () => {
     try {
@@ -16,17 +16,17 @@ function Search() {
       console.error("Error al obtener las mascotas:", error);
     }
   };
-
+  
   // Llamar a la función fetchMascotas cuando se monta el componente
   useEffect(() => {
     fetchMascotas();
   }, []);
-
+  
   // Función para manejar la selección de una mascota
   const handleSelectMascota = (mascota) => {
     navigate(`/detalle-mascota`, { state: { mascota } });
   };
-
+  
   return (
     <div className="inicio">
     <div className="mascota-grid">

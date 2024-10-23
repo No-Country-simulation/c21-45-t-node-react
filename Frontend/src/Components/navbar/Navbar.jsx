@@ -14,7 +14,6 @@ const Navbar = () => {
 
         <nav className="navbar">
             <a href="/">FAQ</a>
-            <a href="/">Historias</a>
             <a href="/">Quiero adoptar</a>
             <a href="/formulario-registro">Quiero dar en adopción</a>
             <button type="submit" id="Login">  <Link to={"/login"}>Login</Link></button>                            

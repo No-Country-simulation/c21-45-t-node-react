@@ -1,9 +1,11 @@
+/* FormularioRegistro.css */
+
 .container-formulario-registro {
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Cambia a flex-start para alinearlo mejor */
+    align-items: flex-start; /* Alineación de elementos en la parte superior */
     flex-direction: row; 
-    margin: 20px; /* Añadir margen para separación */
+    margin: 20px; /* Margen para separación */
 }
 
 .container-formulario-registro img {
@@ -14,48 +16,52 @@
 }
 
 .container--formulario h2 {
-    font-family: "Lilita One";
+    font-family: "Lilita One", sans-serif; /* Asegúrate de que la fuente esté disponible */
     text-align: center; /* Centra el título */
+    margin-bottom: 20px; /* Espacio inferior del título */
 }
 
 .container--datos {
-    font-family: "Lilita One";
+    font-family: "Lilita One", sans-serif;
     display: flex;
-    flex-direction: row; /* Asegúrate de que los elementos dentro de este contenedor también estén en columna */
-    align-items: flex-start; /* Alinea los elementos al inicio */
-    width: 100%; /* Establecer un ancho para el formulario */
+    flex-direction: column; /* Coloca los elementos en columna */
+    align-items: center; /* Centra los elementos */
+    width: 100%; /* Ancho del formulario */
 }
 
 .container--datos div { /* Estilos para los divs que envuelven cada campo */
     margin-bottom: 15px; /* Espaciado entre los campos del formulario */
+    width: 100%; /* Para que cada div ocupe el ancho completo */
 }
 
 label {
     margin-bottom: 5px; /* Espaciado entre el label y el input */
+    display: block; /* Asegura que el label esté en su propia línea */
 }
+
 input, select {
-    width: 80%; /* Cambiado a 80% para que ocupen menos espacio */
-    max-width: 400px; /* Establece un ancho máximo para los inputs */
+    width: 80%; /* Ancho del 80% para inputs y selects */
+    max-width: 400px; /* Ancho máximo para los inputs */
     padding: 8px; 
     border-radius: 5px; 
     border: 1px solid #ccc; 
 }
 
 button[type="submit"] {
-    font-family: "Lilita One";
+    font-family: "Lilita One", sans-serif; /* Asegúrate de que la fuente esté disponible */
     font-size: 20px;
     margin-top: 20px;
-    padding: 10px 20px; /* Añadir padding para un mejor aspecto */
+    padding: 10px 20px; /* Espaciado interno para mejor aspecto */
     cursor: pointer;
     border-radius: 20px;
     color: white;
-    background-color: #FF6F61;
-    border: solid #FF6F61 2px;
+    background-color: #FF6F61; /* Color de fondo del botón */
+    border: solid #FF6F61 2px; /* Borde del botón */
+    transition: background-color 0.3s, color 0.3s; /* Transiciones suaves */
 }
 
 button[type="submit"]:hover {
-    color: #FF6F61;
-    background-color: white;
-    border: solid #FF6F61 2px;
-    transition-duration: 0.3s;
+    color: #FF6F61; /* Color del texto al pasar el ratón */
+    background-color: white; /* Color de fondo al pasar el ratón */
+    border: solid #FF6F61 2px; /* Borde del botón */
 }
