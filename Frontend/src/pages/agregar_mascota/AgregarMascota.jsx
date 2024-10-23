@@ -26,7 +26,7 @@ const PositivoNegativo = Object.freeze({
     NO: 'No',
 });
 
-// Definiendo los campos
+// Definiendo los campos del formulario
 const AgregarMascota = ({ addPet, userId }) => {
   const [name, setName] = useState(''); // Nombre
   const [type, setType] = useState(''); // Si es perro o gato
