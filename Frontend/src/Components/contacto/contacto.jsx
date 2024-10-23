@@ -7,7 +7,7 @@ const Contacto = () => {
         <div className="contact_btn">
         <h1>Contactame</h1>
         <div className="btn-contact">
-          <Link to="/adoptar">
+          <Link to="/formulario-adopcion">
             <button> Adoptar</button>
           </Link>
           </div>

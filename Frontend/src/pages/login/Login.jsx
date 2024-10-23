@@ -1,10 +1,12 @@
 import "./Login.css";
-import { useState } from "react";
+import { useContext , useState } from "react";
+import { UserContext } from "../../context/UserContext";
 
 function Login() {
   const homeImage = "home_image.png";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { login } = useContext(UserContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -28,7 +30,8 @@ function Login() {
       if (response.ok) {
         const data = await response.json();
         console.log("Login exitoso:", data);
-        // Aquí redirigir a donde corresponda o guardar el usuario en el estado global
+        // Guarda los datos del usuario en el estado global
+        login(data);
       } else {
         console.error("Error en el login:", response.statusText);
         alert("Usuario o contraseña incorrectos"); // sacar y poner un mensaje en pantalla
@@ -41,9 +44,6 @@ function Login() {
   return (
     <>
       <div className="container-general-login">
-        <div className="nav">
-          <p>componente NAV</p>
-        </div>
 
         <div className="main-content">
           <div className="container-form-login">

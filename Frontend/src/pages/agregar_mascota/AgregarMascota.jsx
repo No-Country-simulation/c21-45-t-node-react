@@ -30,14 +30,15 @@ const PositivoNegativo = Object.freeze({
 
 // Definiendo los campos del formulario
 const AgregarMascota = ({ addPet }) => {
- /*  const { user } = useContext(UserContext);
-  
+  /* Ver porque no trae los datos del usuario logueado
+  const { user } = useContext(UserContext);
   // Verifica si el usuario no está autenticado
   if (!user) {
    alert("Por favor, inicia sesión para agregar una mascota."); 
-  }*/
+  }
 
-  const PK_Usuario = 1;
+  const PK_Usuario = user.PK_Usuario; */
+  const PK_Usuario = 1; // ID del usuario autenticado
 
   const [name, setName] = useState(''); // Nombre
   const [type, setType] = useState(''); // Si es perro o gato

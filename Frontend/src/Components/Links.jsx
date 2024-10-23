@@ -9,7 +9,7 @@ function Links() {
     { href: '/proceso-adopcion', text: 'Proceso de adopción' },
     { href: '/preguntas-frecuentes', text: 'Preguntas frecuentes' },
     { href: '/requisitos-adoptar', text: 'Requisitos para adoptar' },
-    { href: '/publicar-mascota', text: 'Publicar mascota' }
+    { href: '/agregar-mascota', text: 'Publicar mascota' }
   ];
 
   return (

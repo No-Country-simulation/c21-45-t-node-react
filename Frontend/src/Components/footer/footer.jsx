@@ -36,7 +36,7 @@ const instagramLogo ="/ph_instagram-logo.png";
               <a href="/requisitos-adoptar">Requisitos para adoptar</a>
             </li>
             <li>
-              <a href="/publicar-mascota">Publicar mascota</a>
+              <a href="/agregar-mascota">Publicar mascota</a>
             </li>
           </ul>
         </div>

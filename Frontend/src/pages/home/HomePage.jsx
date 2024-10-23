@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-import Navbar from '../../Components/navbar/Navbar';
 import Search from '../../pages/search/search'; 
 import './HomePage.css';
 
@@ -31,7 +30,6 @@ const HomePage = () => {
 
   return (
     <>
-      <Navbar />
       <div className="home-container">
         <div className="home-left">
           <h1 className="main-title">Dales una segunda oportunidad, encuentra a tu nuevo mejor amigo</h1>

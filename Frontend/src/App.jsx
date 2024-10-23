@@ -1,11 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/home/HomePage";
+import Navbar from "./Components/navbar/Navbar";
 import Links from "./Components/Links";
 import Requisitos from "./pages/requisitos/requisitos";
 import Login from "./pages/login/Login";
-import FormularioRegistro from "./Components/formularioRegistro/FormularioRegistro";
-import FormularioAdopcion from "./Components/formularioAdopcion/FormularioAdopcion";
+import FormularioRegistro from "./pages/formularioRegistro/FormularioRegistro";
+import FormularioAdopcion from "./pages/formularioAdopcion/FormularioAdopcion";
 import Search from "./pages/search/search";
 import Mascotagato from "./pages/search/gatos/mascotagato";
 import Mascotaperro from "./pages/search/perro/mascotaperro";
@@ -18,6 +19,7 @@ import AgregarMascota from "./pages/agregar_mascota/AgregarMascota";
 function App() {
   return (
     <Router>
+      <Navbar />
       <Routes>
         <Route path="/*" element={<HomePage />} />
         <Route path="/" element={<HomePage />} />

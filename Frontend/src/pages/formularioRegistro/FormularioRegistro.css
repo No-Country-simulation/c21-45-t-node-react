@@ -6,6 +6,7 @@
     align-items: flex-start; /* Alineación de elementos en la parte superior */
     flex-direction: row; 
     margin: 20px; /* Margen para separación */
+    margin-top: 120px;
 }
 
 .container-formulario-registro img {
