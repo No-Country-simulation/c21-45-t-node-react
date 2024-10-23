@@ -22,12 +22,24 @@ const Filtro_mascota = () => {
     return `${day}/${month}/${year}`;
   };
 
+  // Obtener la URL de la imagen
+  let imagenURL = mascota.foto;
+
+  if (typeof imagenURL === "string") {
+    try {
+      const parsed = JSON.parse(imagenURL);
+      imagenURL = Array.isArray(parsed) ? parsed[0] : imagenURL;
+    } catch (error) {
+      // No hacer nada, la URL ya es una cadena válida
+    }
+  }
+
   return (
     <div className="container-mascota">
       <div className="container">
         <div className="left">
           <h1>{mascota.nombre}</h1>
-          <img src={gatito} alt="Imagen de mascota" />
+          <img src={imagenURL} alt={`Imagen de ${mascota.nombre}`} />
         </div>
         <div className="right">
           <div className="atributos">
