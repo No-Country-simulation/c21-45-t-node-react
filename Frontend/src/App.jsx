@@ -8,8 +8,6 @@ import Login from "./pages/login/Login";
 import FormularioRegistro from "./pages/formularioRegistro/FormularioRegistro";
 import FormularioAdopcion from "./pages/formularioAdopcion/FormularioAdopcion";
 import Search from "./pages/search/search";
-import Mascotagato from "./pages/search/gatos/mascotagato";
-import Mascotaperro from "./pages/search/perro/mascotaperro";
 import Mascotas from "./pages/search/mascotas/mascotas";
 import Preguntas from "./pages/preguntas/preguntas";
 import Filtro_mascota from "./Components/filtro_mascota/filtro_mascota";
@@ -32,8 +30,6 @@ function App() {
         <Route path="/formulario-registro" element={<FormularioRegistro />} />
         <Route path="/formulario-adopcion" element={<FormularioAdopcion />} />
         <Route path="/search" element={<Search />} />
-        <Route path="/mascotas-gato" element={<Mascotagato />} />
-        <Route path="/mascotas-perro" element={<Mascotaperro />} />
         <Route path="/detalle-mascota" element={<Filtro_mascota />} />
         <Route path="/agregar-mascota" element={< AgregarMascota/>} />
       </Routes>

@@ -48,13 +48,13 @@ const HomePage = () => {
                 <option value="">Selecciona un país</option>
                 {paises.length > 0 ? (
                   paises.map(pais => (
-                    <option key={pais.id} value={pais.id}>{pais.nombre}</option> // Asegúrate de que los objetos país tengan `id` y `nombre`
+                    <option key={pais.PK_Pais} value={pais.PK_Pais}>{pais.nombre}</option> // Asegúrate de que los objetos país tengan `id` y `nombre`
                   ))
                 ) : (
                   <option value="" disabled>{error || 'Cargando...'}</option> // Mensaje de carga o error
                 )}
               </select>
-              <Link to="/search">
+              <Link to="/mascotas">
                 <img 
                   src={lupa} 
                   alt="Buscar" 
@@ -75,7 +75,7 @@ const HomePage = () => {
         <Search /> 
       </div>
       <div className="btn-container">
-        <Link to='/mascotas'><button className="btn">¡Comenzar!</button></Link>
+        <Link to='/mascotas'><button className="btn">Ver más</button></Link>
       </div>
     </>
   );

@@ -57,6 +57,7 @@ const Filtro_mascota = () => {
             <h3>Detalles</h3>
             <h3>Localidad - Provincia</h3>
             <h3>País</h3>
+            <h3>Mascota publicada por</h3>
 
 
           </div>
@@ -75,6 +76,7 @@ const Filtro_mascota = () => {
             <h3>{mascota.detalle}</h3>
             <h3>{mascota.localidad} - {mascota.provincia}</h3>
             <h3>{mascota.pais}</h3>
+            <h3>{mascota.usuario_nombre} {mascota.usuario_apellido}</h3>
           </div>
         </div>
       </div>

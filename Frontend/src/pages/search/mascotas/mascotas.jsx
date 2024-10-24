@@ -27,21 +27,7 @@ const Mascotas = () => {
       titulo: "ESPECIE",
       atributos: ["Perro", "Gato"],
     },
-    /* {
-      imagen: "/gato.png",
-      titulo: "GATO",
-      // No requiere atributos para redirigir
-    }, */
   ];
-
-  // Función para manejar clics en las imágenes de perro y gato
-  const handleFilterClick = (titulo) => {
-    if (titulo === "PERRO") {
-      navigate("/mascotas-perro"); // Redirige a la página de perros
-    } else if (titulo === "GATO") {
-      navigate("/mascotas-gato"); // Redirige a la página de gatos
-    }
-  };
 
   return (
     <div className="gato">
