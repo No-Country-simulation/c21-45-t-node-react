@@ -55,7 +55,7 @@ const Filtro_mascota = () => {
             <h3>Amigable con gatos</h3>
             <h3>Enfermedades</h3>
             <h3>Detalles</h3>
-            <h3>Provincia - Localidad</h3>
+            <h3>Localidad - Provincia</h3>
             <h3>País</h3>
 
 
@@ -73,7 +73,7 @@ const Filtro_mascota = () => {
             <h3>{mascota.amigable_gatos === 1 ? "Sí" : "No"}</h3>
             <h3>{mascota.enfermedades}</h3>
             <h3>{mascota.detalle}</h3>
-            <h3>{mascota.provincia} - {mascota.provincia}</h3>
+            <h3>{mascota.localidad} - {mascota.provincia}</h3>
             <h3>{mascota.pais}</h3>
           </div>
         </div>
