@@ -122,14 +122,13 @@ export const deleteMascota = async (req, res) => {
   }
 };
 
-// Filtrar mascotas por especie, sexo, tamaño y edad
+// Filtrar mascotas por especie, sexo, tamaño, edad, localidad, provincia y país
 export const filtroMascotas = async (req, res) => {
   try {
     const filterData = req.body;
-    const imageUrls = req.files.map((file) => file.path);
-    const mascotas = await mascotaService.filtroMascotas(filterData, imageUrls);
+    const mascotas = await mascotaService.filtroMascotas(filterData);
     // Retorna la lista de mascotas filtradas
-    res.json({ success: true, imageUrls });
+    res.json(mascotas);
   } catch (error) {
     console.error('Error al filtrar las mascotas:', error);
     res.status(500).json({ error: 'Error al filtrar las mascotas.' });

@@ -289,7 +289,11 @@ async filtroMascotas(filterData) {
 
     // Filtros dinámicos según los parámetros recibidos
     if (edad) {
-      query += ` AND edad = ?`;
+      query += ` AND CASE
+        WHEN TIMESTAMPDIFF(MONTH, m.fecha_nacimiento, CURDATE()) <= 6 THEN 'Cachorro'
+        WHEN TIMESTAMPDIFF(YEAR, m.fecha_nacimiento, CURDATE()) <= 7 THEN 'Adulto'
+        ELSE 'Senior'
+      END = ?`;
       params.push(edad);
     }
     if (sexo) {
@@ -325,8 +329,6 @@ async filtroMascotas(filterData) {
     throw new Error(`Error al filtrar mascotas: ${error.message}`);
   }
 },
-
-  
 };
 
 export default mascotaService;
