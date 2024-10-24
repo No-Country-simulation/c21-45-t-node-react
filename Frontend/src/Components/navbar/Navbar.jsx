@@ -29,9 +29,10 @@ const Navbar = () => {
 
   return (
     <header className="header">
+      <div className="logo">
       <img src={logo1} alt="logo1" className="logo1" />
       <Link to={"/"}><img src={logo2} alt="logo2" className="logo2" /></Link>
-
+      </div>
       <nav className="navbar">
         <ul className="nav-links">
           <li><Link to="/preguntas-frecuentes">FAQ</Link></li>

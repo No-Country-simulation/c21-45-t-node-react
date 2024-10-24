@@ -140,5 +140,3 @@ const FormularioRegistro = () => {
 };
 
 export default FormularioRegistro;
-
-

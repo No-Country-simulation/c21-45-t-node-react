@@ -31,13 +31,13 @@ function Login() {
       const data = await response.json();
 
       if (response.ok) {
-     
-          handleLogin(data);
-          navigate("/");}
-         else  {         
-          throw new Error("Acceso denegado: solo usuarios pueden iniciar sesión.");         
-        } 
-     
+        handleLogin(data);
+        navigate("/");
+      } else {
+        throw new Error(
+          "Acceso denegado: solo usuarios pueden iniciar sesión."
+        );
+      }
     } catch (error) {
       notificacionRef.current.style.color = "red";
       notificacionRef.current.innerHTML = error.message;
@@ -48,10 +48,14 @@ function Login() {
     <>
       <div className="container-general-login">
         <div className="main-content">
-          <div className="container-form-login">
+          <div className="container-form-login_right" >
             <h2>Login</h2>
 
-            <form className="form-login" id="login-form" onSubmit={handleSubmit}>
+            <form
+              className="form-login"
+              id="login-form"
+              onSubmit={handleSubmit}
+            >
               <label htmlFor="email" className="label-login">
                 Email
               </label>
@@ -93,13 +97,21 @@ function Login() {
             </div>
 
             <div className="social-login">
-              <button className="btn-google">Continuar con Google</button>
-              <button className="btn-facebook">Continuar con Facebook</button>
-              <button className="btn-x">Continuar con X</button>
+              <button className="btn-google">
+                <img src="/google.png" alt="" srcset="" />
+                Continuar con Google
+              </button>
+              <button className="btn-facebook">
+                <img src="/facebook.png" alt="" srcset="" />
+                Continuar con Facebook</button>
+              <button className="btn-x">
+              <img  src="/x.png" alt="" />
+                Continuar con X</button>
+              
             </div>
           </div>
 
-          <div className="container-img-login">
+          <div className="container-img-login_left">
             <img src={homeImage} alt="home" />
           </div>
         </div>

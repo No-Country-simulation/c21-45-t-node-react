@@ -1,121 +1,169 @@
 /* General container */
 .container-general-login {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
-    margin-top: 100px;
-  }
-  
-  /* Form container */
-  .container-form-login {
-    width: 350px;
-    background-color: #f5f5f5;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
-  
-  h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-  }
-  
-  .input-login {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1rem;
-  }
-  
-  /* Forgot password section */
-  .forgot-password {
-    text-align: right;
-    margin-bottom: 20px;
-    font-size: 0.85rem;
-    color: gray;
-  }
-  
-  /* Button styles */
-  .button-iniciar {
-    width: 100%;
-    padding: 10px;
-    background-color: #ff6f61;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-    margin-bottom: 20px;
-  }
-  
-  .button-iniciar:hover {
-    background-color: #ff3f30;
-  }
-  
-  /* Separator styles */
-  .separator {
-    text-align: center;
-    margin: 10px 0;
-    position: relative;
-    font-size: 0.85rem;
-    color: gray;
-  }
-  
-  .separator span {
-    background-color: #f5f5f5;
-    padding: 0 10px;
-    position: relative;
-    z-index: 2;
-  }
-  
-  .separator::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    border-top: 1px solid #ccc;
-    z-index: 1;
-  }
-  
-  /* Social login buttons */
-  .social-login button {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    font-size: 1rem;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    cursor: pointer;
-  }
-  
-  .btn-google {
-    background-color: white;
-    border-color: #db4437;
-  }
-  
-  .btn-facebook {
-    background-color: white;
-    border-color: #4267B2;
-  }
-  
-  .btn-x {
-    background-color: white;
-    border-color: #000000;
-  }
-  
-  .social-login button:hover {
-    background-color: #f5f5f5;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  margin-top: 100px;
+  background-color: #f5f5f5;
+}
 
-  
-  .main-content{
-    display: flex;
-    flex-direction: row-reverse;
-  }
+/* Main content flexbox */
+.main-content {
+  display: flex;
+  flex-direction: row-reverse; /* Alinear la imagen a la derecha */
+}
+
+/* Form container */
+.container-form-login_right {
+  padding: 8px;
+  width: 350px; /* Anchura del contenedor del formulario */
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  background-color: white; /* Fondo blanco para el formulario */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+/* Input styles */
+.input-login {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+/* Notification container */
+#notificacion {
+  height: 20px; /* Espacio reservado para la notificación */
+  color: red; /* Color de texto */
+  margin-bottom: 20px; /* Margen inferior para espacio */
+}
+
+/* Forgot password section */
+.forgot-password {
+  text-align: right;
+  margin-bottom: 20px;
+  font-size: 0.85rem;
+  color: gray;
+}
+
+/* Button styles */
+.button-iniciar {
+  width: 100%;
+  padding: 10px;
+  background-color: #ff6f61;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.button-iniciar:hover {
+  background-color: #ff3f30;
+}
+
+/* Separator styles */
+.separator {
+  text-align: center;
+  margin: 10px 0;
+  position: relative;
+  font-size: 0.85rem;
+  color: gray;
+}
+
+.separator span {
+  background-color: #f5f5f5;
+  padding: 0 10px;
+  position: relative;
+  z-index: 2;
+}
+
+.separator::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  border-top: 1px solid #ccc;
+  z-index: 1;
+}
+
+/* Social login buttons */
+.social-login {
+  display: flex;
+  flex-direction: column; /* Alinear los botones de redes sociales en columna */
+  margin-top: 20px; /* Espacio superior para separar del formulario */
+}
+
+.social-login button {
+  display: flex; /* Usar flex para alinear la imagen y el texto */
+  align-items: center; /* Centrar verticalmente el contenido del botón */
+  justify-content: flex-start; /* Alinear el texto a la izquierda */
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  text-align: left; /* Alinear el texto a la izquierda */
+}
+
+.btn-google {
+  background-color: white;
+  border-color: #db4437;
+  color: #000000;
+}
+
+.btn-facebook {
+  background-color: white;
+  color: #000000;
+
+  border-color: #4267B2;
+}
+
+.btn-x {
+  background-color: white;
+  color: #000000;
+
+  border-color: #000000;
+}
+
+.social-login button:hover {
+  background-color: #f5f5f5;
+}
+
+/* Ajustar tamaño de las imágenes */
+.social-login img {
+  width: 16px; /* Tamaño reducido de la imagen */
+  height: 16px; /* Tamaño reducido de la imagen */
+  margin-right: 8px; /* Espacio a la derecha de la imagen */
+  margin-top: 2px; /* Espacio superior para centrar verticalmente */
+}
+
+/* Image container */
+.container-img-login_left {
+  flex: 1; /* Permitir que ocupe el espacio restante */
+  display: flex; /* Usar flex para centrar la imagen */
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+}
+
+.container-img-login_left img {
+  max-width: 655px; /* Hacer que la imagen se ajuste al contenedor */
+  height: 660px; /* Mantener proporciones de la imagen */
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
