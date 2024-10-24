@@ -24,14 +24,14 @@ const Mascotas = () => {
     },
     {
       imagen: "/perro_vector.png",
-      titulo: "PERRO",
-      // No requiere atributos para redirigir
+      titulo: "ESPECIE",
+      atributos: ["Perro", "Gato"],
     },
-    {
+    /* {
       imagen: "/gato.png",
       titulo: "GATO",
       // No requiere atributos para redirigir
-    },
+    }, */
   ];
 
   // Función para manejar clics en las imágenes de perro y gato
