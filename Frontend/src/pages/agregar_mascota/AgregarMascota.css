@@ -18,4 +18,35 @@
     width: 30%;
     height: 2rem;
     border-radius: 2rem;
+    height: auto;
 }
+
+.image-preview {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    margin-left: 30px;
+}
+
+.image-preview img {
+    width: 100px;
+    height: auto; 
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+}
+
+.button-agregarMascotas {
+    width: 30%;
+    padding: 10px;
+    background-color: #ff6f61;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 30px 30px 30px 30px;
+}
+
