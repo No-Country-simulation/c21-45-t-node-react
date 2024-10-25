@@ -2,34 +2,54 @@
     display:flex;
     justify-content: center;
     align-items: center;
+    background-color:#f5f5f5f5;
     margin-top: 100px;
+    margin-bottom: 100px;
+    padding-top:100px;
+    padding-bottom: 50px;
 }
 
 .container--componente img {
-    width: 70%;
+    width: 60%;
     border-radius: 35px;
     box-shadow: 0px 2px 10px rgba(15, 15, 15, 0.5);
     position: static;
     margin-top: 20px;
-    margin-left: 40px;
+    margin-left: 150px;
+    margin-bottom: 20px;
 }
 
 .container--formulario h2 {
+    margin-bottom:20px;
     font-family: "Lilita One";
+}
+
+.separator {
+    text-align:left;
+    position: relative;
+    font-size: 0.7rem;
+    color: gray;
 }
 
 .container--datos {
     font-family: "Lilita One";
+    font-size: 0.9rem;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    width: 300px;
+    padding: 10px;
+    margin-right: 100px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
 #enviar {
     font-family: "Lilita One";
     font-size: 20px;
     margin-top: 20px;
-    margin-left: 40px;
+    margin-bottom: 20px;
+    margin-left: 50px;
     padding-top: 4px;
     padding-bottom: 4px;
     cursor: pointer;
