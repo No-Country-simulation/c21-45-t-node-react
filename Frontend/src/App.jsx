@@ -11,7 +11,7 @@ import Search from "./pages/search/search";
 import Mascotas from "./pages/search/mascotas/mascotas";
 import Preguntas from "./pages/preguntas/preguntas";
 import Filtro_mascota from "./Components/filtro_mascota/filtro_mascota";
-import Proceso from "./pages/Proceso_inscripcion/ProcesoInscripcion";
+
 import AgregarMascota from "./pages/agregar_mascota/AgregarMascota";
 
 function App() {
@@ -22,7 +22,6 @@ function App() {
         <Route path="/*" element={<HomePage />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/mascotas" element={<Mascotas />} />
-        <Route path="/proceso-adopcion" element={<Proceso />} />
         <Route path="/preguntas-frecuentes" element={<Preguntas />} />
         <Route path="/requisitos-adoptar" element={<Requisitos />} />
         <Route path="/login" element={<Login />} />

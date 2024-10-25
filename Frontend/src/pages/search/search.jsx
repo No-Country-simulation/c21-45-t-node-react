@@ -11,6 +11,7 @@ function Search() {
   const fetchMascotas = async () => {
     try {
       const response = await axios.get("http://localhost:3000/api/mascota/");
+      console.log(response.data); 
       setMascotas(response.data); // Guardar las mascotas en el estado
     } catch (error) {
       console.error("Error al obtener las mascotas:", error);
@@ -20,6 +21,7 @@ function Search() {
   // Llamar a la función fetchMascotas cuando se monta el componente
   useEffect(() => {
     fetchMascotas();
+    console.log("hay mascotas",mascotas);
   }, []);
   
   // Función para manejar la selección de una mascota
