@@ -45,9 +45,28 @@ async addMascota(mascotaData, imageUrls) {
 // Listar todas las mascotas
 async listMascotas() {
   try {
-   const query = "SELECT * FROM Mascota WHERE eliminada = 0";
+    const query = `
+            SELECT m.*, 
+              l.nombre AS localidad, 
+              p.nombre AS provincia, 
+              pais.nombre AS pais,
+              CASE
+                WHEN TIMESTAMPDIFF(MONTH, m.fecha_nacimiento, CURDATE()) <= 6 THEN 'Cachorro'
+                WHEN TIMESTAMPDIFF(YEAR, m.fecha_nacimiento, CURDATE()) <= 7 THEN 'Adulto'
+                ELSE 'Senior'
+              END AS edad,
+              u.nombre AS usuario_nombre,
+              u.apellido AS usuario_apellido
+            FROM Mascota m
+            JOIN Usuario u ON m.FK_Usuario = u.PK_Usuario
+            JOIN Direccion d ON u.FK_Direccion = d.PK_Direccion
+            JOIN Localidad l ON d.FK_Localidad = l.PK_Localidad
+            JOIN Provincia p ON l.FK_Provincia = p.PK_Provincia
+            JOIN Pais pais ON p.FK_Pais = pais.PK_Pais
+            WHERE m.eliminada = 0
+    `;
     const [rows] = await pool.query(query);
-    console.log("Mascotas encontradas sin JOINs:", rows);
+    console.log("Mascotas encontradas:", rows); // Verifica el contenido de rows
     if (rows.length === 0) {
       return "No hay mascotas disponibles.";
     } else {
