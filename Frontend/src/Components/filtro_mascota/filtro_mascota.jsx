@@ -1,47 +1,86 @@
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import Contacto from "../contacto/contacto";
 import "./Filtro_mascota.css";
-;
+import { Link } from "react-router-dom";
+
 
 const Filtro_mascota = () => {
-  const gatito= "/gatito.png"
   const location = useLocation();
-  const { mascota } = location.state || {}; 
+  const { mascota } = location.state || {};
+  console.log("mascota adoptar", mascota);
+  
 
   if (!mascota) {
     return <h2>No se encontró la información de la mascota</h2>;
   }
 
-  // Función para formatear la fecha
+  // Estado para el índice de la imagen actual en el carrusel
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Obtener las URLs de las imágenes
+  let imagenesURL = [];
+
+  if (typeof mascota.foto === "string") {
+    try {
+      const parsed = JSON.parse(mascota.foto);
+      imagenesURL = Array.isArray(parsed) ? parsed : [mascota.foto];
+    } catch (error) {
+      imagenesURL = [mascota.foto]; // Caso en que solo haya una URL de imagen
+    }
+  }
+
+  // Función para cambiar a la siguiente imagen
+  const nextImage = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % imagenesURL.length);
+  };
+
+  // Función para cambiar a la imagen anterior
+  const prevImage = () => {
+    setCurrentImageIndex((prevIndex) =>
+      (prevIndex - 1 + imagenesURL.length) % imagenesURL.length
+    );
+  };
+
+  // Formatear la fecha de nacimiento
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = String(date.getDate()).padStart(2, '0');
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const year = date.getFullYear();
-    
     return `${day}/${month}/${year}`;
   };
-
-  // Obtener la URL de la imagen
-  let imagenURL = mascota.foto;
-
-  if (typeof imagenURL === "string") {
-    try {
-      const parsed = JSON.parse(imagenURL);
-      imagenURL = Array.isArray(parsed) ? parsed[0] : imagenURL;
-    } catch (error) {
-      // No hacer nada, la URL ya es una cadena válida
-    }
-  }
 
   return (
     <div className="container-mascota">
       <div className="container">
         <div className="left">
           <h1>{mascota.nombre}</h1>
-          <img src={imagenURL} alt={`Imagen de ${mascota.nombre}`} />
+
+          {/* Carrusel de imágenes */}
+          <div className="carousel">
+            <button onClick={prevImage} className="carousel-button">❮</button>
+            <img
+              src={imagenesURL[currentImageIndex]}
+              alt={`Imagen de ${mascota.nombre}`}
+              className="carousel-image"
+            />
+            <button onClick={nextImage} className="carousel-button">❯</button>
+          </div>
+          <p>Pertenece a: {mascota.nombre} {mascota.usuario_apellido}</p>
+
+        
+            <Link to="/formulario-adopcion">
+              <button className="btn-adoptar"> Solicitar adopcion</button>
+            </Link>
+          
+              <img src="perro_contacto.png" alt="" />
+     
+
         </div>
+
         <div className="right">
+          {/* Aquí van los atributos de la mascota */}
           <div className="atributos">
             <h3>Especie</h3>
             <h3>Raza</h3>
@@ -58,8 +97,6 @@ const Filtro_mascota = () => {
             <h3>Localidad - Provincia</h3>
             <h3>País</h3>
             <h3>Mascota publicada por</h3>
-
-
           </div>
           <div className="respuestas_atributos">
             <h3>{mascota.especie}</h3>
@@ -80,7 +117,6 @@ const Filtro_mascota = () => {
           </div>
         </div>
       </div>
-      <Contacto />
     </div>
   );
 };

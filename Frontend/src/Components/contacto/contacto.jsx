@@ -8,18 +8,14 @@ const Contacto = () => {
         <h1>Contactame</h1>
         <div className="btn-contact">
           <Link to="/formulario-adopcion">
-            <button> Adoptar</button>
+            <button> Solicitar adopcion</button>
           </Link>
           </div>
-          <div className="correo-adopcion">
+          <div className="perteneciente">
             <img src="/email-refugio.png" alt="" srcset="" />
             <p>refugiopatitas@gmail.com</p>
           </div>
-          <div className="location-refugio">
-            <img src="/location-refugio.png" alt="" />
-            <p>Calle falsa 123, CABA</p>
-          </div>
-          <div className="name-refugio">
+            <div className="name-refugio">
             <img src="/nombre-refugio.png" alt="" />
             <p>Refugio patitas</p>
           </div>
