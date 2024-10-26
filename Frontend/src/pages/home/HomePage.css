@@ -80,7 +80,7 @@
 .search-input {
   width: 100%;
   padding: 10px;
-  border: none; 
+  border: none;
   outline: none;
 }
 
@@ -113,15 +113,17 @@
 
 .btn-container {
   text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .btn {
   width: 150px;
   height: 45px;
-  background-color: #FF6F61;
+  background-color: #ff6f61;
   color: white;
   font-size: 16px;
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
   border: none;
   border-radius: 25px;
   cursor: pointer;
@@ -130,11 +132,11 @@
 }
 
 .btn:hover {
-  background-color: #FF4A39;
+  background-color: #ff4a39;
   transform: scale(1.05);
 }
 
 .btn:active {
-  background-color: #FF2A10;
+  background-color: #ff2a10;
   transform: scale(0.98);
 }

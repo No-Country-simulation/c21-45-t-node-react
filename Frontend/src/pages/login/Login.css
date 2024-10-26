@@ -91,12 +91,12 @@ h2 {
 }
 
 .separator::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 0;
   right: 0;
-  border-top: 1px solid #ccc;
+  /* border-top: 1px solid #ccc; */
   z-index: 1;
 }
 
@@ -131,7 +131,7 @@ h2 {
   background-color: white;
   color: #000000;
 
-  border-color: #4267B2;
+  border-color: #4267b2;
 }
 
 .btn-x {

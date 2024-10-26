@@ -1,9 +1,7 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import "./CardMascota.css";
 
-
 function CardMascota({ mascota }) {
-
   // Obtener la URL de la imagen
   let imagenURL = mascota.foto;
 
@@ -16,10 +14,9 @@ function CardMascota({ mascota }) {
     }
   }
 
-  const perro= "/perro.png"
   return (
     <div className="container-card">
-      <Link to='/cards' className="link-card">
+      <Link to="/cards" className="link-card">
         <figure className="container-img">
           <img src={imagenURL} alt={`Imagen de ${mascota.nombre}`} />
         </figure>
@@ -28,8 +25,8 @@ function CardMascota({ mascota }) {
           <p className="titulo">{mascota.nombre}</p>
           <div className="caracteristicas">
             <p className="caracteristica">{mascota.sexo}</p>
-            <p className="caracteristica">{mascota.provincia}</p>
             <p className="caracteristica">{mascota.raza}</p>
+            <p className="caracteristica">{mascota.provincia}</p>
           </div>
         </div>
       </Link>

@@ -7,12 +7,13 @@
 
 .container-card {
   width: 200px;
-  height: 320px;
+  min-height: 320px;
   border-radius: 18px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   text-align: center;
   font-family: Arial, sans-serif;
+  padding-bottom: 10px;
 }
 
 .container-img {
@@ -31,13 +32,13 @@
   border-bottom-left-radius: 50%;
   border-bottom-right-radius: 50%;
 }
-p.titulo{
-    font-family: "Lilita One", sans-serif;
-    font-size: 18px;
+p.titulo {
+  font-family: "Lilita One", sans-serif;
+  font-size: 18px;
 }
 p.caracteristica {
-    font-family: "Lilita One", sans-serif;
-font-size: 12px;
+  font-family: "Lilita One", sans-serif;
+  font-size: 14px;
   width: auto;
   height: 20px;
   width: 60px;
@@ -45,9 +46,12 @@ font-size: 12px;
   background-color: #1e9dba; /* Color de fondo azul */
   color: white;
   border-radius: 10px;
-  display: inline-block;
+  /* display: inline-block; */
   margin-right: 5px;
-  padding: 5px; /* Añadido para espaciar el texto dentro del bloque */
+  padding: 7px 10px; /* Añadido para espaciar el texto dentro del bloque */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .caracteristicas {
@@ -59,8 +63,6 @@ font-size: 12px;
 .contenido-card {
   margin-top: -15px;
 }
-
-
 
 /* Media queries para responsividad */
 @media (max-width: 1200px) {
