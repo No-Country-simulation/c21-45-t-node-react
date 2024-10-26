@@ -66,7 +66,6 @@ async listMascotas() {
             WHERE m.eliminada = 0
     `;
     const [rows] = await pool.query(query);
-    console.log("Mascotas encontradas:", rows); // Verifica el contenido de rows
     if (rows.length === 0) {
       return "No hay mascotas disponibles.";
     } else {

@@ -26,6 +26,6 @@ router.put('/:id', mascotaController.editMascota);
 router.delete('/:id', mascotaController.deleteMascota);
 // Ruta para filtrar mascotas
 router.post('/filtro', mascotaController.filtroMascotas);
-  
+
 
 export default router;
