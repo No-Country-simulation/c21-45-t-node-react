@@ -67,7 +67,7 @@ const Filtro_mascota = () => {
             />
             <button onClick={nextImage} className="carousel-button">❯</button>
           </div>
-          <p>Pertenece a: {mascota.nombre} {mascota.usuario_apellido}</p>
+          <p>Pertenece a: {mascota.usuario_nombre} {mascota.usuario_apellido}</p>
 
         
             <Link to="/formulario-adopcion">
