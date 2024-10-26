@@ -248,9 +248,10 @@ const AgregarMascota = ({ addPet }) => {
       <input
         className='info--agregarMascotas'
         type="text"
-        placeholder="Enfermedades (si hay)"
+        placeholder="Enfermedades"
         value={enf}
         onChange={(e) => setEnf(e.target.value)}
+        required
       />
       <textarea
         className='info--agregarMascotas'
@@ -265,6 +266,7 @@ const AgregarMascota = ({ addPet }) => {
         accept="image/*"
         multiple
         onChange={handleImageChange}
+        required
       />
 
       {/* Mostrar previsualización de las imágenes seleccionadas */}
