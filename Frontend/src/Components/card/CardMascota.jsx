@@ -10,7 +10,7 @@ function CardMascota({ mascota }) {
       const parsed = JSON.parse(imagenURL);
       imagenURL = Array.isArray(parsed) ? parsed[0] : imagenURL;
     } catch (error) {
-      // No hacer nada, la URL ya es una cadena válida
+      console.log(error);
     }
   }
 
@@ -22,11 +22,21 @@ function CardMascota({ mascota }) {
         </figure>
 
         <div className="contenido-card">
-          <p className="titulo">{mascota.nombre}</p>
+          <p className="titulo">
+            <span className="icono-animal">{mascota.especie == "Perro" ? "🐶" : "🐱"} </span>
+            {mascota.nombre}
+          </p>
           <div className="caracteristicas">
-            <p className="caracteristica">{mascota.sexo}</p>
-            <p className="caracteristica">{mascota.raza}</p>
-            <p className="caracteristica">{mascota.provincia}</p>
+            <div className="caracteristicas-principal">
+              <span className="caracteristica">{mascota.sexo}</span>
+              <span className="caracteristica">{mascota.edad}</span>
+            </div>
+            <div className="caracteristicas-ubicacion">
+              <span className="icono-ubicacion">📍</span>
+              <span className="ubicacion-texto">
+                {mascota.provincia}, {mascota.pais}
+              </span>
+            </div>
           </div>
         </div>
       </Link>

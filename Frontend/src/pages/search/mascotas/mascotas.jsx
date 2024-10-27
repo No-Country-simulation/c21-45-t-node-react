@@ -1,44 +1,33 @@
-import { useNavigate } from "react-router-dom"; // Importamos useNavigate
+import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import Search from "../search";
 import Filtros from "../../../Components/filtros/filtros";
-import './mascotas.css'
-const Mascotas = () => {
-  const navigate = useNavigate(); // Inicializamos el hook de navegación
+import filtros from "../../../Components/filtros/filtrosConfig.js";
+import "./mascotas.css";
 
-  const filtros = [
-    {
-      imagen: "/gato.png",
-      titulo: "EDAD",
-      atributos: ["Cachorro", "Adulto", "Senior"],
-    },
-    {
-      imagen: "/tamaño.png",
-      titulo: "TAMAÑO",
-      atributos: ["Grande", "Mediano", "Pequeño"],
-    },
-    { imagen: "/genero.png", titulo: "GÉNERO", atributos: ["Macho", "Hembra"] },
-    {
-      imagen: "/localizacion.png",
-      titulo: "UBICACIÓN",
-      atributos: ["CABA", "Buenos Aires"],
-    },
-    {
-      imagen: "/perro_vector.png",
-      titulo: "ESPECIE",
-      atributos: ["Perro", "Gato"],
-    },
-  ];
+const Mascotas = () => {
+  const location = useLocation();
+  const [filters, setFilters] = useState(location.state || {});
+  // const [filters, setFilters] = useState({});
+
+  const handleFilterClick = (titulo, atributo) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [titulo.toLowerCase()]: atributo,
+    }));
+    console.log("filters", filters);
+  };
 
   return (
     <div className="gato">
       <div className="filtros-container">
         {filtros.map((filtro, index) => (
-          <div key={index} onClick={() => handleFilterClick(filtro.titulo)}>
-            <Filtros filtro={filtro} />
+          <div key={index}>
+            <Filtros filtro={filtro} onFilterChange={handleFilterClick} />
           </div>
         ))}
       </div>
-      <Search />
+      <Search filters={filters} />
     </div>
   );
 };

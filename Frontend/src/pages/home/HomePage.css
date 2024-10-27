@@ -49,13 +49,21 @@
   margin: 10px 0;
 }
 
-.container-masc a img {
+.container-masc img {
   margin: 10px;
   transition: filter 0.3s ease;
 }
 
-.container-masc a img:hover {
+.container-masc img:hover {
   filter: sepia(3) hue-rotate(1deg) saturate(10);
+}
+
+.container-masc img.selected {
+  border: 2px solid black; /* Cambia el color según prefieras */
+  border-radius: 100%;
+  filter: brightness(0.9); /* Ajusta el brillo o cualquier otro efecto visual */
+  transform: scale(1.05); /* Hace que la imagen se vea ligeramente más grande */
+  transition: all 0.1s ease;
 }
 
 .buscador {
