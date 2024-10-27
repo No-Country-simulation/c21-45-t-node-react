@@ -13,7 +13,7 @@ const Pregunta = ({ pregunta, respuesta}) => {
       <div className="pregunta-text" onClick={manejarClick}>
         
         <h3>{pregunta}</h3>
-        <span className='flecha'><img src="/flecha.png" alt="" srcset="" /></span> 
+        <span className='flecha'><img src="/flecha.png" alt="" srcSet="" /></span> 
       </div>
 
       <div className={`respuesta-container ${mostrarRespuesta ? 'mostrar' : ''}`}>
