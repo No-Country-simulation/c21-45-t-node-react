@@ -1,19 +1,17 @@
 # c21-45-t-node-react
-# Plataforma de Adopción de Mascotas: AdoptMe
+# AdoptMe - Plataforma de Adopción de Mascotas
 
 ## Descripción
-Esta plataforma permite a personas interesadas en adoptar mascotas encontrar animales rescatados de refugios. Los refugios pueden registrar mascotas y gestionar las solicitudes de adopción. Los administradores tienen control sobre la seguridad y el proceso general de la plataforma para garantizar la calidad y el bienestar de las mascotas.
+**AdoptMe** es una plataforma que conecta a personas interesadas en adoptar mascotas con refugios y personas particulares que desean dar en adopción a sus animales. Refugios y usuarios particulares pueden registrar mascotas y gestionar las solicitudes de adopción, mientras que los administradores supervisan la seguridad y el cumplimiento de políticas para asegurar el bienestar de las mascotas.
 
-## Integrantes:
-- Arroyo, David
-- Cordoba, Fabricio
-- Durruty, Valeria
-- García, Camila
-- Hernandez, Oscar
-- Perez, Patricio
-- Rabosto, Macarena
+## Colaboradores
+- **Arroyo, David** - Frontend [LinkedIn](https://www.linkedin.com/in/david-arroyo-469327195/)
+- **Córdoba, Fabricio** - Frontend [LinkedIn](https://www.linkedin.com/in/fabricio-cordoba)
+- **Durruty, Valeria** - Backend [LinkedIn](https://www.linkedin.com/in/valeria-edith-durruty/)
+- **Hernandez, Oscar** - Frontend [LinkedIn](https://www.linkedin.com/in/oscar-hernandez-castellanos/)
+- **Rabosto, Macarena** - Backend [LinkedIn](https://www.linkedin.com/in/macarena-rabosto/)
 
-**TL**: Leyes, Laura
+**Team Lead**: **Leyes, Laura**
 
 ## Tecnologías
 - **Frontend**: React (Vite)
@@ -21,14 +19,15 @@ Esta plataforma permite a personas interesadas en adoptar mascotas encontrar ani
 - **Base de Datos**: MySQL
 
 ## Funcionalidades
-### Para usuarios interesados en adoptar:
-- Búsqueda de mascotas disponibles para adopción.
-- Solicitud de adopción en línea.
 
-### Para refugios de animales:
-- Registro y gestión de mascotas en adopción.
-- Seguimiento del proceso de adopción.
+### Para Usuarios Interesados en Adoptar
+- Exploración de mascotas disponibles para adopción.
+- Envío de solicitudes de adopción en línea.
 
-### Para administradores:
-- Gestión de usuarios y refugios.
-- Asegurar el cumplimiento de políticas de calidad y seguridad.
+### Para Usuarios que Quieren Dar en Adopción
+- Registro y administración de mascotas en adopción.
+- Recepción y gestión de solicitudes de adopción.
+
+### Para Administradores
+- Supervisión de usuarios y mascotas.
+- Cumplimiento de políticas de calidad y seguridad.
