@@ -278,7 +278,7 @@ const mascotaService = {
   // Filtrar mascotas por edad, sexo, tamaño, especie, país, provincia y localidad
   async filtroMascotas(filterData) {
     try {
-      const { edad, sexo, tamanio, especie, pais, provincia, localidad } = filterData;
+      const { edad, sexo, tamanio, especie, ubicacion, pais, provincia, localidad } = filterData;
 
       // Base de la consulta
       let query = `
@@ -321,6 +321,10 @@ const mascotaService = {
       if (especie) {
         query += ` AND m.especie = ?`;
         params.push(especie);
+      }
+      if (ubicacion) {
+        query += ` AND l.nombre = ?`;
+        params.push(ubicacion);
       }
       if (localidad) {
         query += ` AND l.PK_Localidad = ?`;
