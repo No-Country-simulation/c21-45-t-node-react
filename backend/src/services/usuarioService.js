@@ -1,10 +1,23 @@
 import pool from "../config/db.js";
 
 const usuarioService = {
-  // Obtener todos los usuarios
+  // Obtener todos los usuarios junto con la dirección (si existe)
   async getUsuarios() {
     try {
-      const [rows] = await pool.query("SELECT * FROM usuario");
+      const [rows] = await pool.query(`
+      SELECT 
+        u.*, 
+        d.calle, 
+        d.numero, 
+        l.nombre AS localidad, 
+        p.nombre AS provincia, 
+        pa.nombre AS pais
+      FROM usuario u
+      LEFT JOIN direccion d ON u.FK_Direccion = d.PK_Direccion
+      LEFT JOIN localidad l ON d.FK_Localidad = l.PK_Localidad
+      LEFT JOIN provincia p ON l.FK_Provincia = p.PK_Provincia
+      LEFT JOIN pais pa ON p.FK_Pais = pa.PK_Pais
+    `);
       return rows;
     } catch (error) {
       throw new Error(`Error al obtener usuarios: ${error.message}`);
@@ -165,34 +178,6 @@ const usuarioService = {
       return { message: "Usuario eliminado correctamente" };
     } catch (error) {
       throw new Error(`Error al eliminar usuario con ID ${userId}: ${error.message}`);
-    }
-  },
-
-  // Obtener todos los Adoptantes
-  async getAdoptantes() {
-    try {
-      const [rows] = await pool.query(`
-        SELECT Usuario.*, Adoptante.*
-        FROM Usuario
-        INNER JOIN Adoptante ON Usuario.FK_Adoptante = Adoptante.PK_Adoptante
-      `);
-      return rows;
-    } catch (error) {
-      throw new Error(`Error al obtener adoptantes: ${error.message}`);
-    }
-  },
-
-  // Obtener todos los Refugios
-  async getRefugios() {
-    try {
-      const [rows] = await pool.query(`
-          SELECT Usuario.*, Refugio.*
-          FROM Usuario
-          INNER JOIN Refugio ON Usuario.FK_Refugio = Refugio.PK_Refugio
-      `);
-      return rows;
-    } catch (error) {
-      throw new Error(`Error al obtener refugios: ${error.message}`);
     }
   },
 };
