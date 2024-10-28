@@ -4,7 +4,6 @@ import useFetchMascotas from "../../hooks/useFetchMascotas";
 
 function Search({ filters }) {
   const navigate = useNavigate();
-  console.log("paso a fetch mascotas: ", filters);
   const { mascotas, loading } = useFetchMascotas(filters);
 
   if (loading) return <p>Cargando...</p>;

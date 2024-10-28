@@ -18,12 +18,15 @@ const HomePage = () => {
 
   const navigate = useNavigate();
 
+  const setFiltroEspecie = (especie) => {
+    selectedEspecie == especie ? setSelectedEspecie("") : setSelectedEspecie(especie);
+  };
+
   const handleNavigateWithFilters = () => {
     const filters = {
       pais: selectedPais,
       especie: selectedEspecie,
     };
-
     navigate("/mascotas", { state: filters });
   };
 
@@ -51,21 +54,12 @@ const HomePage = () => {
             <h2>¡Encuentra a tu compañero!</h2>
             <p>¿Qué mascota estás buscando?</p>
             <div className="container-masc">
-              <img className={`${selectedEspecie === "gato" ? "selected" : ""}`} src={gato} alt="Gato" onClick={() => setSelectedEspecie("gato")} />
-              <img
-                className={`${selectedEspecie === "perro" ? "selected" : ""}`}
-                src={perro}
-                alt="Perro"
-                onClick={() => setSelectedEspecie("perro")}
-              />
-
-              {/* <img className="mascota-especie" src={gato} alt="Gato" onClick={() => setSelectedEspecie("gato")} /> */}
-              {/* <img className="mascota-especie" src={perro} alt="Perro" onClick={() => setSelectedEspecie("perro")} /> */}
+              <img className={selectedEspecie === "gato" ? "selected" : ""} src={gato} alt="Gato" onClick={() => setFiltroEspecie("gato")} />
+              <img className={selectedEspecie === "perro" ? "selected" : ""} src={perro} alt="Perro" onClick={() => setFiltroEspecie("perro")} />
             </div>
             <p>¿De dónde eres?</p>
 
             <div className="buscador">
-              {/* <select name="pais" id="pais-select"> */}
               <select name="pais" id="pais-select" value={selectedPais} onChange={(e) => setSelectedPais(e.target.value)}>
                 <option value="">Selecciona un país</option>
                 {paises.length > 0 ? (
@@ -80,12 +74,7 @@ const HomePage = () => {
                   </option> // Mensaje de carga o error
                 )}
               </select>
-              {/* <Link to="/mascotas"> */}
               <img src={lupa} alt="Buscar" className="search-icon" style={{ cursor: "pointer" }} onClick={handleNavigateWithFilters} />
-              {/* </Link> */}
-              {/* <Link to={`/mascotas?pais=${selectedPais}`}>
-                <img src={lupa} alt="Buscar" className="search-icon" style={{ cursor: "pointer" }} />
-              </Link> */}
             </div>
           </div>
         </div>
