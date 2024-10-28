@@ -31,3 +31,13 @@ export const listLocalidadesByProvincia = async (req, res) => {
     res.status(404).json({ error: error.message });
   }
 };
+
+// Listar todas las localidades que tengan mascotas en adopción
+export const listLocalidadesConMascotas = async (req, res) => {
+  try {
+    const localidades = await ubicacionService.listLocalidadesConMascotas();
+    res.status(200).json(localidades);
+  } catch (error) {
+    res.status(404).json({ error: error.message });
+  }
+};
