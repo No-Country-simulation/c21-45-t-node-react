@@ -22,7 +22,7 @@ const filtros = [
     imagen: "/localizacion.png",
     titulo: "UBICACIÓN",
     filtro: "ubicacion",
-    atributos: ["Argentina", "Uruguay", "México"],
+    atributos: ["La Plata", "Montevideo", "Veracruz"],
   },
 ];
 

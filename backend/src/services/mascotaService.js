@@ -323,7 +323,7 @@ const mascotaService = {
         params.push(especie);
       }
       if (ubicacion) {
-        query += ` AND pais.nombre = ?`;
+        query += ` AND l.nombre = ?`;
         params.push(ubicacion);
       }
       if (localidad) {
