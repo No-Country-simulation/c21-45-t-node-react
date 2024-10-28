@@ -37,6 +37,25 @@ const ubicacionService = {
       throw new Error(`Error al obtener localidades de la provincia con ID ${id}: ${error.message}`);
     }
   },
+
+  // Listar todas las localidad que tengan mascotas en adopcion
+async listLocalidadesConMascotas() {
+  try {
+    const [rows] = await pool.query(
+        `SELECT DISTINCT l.nombre AS localidad
+        FROM mascota m
+        JOIN usuario u ON m.FK_Usuario = u.PK_Usuario
+        JOIN direccion d ON u.FK_Direccion = d.PK_Direccion
+        JOIN localidad l ON d.FK_Localidad = l.PK_Localidad
+        WHERE m.eliminada = 0;`,);
+    if (rows.length === 0) {
+      throw new Error("Localidades no encontradas");
+    }
+    return rows;
+  } catch (error) {
+    throw new Error(`Error al obtener localidades con mascotas en adopción: ${error.message}`);
+  }
+},
 };
 
 export default ubicacionService;
