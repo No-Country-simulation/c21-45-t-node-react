@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-// import Contacto from "../contacto/contacto";
 import "./Filtro_mascota.css";
 import { Link } from "react-router-dom";
 // import { formatDate } from "../../service/formatoFecha";
@@ -48,7 +47,6 @@ const Filtro_mascota = () => {
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
   };
-
 
   return (
     <div className="container-mascota">
@@ -115,30 +113,21 @@ const Filtro_mascota = () => {
             <h3>{mascota.detalle}</h3>
           </div>
 
-          <div className="contact">
-            <div className="left_contact">
-              <div className="contact_btn">
-                
-                <div className="btn-contact">
-                  <button>Adoptar</button>
-                </div>
+          <div className="section">
+            <div className="left_section">
 
-                <div className="correo-adopcion">
-                  {/* <img src="/email-refugio.png" alt="" srcset="" /> */}
-                  <p>{mascota.localidad} - {mascota.provincia}</p>
+                <div className="localidad-provincia">
+                  <p>Ubicación: {mascota.localidad}, {mascota.provincia}</p>
                 </div>
-                <div className="location-refugio">
-                  {/* <img src="/location-refugio.png" alt="" /> */}
-                  <p>{mascota.pais}</p>
+                <div className="pais">
+                  <p> País: {mascota.pais}</p>
                 </div>
-                <div className="name-refugio">
-                  {/* <img src="/nombre-refugio.png" alt="" /> */}
-                  <p>{mascota.usuario_nombre} {mascota.usuario_apellido}</p>
+                <div className="nombre-apellido">
+                  <p>Usuario: {mascota.usuario_nombre} {mascota.usuario_apellido}</p>
                 </div>
-              </div>
             </div>
 
-            <div className="right_contact">
+            <div className="right_section">
               <img src="perro_contacto.png" alt="" />
             </div>
           </div>
