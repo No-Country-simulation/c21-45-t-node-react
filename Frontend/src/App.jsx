@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { UserContext } from "./context/UserContext";
 import HomePage from "./pages/home/HomePage";
 import Navbar from "./Components/navbar/Navbar";
 import Links from "./Components/Links";
@@ -11,27 +12,33 @@ import Search from "./pages/search/search";
 import Mascotas from "./pages/search/mascotas/mascotas";
 import Preguntas from "./pages/preguntas/preguntas";
 import Filtro_mascota from "./Components/filtro_mascota/filtro_mascota";
-
+import Admin from "./pages/admin/admin";
 import AgregarMascota from "./pages/agregar_mascota/AgregarMascota";
+import RequireAdmin from "./RequireAdmin"; // Importa el componente de redirección
 
 function App() {
   return (
     <Router>
       <Navbar />
-      <Routes>
-        <Route path="/*" element={<HomePage />} />
-        <Route path="/" element={<HomePage />} />
-        <Route path="/mascotas" element={<Mascotas />} />
-        <Route path="/preguntas-frecuentes" element={<Preguntas />} />
-        <Route path="/requisitos-adoptar" element={<Requisitos />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/publicar-mascota" element={<div>Publicar Mascota Page</div>} />
-        <Route path="/formulario-registro" element={<FormularioRegistro />} />
-        <Route path="/formulario-adopcion" element={<FormularioAdopcion />} />
-        <Route path="/search" element={<Search />} />
-        <Route path="/detalle-mascota" element={<Filtro_mascota />} />
-        <Route path="/agregar-mascota" element={< AgregarMascota/>} />
-      </Routes>
+      <RequireAdmin>
+        <Routes>
+          <Route path="/*" element={<HomePage />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/mascotas" element={<Mascotas />} />
+          <Route path="/preguntas-frecuentes" element={<Preguntas />} />
+          <Route path="/requisitos-adoptar" element={<Requisitos />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/publicar-mascota" element={<div>Publicar Mascota Page</div>} />
+          <Route path="/formulario-registro" element={<FormularioRegistro />} />
+          <Route path="/formulario-adopcion" element={<FormularioAdopcion />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/detalle-mascota" element={<Filtro_mascota />} />
+          <Route path="/agregar-mascota" element={<AgregarMascota />} />
+
+          {/* Página de administración exclusiva para el rol administrador */}
+          <Route path="/admin" element={<Admin />} />
+        </Routes>
+      </RequireAdmin>
       <Links />
     </Router>
   );

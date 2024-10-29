@@ -3,13 +3,14 @@ import { useLocation } from "react-router-dom";
 import Contacto from "../contacto/contacto";
 import "./Filtro_mascota.css";
 import { Link } from "react-router-dom";
+import { formatDate } from "../../service/formatoFecha";
 
 
 const Filtro_mascota = () => {
   const location = useLocation();
   const { mascota } = location.state || {};
   console.log("mascota adoptar", mascota);
-  
+
 
   if (!mascota) {
     return <h2>No se encontró la información de la mascota</h2>;
@@ -43,13 +44,6 @@ const Filtro_mascota = () => {
   };
 
   // Formatear la fecha de nacimiento
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
-  };
 
   return (
     <div className="container-mascota">
@@ -67,15 +61,15 @@ const Filtro_mascota = () => {
             />
             <button onClick={nextImage} className="carousel-button">❯</button>
           </div>
-          <p>Pertenece a: {mascota.nombre} {mascota.usuario_apellido}</p>
+          <p>Pertenece a: {mascota.usuario_nombre}</p>
 
-        
-            <Link to="/formulario-adopcion">
-              <button className="btn-adoptar"> Solicitar adopcion</button>
-            </Link>
-          
-              <img src="perro_contacto.png" alt="" />
-     
+
+          <Link to="/formulario-adopcion">
+            <button className="btn-adoptar"> Solicitar adopcion</button>
+          </Link>
+
+          <img src="perro_contacto.png" alt="" />
+
 
         </div>
 

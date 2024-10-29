@@ -2,28 +2,28 @@ import pool from "../config/db.js";
 
 const usuarioService = {
   // Obtener todos los usuarios
-  async getUsuarios() {
-    try {
-      const [rows] = await pool.query("SELECT * FROM usuario");
-      return rows;
-    } catch (error) {
-      throw new Error(`Error al obtener usuarios: ${error.message}`);
-    }
-  },
-
-  // Obtener un usuario por ID
-  async getUsuarioById(userId) {
-    try {
-      const [rows] = await pool.query("SELECT * FROM usuario WHERE PK_Usuario = ?", [userId]);
-      if (rows.length === 0) {
-        throw new Error("Usuario no encontrado");
-      }
-      return rows[0];
-    } catch (error) {
-      throw new Error(`Error al obtener usuario con ID ${userId}: ${error.message}`);
-    }
-  },
-
+ // Obtener todos los usuarios con datos de dirección
+ async getUsuarios() {
+  try {
+    const [rows] = await pool.query(`
+    SELECT 
+      u.*, 
+      d.calle, 
+      d.numero, 
+      l.nombre AS localidad, 
+      p.nombre AS provincia, 
+      pa.nombre AS pais
+    FROM usuario u
+    LEFT JOIN direccion d ON u.FK_Direccion = d.PK_Direccion
+    LEFT JOIN localidad l ON d.FK_Localidad = l.PK_Localidad
+    LEFT JOIN provincia p ON l.FK_Provincia = p.PK_Provincia
+    LEFT JOIN pais pa ON p.FK_Pais = pa.PK_Pais
+  `);
+    return rows;
+  } catch (error) {
+    throw new Error(`Error al obtener usuarios: ${error.message}`);
+  }
+},
   // Obtener un usuario por email
   async getUsuarioByEmail(email) {
     try {

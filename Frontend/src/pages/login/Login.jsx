@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 function Login() {
   const homeImage = "home_image.png";
-  const { handleLogin } = useContext(UserContext);
+  const { handleLogin} = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const notificacionRef = useRef(null);
@@ -29,15 +29,17 @@ function Login() {
       });
 
       const data = await response.json();
+      console.log("data login", data);
+      
+      handleLogin(data); // Llamar a handleLogin antes de verificar el rol
 
-      if (response.ok) {
-        handleLogin(data);
-        navigate("/");
+      // Verificar rol y redirigir en consecuencia
+      if (data.payload.FK_Rol === 1) { // Verifica si es administrador
+        navigate("/admin");
       } else {
-        throw new Error(
-          "Acceso denegado: solo usuarios pueden iniciar sesión."
-        );
+        navigate("/"); // Redirige a la página principal si no es administrador
       }
+      
     } catch (error) {
       notificacionRef.current.style.color = "red";
       notificacionRef.current.innerHTML = error.message;
@@ -48,7 +50,7 @@ function Login() {
     <>
       <div className="container-general-login">
         <div className="main-content">
-          <div className="container-form-login_right" >
+          <div className="container-form-login_right">
             <h2>Login</h2>
 
             <form
@@ -84,11 +86,11 @@ function Login() {
               <p id="notificacion" ref={notificacionRef}></p>
 
               <div className="forgot-password">
-                <p>¿olvidaste tu contraseña?</p>
+                <p>¿Olvidaste tu contraseña?</p>
               </div>
 
               <button className="button-iniciar" type="submit">
-                Continue
+                Continuar
               </button>
             </form>
 
@@ -98,16 +100,17 @@ function Login() {
 
             <div className="social-login">
               <button className="btn-google">
-                <img src="/google.png" alt="" srcset="" />
+                <img src="/google.png" alt="Google" />
                 Continuar con Google
               </button>
               <button className="btn-facebook">
-                <img src="/facebook.png" alt="" srcset="" />
-                Continuar con Facebook</button>
+                <img src="/facebook.png" alt="Facebook" />
+                Continuar con Facebook
+              </button>
               <button className="btn-x">
-              <img  src="/x.png" alt="" />
-                Continuar con X</button>
-              
+                <img src="/x.png" alt="X" />
+                Continuar con X
+              </button>
             </div>
           </div>
 
