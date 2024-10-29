@@ -3,8 +3,11 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import './FormularioAdopcion.css';
 import {UserContext} from '../../context/UserContext';
+import { useLocation } from 'react-router-dom';
 
 export const FormularioAdopcion = () => {
+    const location = useLocation();
+    const { PK_Mascota } = location.state || {}; // Recuperar PK_Mascota del estado
 
     const homeImage = "/home_image.png"
 
@@ -29,8 +32,18 @@ export const FormularioAdopcion = () => {
     }
 
     const handleCompromisoChange = (event) => {
-        setCompromiso(event.target.value);
-    }
+        const value = event.target.value;
+        if (value === 'No') {
+            Swal.fire({
+                title: 'Advertencia',
+                text: 'Si no te comprometes a cuidar de la mascota, no puedes solicitar la adopción.',
+                icon: 'warning',
+            });
+            setCompromiso(''); // Limpia la selección
+        } else {
+            setCompromiso(value);
+        }
+    };
 
     const handleSeguridadChange = (event) => {
         setSeguridad(event.target.value);
@@ -39,27 +52,27 @@ export const FormularioAdopcion = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (user) {
-          const convertToBinary = (value) => value === 'Si' ? 1 : 0;
+            const data = {
+                horas_solo: tiempoSolo,
+                tipo_vivienda: tipoVivienda,
+                detalle_mascotas: especieCantidad,
+                comentario: comentarioAdicional,
+                otras_mascotas: otrasMascotas,
+                patio: patio,
+                cerramiento: seguridad,
+                compromiso: compromiso,
+                FK_Mascota: PK_Mascota,
+                FK_Usuario: PK_Usuario,
+            };
     
-          const formData = new FormData();
-          formData.append('horas_solo', tiempoSolo);
-          formData.append('tipo_vivienda', tipoVivienda);
-          formData.append('detalle_mascotas', especieCantidad);
-          formData.append('comentario', comentarioAdicional);
-          formData.append('otras_mascotas', convertToBinary(otrasMascotas));
-          formData.append('patio', convertToBinary(patio));
-          formData.append('cerramiento', convertToBinary(seguridad));
-          formData.append('compromiso', convertToBinary(compromiso));
-          formData.append('FK_Usuario', PK_Usuario);
-
-          try {
-            const response = await axios.post('http://localhost:3000/api/adopcion', formData, {
-              headers: {
-                'Content-Type': 'multipart/form-data',
-              },
-            });
+            try {
+                const response = await axios.post('http://localhost:3000/api/adopcion', data, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
     
-            console.log('Respuesta de la API:', response.data);
+                //console.log('Respuesta de la API:', response.data);
     
             if (response.data.success) {
               Swal.fire({
@@ -113,23 +126,23 @@ export const FormularioAdopcion = () => {
 
                     <label htmlFor="tiempoSolo">¿Cuántas horas podría estar sola tu mascota?</label>
                     <input type="number" id="tiempoSolo" value={tiempoSolo}
-                    onChange={(e) => setTiempoSolo(e.target.value)} />
+                    onChange={(e) => setTiempoSolo(e.target.value)} required/>
                     <br />
 
                     <label htmlFor="tipoVivienda">Tipo de vivienda (casa, departamento, chalet, loft, etc.)</label>
                     <input type="text" id="tipoVivienda" value={tipoVivienda}
-                    onChange={(e) => setTipoVivienda(e.target.value)} />
+                    onChange={(e) => setTipoVivienda(e.target.value)} required/>
                     <br />
 
                     <label htmlFor="patio">¿Cuentas con patio en casa?</label>
                     <label>
                         <input
                             type="radio"
-                            value="Sí"
-                            checked={patio === 'Sí'}
+                            value="Si"
+                            checked={patio === 'Si'}
                             onChange={handlePatioChange}
-                        />
-                        Sí
+                        required/>
+                        Si
                     </label>
                     <label>
                         <input
@@ -146,11 +159,11 @@ export const FormularioAdopcion = () => {
                     <label>
                         <input
                             type="radio"
-                            value="Sí"
-                            checked={seguridad === 'Sí'}
+                            value="Si"
+                            checked={seguridad === 'Si'}
                             onChange={handleSeguridadChange}
-                        />
-                        Sí
+                        required/>
+                        Si
                     </label>
                     <label>
                         <input
@@ -167,11 +180,11 @@ export const FormularioAdopcion = () => {
                     <label>
                         <input
                             type="radio"
-                            value="Sí"
-                            checked={otrasMascotas === 'Sí'}
+                            value="Si"
+                            checked={otrasMascotas === 'Si'}
                             onChange={handleMascotasChange}
-                        />
-                        Sí
+                        required/>
+                        Si
                     </label>
                     <label>
                         <input
@@ -200,11 +213,11 @@ export const FormularioAdopcion = () => {
                     <label>
                         <input
                             type="radio"
-                            value="Sí"
-                            checked={compromiso === 'Sí'}
+                            value="Si"
+                            checked={compromiso === 'Si'}
                             onChange={handleCompromisoChange}
-                        />
-                        Sí
+                        required/>
+                        Si
                     </label>
                     <label>
                         <input

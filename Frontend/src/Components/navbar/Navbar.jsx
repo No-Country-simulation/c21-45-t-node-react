@@ -32,8 +32,8 @@ const Navbar = () => {
         <Link to="/"><img src={logo2} alt="logo2" className="logo2" /></Link>
       </div>
       <nav className="navbar">
-        {/* Mostrar enlaces de navegación solo si el usuario no es administrador */}
-        {(!user || user.payload.FK_Rol !== 1) && (
+        {/* Mostrar enlaces de navegación solo si el usuario tira error o no es administrador */}
+        {(!user || user.error|| user.payload.FK_Rol !== 1) && (
           <ul className="nav-links">
             <li><Link to="/preguntas-frecuentes">FAQ</Link></li>
             <li><Link to="/mascotas">Quiero adoptar</Link></li>
@@ -58,15 +58,15 @@ const Navbar = () => {
                   {user.payload.FK_Rol === 1 ? (
                     // Mostrar solo para administrador
                     <li>
-                      <Link to="/" onClick={handleLogout}>Cerrar sesión</Link>
+                      <Link to="/" className="dropdown-link" onClick={handleLogout}>Cerrar sesión</Link>
                     </li>
                   ) : (
                     // Menú completo para otros usuarios
                     <>
-                      <li><Link to="/perfil">Perfil</Link></li>
-                      <li><Link to="/">Mis mascotas</Link></li>
-                      <li><Link to="/">Mis solicitudes</Link></li>
-                      <li><Link to="/" onClick={handleLogout}>Cerrar sesión</Link></li>
+                      <li><Link to="/perfil" className="dropdown-link">Perfil</Link></li>
+                      <li><Link to="/" className="dropdown-link">Mis mascotas</Link></li>
+                      <li><Link to="/" className="dropdown-link">Mis solicitudes</Link></li>
+                      <li><Link to="/" className="dropdown-link" onClick={handleLogout}>Cerrar sesión</Link></li>
                     </>
                   )}
                 </ul>
