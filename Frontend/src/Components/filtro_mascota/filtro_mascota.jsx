@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 // import Contacto from "../contacto/contacto";
 import "./Filtro_mascota.css";
 import { Link } from "react-router-dom";
+// import { formatDate } from "../../service/formatoFecha";
 
 const Filtro_mascota = () => {
   const location = useLocation();
@@ -39,6 +40,7 @@ const Filtro_mascota = () => {
   };
 
   // Formatear la fecha de nacimiento
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = String(date.getDate()).padStart(2, "0");
@@ -46,6 +48,7 @@ const Filtro_mascota = () => {
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
   };
+
 
   return (
     <div className="container-mascota">
@@ -70,7 +73,6 @@ const Filtro_mascota = () => {
           <Link to="/formulario-adopcion">
             <button className="btn-adoptar"> Solicitar adopcion</button>
           </Link>
-
           <img src="perro_contacto.png" alt="" />
         </div>
 

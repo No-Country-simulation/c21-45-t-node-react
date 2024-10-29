@@ -1,6 +1,7 @@
 import pool from "../config/db.js";
 
 const usuarioService = {
+
   // Obtener todos los usuarios junto con la dirección (si existe)
   async getUsuarios() {
     try {

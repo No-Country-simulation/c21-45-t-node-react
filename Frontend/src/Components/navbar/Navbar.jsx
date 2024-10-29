@@ -9,19 +9,16 @@ const Navbar = () => {
 
   const { user, handleLogout } = useContext(UserContext);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null); // Crear referencia para el dropdown
+  const dropdownRef = useRef(null);
 
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      setIsDropdownOpen(false); // Cerrar dropdown si se hace clic fuera
+      setIsDropdownOpen(false);
     }
   };
 
   useEffect(() => {
-    // Añadir el evento de clic cuando el componente se monta
     document.addEventListener('mousedown', handleClickOutside);
-
-    // Limpiar el evento al desmontar el componente
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
@@ -31,16 +28,18 @@ const Navbar = () => {
     <header className="header">
       <div className="logo">
         <img src={logo1} alt="logo1" className="logo1" />
-        <Link to={"/"}>
-          <img src={logo2} alt="logo2" className="logo2" />
-        </Link>
+
+        <Link to="/"><img src={logo2} alt="logo2" className="logo2" /></Link>
       </div>
       <nav className="navbar">
-        <ul className="nav-links">
-          <li><Link to="/preguntas-frecuentes">FAQ</Link></li>
-          <li><Link to="/mascotas">Quiero adoptar</Link></li>
-          <li><Link to="/agregar-mascota">Quiero dar en adopción</Link></li>
-        </ul>
+        {/* Mostrar enlaces de navegación solo si el usuario no es administrador */}
+        {user && user.payload.FK_Rol !== 1 && (
+          <ul className="nav-links">
+            <li><Link to="/preguntas-frecuentes">FAQ</Link></li>
+            <li><Link to="/mascotas">Quiero adoptar</Link></li>
+            <li><Link to="/agregar-mascota">Quiero dar en adopción</Link></li>
+          </ul>
+        )}
 
         <div className="user-menu-container" ref={dropdownRef}>
           {user && user.payload ? (
@@ -56,10 +55,20 @@ const Navbar = () => {
 
               {isDropdownOpen && (
                 <ul className="dropdown-menu">
-                  <li><Link to="/perfil">Perfil</Link></li>
-                  <li><Link to="/mis-mascotas">Mis mascotas</Link></li>
-                  <li><Link to="/mis-solicitudes">Mis solicitudes</Link></li>
-                  <li><Link to="/" onClick={handleLogout}>Cerrar sesión</Link></li>
+                  {user.payload.FK_Rol === 1 ? (
+                    // Mostrar solo para administrador
+                    <li>
+                      <Link to="/" onClick={handleLogout}>Cerrar sesión</Link>
+                    </li>
+                  ) : (
+                    // Menú completo para otros usuarios
+                    <>
+                      <li><Link to="/perfil">Perfil</Link></li>
+                      <li><Link to="/mis-mascotas">Mis mascotas</Link></li>
+                      <li><Link to="/mis-solicitudes">Mis solicitudes</Link></li>
+                      <li><Link to="/" onClick={handleLogout}>Cerrar sesión</Link></li>
+                    </>
+                  )}
                 </ul>
               )}
             </div>

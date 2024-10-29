@@ -1,11 +1,32 @@
 import React, { createContext, useState, useEffect } from 'react';
+import axios from 'axios';
 
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
+    const [users, setUsers]= useState(null)
     const [user, setUser] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isLoading, setIsLoading] = useState(true); // Para manejar el estado de carga
+    // Función para obtener mascotas desde el backend
+   const fetchUsers = async () => {
+    try {
+      const response = await axios.get("http://localhost:3000/api/usuarios");
+      console.log("respuesta axios",response.data); 
+      setUsers(response.data); 
+    } catch (error) {
+      console.error("Error al obtener las usuarios:", error);
+    }
+  };
+  console.log("lista de usuarios", users);
+  
+  
+  // Llamar a la función fetchMascotas cuando se monta el componente
+  useEffect(() => {
+    fetchUsers();
+   
+  }, []);
+   
   
     // Manejo de inicio de sesión
     const handleLogin = (loggedInUser) => {
@@ -31,9 +52,11 @@ export const UserProvider = ({ children }) => {
         localStorage.removeItem('user');
         setIsLoggedIn(false); 
     };
+    console.log("user del contexto", user);
+    
 
     return (
-        <UserContext.Provider value={{ user, handleLogin, handleLogout, isLoggedIn, isLoading }}>
+        <UserContext.Provider value={{ user, handleLogin, handleLogout, isLoggedIn, isLoading,users }}>
             {children}
         </UserContext.Provider>
     );
