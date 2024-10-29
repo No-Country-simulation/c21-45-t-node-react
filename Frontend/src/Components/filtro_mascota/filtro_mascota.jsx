@@ -69,6 +69,12 @@ const Filtro_mascota = () => {
           <p>
             Pertenece a: {mascota.usuario_nombre} {mascota.usuario_apellido}
           </p>
+          <p>
+            Localidad - Provincia: {mascota.localidad} {mascota.provincia}
+          </p>
+          <p>
+            País: {mascota.pais}
+          </p>
 
           <Link to="/formulario-adopcion">
             <button className="btn-adoptar"> Solicitar adopcion</button>
@@ -91,9 +97,6 @@ const Filtro_mascota = () => {
             <h3>Amigable con gatos</h3>
             <h3>Enfermedades</h3>
             <h3>Detalles</h3>
-            {/* <h3>Localidad - Provincia</h3> */}
-            {/* <h3>País</h3> */}
-            {/* <h3>Mascota publicada por</h3> */}
           </div>
           <div className="respuestas_atributos">
             <h3>{mascota.especie}</h3>
@@ -110,13 +113,6 @@ const Filtro_mascota = () => {
             <h3>{mascota.amigable_gatos === 1 ? "Sí" : "No"}</h3>
             <h3>{mascota.enfermedades}</h3>
             <h3>{mascota.detalle}</h3>
-            <h3>
-              {/* {mascota.localidad} - {mascota.provincia} */}
-            </h3>
-            {/* <h3>{mascota.pais}</h3> */}
-            <h3>
-              {/* {mascota.usuario_nombre} {mascota.usuario_apellido} */}
-            </h3>
           </div>
 
           <div className="contact">

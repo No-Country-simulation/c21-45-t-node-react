@@ -10,6 +10,11 @@ const Perfil = () => {
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [paises, setPaises] = useState([]);
+  const [provincias, setProvincias] = useState([]);
+  const [localidades, setLocalidades] = useState([]);
+
+  const defaultProfileImage = "/default_user.png";
 
   // Asegúrate de tener userId definido
   const userId = user?.payload?.PK_Usuario; // Cambia esto si el ID está en otro lugar
@@ -23,12 +28,46 @@ const Perfil = () => {
         telefono: user.payload.telefono || '',
         tipo_doc: user.payload.tipo_doc || '',
         nro_doc: user.payload.nro_doc || '',
-        calle: user.calle || '',
+        calle: user.payload.calle || '',
         numero: user.payload.numero || '',
-        foto_perfil: user.payload.foto_perfil || '' ,
+        localidad: user.payload.localidad || '',
+        provincia: user.payload.provincia || '',
+        pais: user.payload.pais || '',
+        foto_perfil: user.payload.foto_perfil || defaultProfileImage
       });
     }
   }, [user]);
+
+  // Obtener países
+  useEffect(() => {
+    const fetchPaises = async () => {
+      const response = await axios.get("http://localhost:3000/api/ubicacion/pais");
+      setPaises(response.data);
+    };
+    fetchPaises();
+  }, []);
+
+  // Obtener provincias cuando se selecciona un país
+  useEffect(() => {
+    const fetchProvincias = async () => {
+      if (formData.pais) {
+        const response = await axios.get(`http://localhost:3000/api/ubicacion/provincia/${formData.pais}`);
+        setProvincias(response.data);
+      }
+    };
+    fetchProvincias();
+  }, [formData.pais]);
+
+  // Obtener localidades cuando se selecciona una provincia
+  useEffect(() => {
+    const fetchLocalidades = async () => {
+      if (formData.provincia) {
+        const response = await axios.get(`http://localhost:3000/api/ubicacion/localidad/${formData.provincia}`);
+        setLocalidades(response.data);
+      }
+    };
+    fetchLocalidades();
+  }, [formData.provincia]);
 
   const handleEditClick = () => {
     setIsEditing(!isEditing); 
@@ -200,7 +239,7 @@ const Perfil = () => {
         )}
       </p>
       <p>
-        <strong>Dirección:</strong>
+        <strong>Calle:</strong>
         {isEditing ? (
           <input 
             type="text" 
@@ -219,6 +258,7 @@ const Perfil = () => {
             />
           </>
         )}
+        <strong>Nº:</strong>
         {isEditing ? (
           <input 
             type="text" 
@@ -239,11 +279,73 @@ const Perfil = () => {
           </>
         )}
       </p>
+      <p>
+        <strong>País:</strong>
+        {isEditing ? (
+          <select name="pais" value={formData.PK_Pais} onChange={handleChange}>
+            <option value="">Seleccione un país</option>
+            {paises.map((pais) => (
+              <option key={pais.PK_Pais} value={pais.PK_Pais}>{pais.nombre}</option>
+            ))}
+          </select>
+        ) : (
+          <>
+            {formData.pais || 'No disponible'}
+            <img 
+              src={editarImg} 
+              alt="Editar" 
+              onClick={handleEditClick} 
+              style={{ cursor: 'pointer', marginLeft: '10px', width: '20px', height: '20px' }} 
+            />
+          </>
+        )}
+        <strong>Provincia:</strong>
+        {isEditing ? (
+          <select name="provincia" value={formData.PK_Provincia} onChange={handleChange} disabled={!formData.pais}>
+            <option value="">Seleccione una provincia</option>
+            {provincias.map((provincia) => (
+              <option key={provincia.PK_Provincia} value={provincia.PK_Provincia}>{provincia.nombre}</option>
+            ))}
+          </select>
+        ) : (
+          <>
+            {formData.provincia || 'No disponible'}
+            <img 
+              src={editarImg} 
+              alt="Editar" 
+              onClick={handleEditClick} 
+              style={{ cursor: 'pointer', marginLeft: '10px', width: '20px', height: '20px' }} 
+            />
+          </>
+        )}
+      </p>
+      <p>
+        <strong>Localidad:</strong>
+        {isEditing ? (
+          <select name="localidad" value={formData.PK_Localidad} onChange={handleChange} disabled={!formData.provincia}>
+            <option value="">Seleccione una localidad</option>
+            {localidades.map((localidad) => (
+              <option key={localidad.PK_Localidad} value={localidad.PK_Localidad}>{localidad.nombre}</option>
+            ))}
+          </select>
+        ) : (
+          <>
+            {formData.localidad || 'No disponible'}
+            <img 
+              src={editarImg} 
+              alt="Editar" 
+              onClick={handleEditClick} 
+              style={{ cursor: 'pointer', marginLeft: '10px', width: '20px', height: '20px' }} 
+            />
+          </>
+        )}
+      </p>
 
       {isEditing && (
         <button onClick={handleSave} disabled={loading}>
           {loading ? "Guardando..." : "Guardar Cambios"}
         </button>
+        
       )}
     </div>
   );

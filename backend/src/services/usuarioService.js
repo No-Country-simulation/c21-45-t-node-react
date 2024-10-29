@@ -41,7 +41,19 @@ const usuarioService = {
   // Obtener un usuario por email
   async getUsuarioByEmail(email) {
     try {
-      const [rows] = await pool.query("SELECT * FROM usuario WHERE email = ?", [email]);
+      const [rows] = await pool.query(`SELECT 
+        u.*, 
+        d.calle, 
+        d.numero, 
+        l.nombre AS localidad, 
+        p.nombre AS provincia, 
+        pa.nombre AS pais
+      FROM usuario u
+      LEFT JOIN direccion d ON u.FK_Direccion = d.PK_Direccion
+      LEFT JOIN localidad l ON d.FK_Localidad = l.PK_Localidad
+      LEFT JOIN provincia p ON l.FK_Provincia = p.PK_Provincia
+      LEFT JOIN pais pa ON p.FK_Pais = pa.PK_Pais
+      WHERE email = ?`, [email]);
       if (rows.length === 0) {
         return null;
       }

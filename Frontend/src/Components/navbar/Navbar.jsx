@@ -64,8 +64,8 @@ const Navbar = () => {
                     // Menú completo para otros usuarios
                     <>
                       <li><Link to="/perfil">Perfil</Link></li>
-                      <li><Link to="/mis-mascotas">Mis mascotas</Link></li>
-                      <li><Link to="/mis-solicitudes">Mis solicitudes</Link></li>
+                      <li><Link to="/">Mis mascotas</Link></li>
+                      <li><Link to="/">Mis solicitudes</Link></li>
                       <li><Link to="/" onClick={handleLogout}>Cerrar sesión</Link></li>
                     </>
                   )}
