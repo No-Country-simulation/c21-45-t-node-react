@@ -255,6 +255,7 @@ const AgregarMascota = ({ addPet }) => {
       />
       <textarea
         className='info--agregarMascotas'
+        type= "text"
         placeholder="Detalles"
         value={details}
         onChange={(e) => setDetails(e.target.value)}

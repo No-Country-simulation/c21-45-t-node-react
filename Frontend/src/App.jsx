@@ -19,6 +19,7 @@ import AgregarMascota from "./pages/agregar_mascota/AgregarMascota";
 import RequireAdmin from "./RequireAdmin"; // Importa el componente de redirección
 import Perfil from "./pages/perfil/perfil";
 import ProcesoAdopcion from "./pages/Proceso_adopcion/ProcesoAdopcion";
+import MisMascotas from "./pages/misMascotas/misMascotas";
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
           <Route path="/search" element={<Search />} />
           <Route path="/detalle-mascota" element={<Filtro_mascota />} />
           <Route path="/perfil" element={< Perfil/>} />
+          <Route path="/mis-mascotas" element={<MisMascotas/>}/>
           <Route path="/admin" element={<Admin />} />
         </Routes>
       </RequireAdmin>
