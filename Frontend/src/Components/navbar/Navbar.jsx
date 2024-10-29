@@ -33,7 +33,7 @@ const Navbar = () => {
       </div>
       <nav className="navbar">
         {/* Mostrar enlaces de navegación solo si el usuario no es administrador */}
-        {user && user.payload.FK_Rol !== 1 && (
+        {(!user || user.payload.FK_Rol !== 1) && (
           <ul className="nav-links">
             <li><Link to="/preguntas-frecuentes">FAQ</Link></li>
             <li><Link to="/mascotas">Quiero adoptar</Link></li>
