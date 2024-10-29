@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useContext } from "react";
+// import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import CardMascota from "../../Components/card/CardMascota";
-import { MascotasContext } from "../../context/Mascotascontext";
+// import { MascotasContext } from "../../context/Mascotascontext";
 import useFetchMascotas from "../../hooks/useFetchMascotas";
 
 function Search({ filters }) {
   const navigate = useNavigate();
 
   // const { mascotas } = useContext(MascotasContext);
-  
+
   const { mascotas, loading } = useFetchMascotas(filters);
 
   if (loading) return <p>Cargando...</p>;
