@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-;
 import axios from "axios"; 
 import "./FormularioRegistro.css";
 
 const FormularioRegistro = () => {
-  const homeImage= "/home_image.png"
-
+  const homeImage = "/home_image.png";
   const [formData, setFormData] = useState({
     rol: "persona",
     nombre: "",
@@ -14,6 +12,8 @@ const FormularioRegistro = () => {
     password: "",
     confirmarPassword: ""
   });
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,6 +25,7 @@ const FormularioRegistro = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrorMessage(""); // Resetea el mensaje de error al enviar el formulario
 
     // Validar que las contraseñas coincidan
     if (formData.password !== formData.confirmarPassword) {
@@ -43,25 +44,37 @@ const FormularioRegistro = () => {
 
     console.log("usuario nuevo", dataToSend);
     
+    setLoading(true); // Muestra indicador de carga
 
     // Enviar los datos al backend
     try {
       const response = await axios.post("http://localhost:3000/api/auth/register", dataToSend);
       console.log(response.data);
       alert("Registro exitoso");
+      setFormData({ // Resetea el formulario después del registro exitoso
+        rol: "persona",
+        nombre: "",
+        apellido: "",
+        email: "",
+        password: "",
+        confirmarPassword: ""
+      });
     } catch (error) {
       console.error(error);
-      alert("Hubo un error en el registro");
+      setErrorMessage("Hubo un error en el registro. " + (error.response?.data?.message || "Intenta de nuevo más tarde."));
+    } finally {
+      setLoading(false); // Oculta el indicador de carga
     }
   };
 
   return (
     <div className="container-formulario-registro">
-      <div className=" rigth">
+      <div className="rigth">
         <img src={homeImage} alt="home_image" className="imagenFormulario" />
       </div>
       <div className="container--formulario-left">
         <h2>Formulario de Registro</h2>
+        {errorMessage && <div className="error-message">{errorMessage}</div>} {/* Mensaje de error */}
         <div className="container--datos">
           <form onSubmit={handleSubmit}>
             <div>
@@ -131,7 +144,9 @@ const FormularioRegistro = () => {
               required
             />
           
-            <button type="submit">Registrarse</button>
+            <button type="submit" disabled={loading}>
+              {loading ? "Cargando..." : "Registrarse"}
+            </button>
           </form>
         </div>
       </div>

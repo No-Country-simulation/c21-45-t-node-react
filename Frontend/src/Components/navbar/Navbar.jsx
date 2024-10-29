@@ -30,8 +30,10 @@ const Navbar = () => {
   return (
     <header className="header">
       <div className="logo">
-      <img src={logo1} alt="logo1" className="logo1" />
-      <Link to={"/"}><img src={logo2} alt="logo2" className="logo2" /></Link>
+        <img src={logo1} alt="logo1" className="logo1" />
+        <Link to={"/"}>
+          <img src={logo2} alt="logo2" className="logo2" />
+        </Link>
       </div>
       <nav className="navbar">
         <ul className="nav-links">
@@ -41,10 +43,9 @@ const Navbar = () => {
         </ul>
 
         <div className="user-menu-container" ref={dropdownRef}>
-          {user ? (
+          {user && user.payload ? (
             <div className="user-dropdown">
-
-<li 
+              <li 
                 className="nav-links" 
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               >
@@ -52,7 +53,6 @@ const Navbar = () => {
                   Hola, {user.payload.nombre}!!
                 </Link>
               </li>
-
 
               {isDropdownOpen && (
                 <ul className="dropdown-menu">
@@ -64,12 +64,10 @@ const Navbar = () => {
               )}
             </div>
           ) : (
-            <>
-              <ul className="nav-links">
-                <li><Link to="/login">Login</Link></li>
-                <li><Link to="/formulario-registro">Registro</Link></li>
-              </ul>
-            </>
+            <ul className="nav-links">
+              <li><Link to="/login">Login</Link></li>
+              <li><Link to="/formulario-registro">Registro</Link></li>
+            </ul>
           )}
         </div>
       </nav>

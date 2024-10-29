@@ -13,6 +13,7 @@ import Mascotas from "./pages/search/mascotas/mascotas";
 import Preguntas from "./pages/preguntas/preguntas";
 import Filtro_mascota from "./Components/filtro_mascota/filtro_mascota";
 import AgregarMascota from "./pages/agregar_mascota/AgregarMascota";
+import Perfil from "./pages/perfil/perfil";
 
 function App() {
   return (
@@ -43,6 +44,8 @@ function App() {
         />
         <Route path="/search" element={<Search />} />
         <Route path="/detalle-mascota" element={<Filtro_mascota />} />
+        <Route path="/perfil" element={< Perfil/>} />
+
       </Routes>
       <Links />
     </Router>
