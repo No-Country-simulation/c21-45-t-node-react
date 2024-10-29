@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/UserContext";
 import axios from "axios";
 import "./perfil.css";
+import Swal from 'sweetalert2';
 import editarImg from "/editar.png";
 
 const Perfil = () => {
@@ -88,11 +89,20 @@ const Perfil = () => {
       const response = await axios.put(`http://localhost:3000/api/usuarios/${userId}`, formData); // Usa formData en lugar de userData
 
       console.log("Datos actualizados:", response.data);
-      alert("Perfil actualizado exitosamente");
+      Swal.fire({
+        icon: 'success',
+        title: 'Perfil actualizado exitosamente',
+        showConfirmButton: false,
+        timer: 1500
+      });
       setIsEditing(false);
     } catch (error) {
       console.error(error);
-      setErrorMessage("Hubo un error al actualizar el perfil. " + (error.response?.data?.message || "Intenta de nuevo más tarde."));
+      Swal.fire({
+        icon: 'error',
+        title: 'Error al actualizar el perfil',
+        text: error.response?.data?.message || "Intenta de nuevo más tarde."
+      });
     } finally {
       setLoading(false);
     }
