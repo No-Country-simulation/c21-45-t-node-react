@@ -9,6 +9,7 @@ import Requisitos from "./pages/requisitos/requisitos";
 import Login from "./pages/login/Login";
 import FormularioRegistro from "./pages/formularioRegistro/FormularioRegistro";
 import FormularioAdopcion from "./pages/formularioAdopcion/FormularioAdopcion";
+import Proceso from "./pages/Proceso_adopcion/ProcesoAdopcion";
 import Search from "./pages/search/search";
 import Mascotas from "./pages/search/mascotas/mascotas";
 import Preguntas from "./pages/preguntas/preguntas";
@@ -17,6 +18,7 @@ import Admin from "./pages/admin/admin";
 import AgregarMascota from "./pages/agregar_mascota/AgregarMascota";
 import RequireAdmin from "./RequireAdmin"; // Importa el componente de redirección
 import Perfil from "./pages/perfil/perfil";
+import ProcesoAdopcion from "./pages/Proceso_adopcion/ProcesoAdopcion";
 
 function App() {
   return (
@@ -29,6 +31,7 @@ function App() {
           <Route path="/mascotas" element={<Mascotas />} />
           <Route path="/preguntas-frecuentes" element={<Preguntas />} />
           <Route path="/requisitos-adoptar" element={<Requisitos />} />
+          <Route path="/proceso-adopcion" element={<Proceso />} />
           <Route path="/login" element={<Login />} />
           <Route path="/formulario-registro" element={<FormularioRegistro />} />
           <Route
