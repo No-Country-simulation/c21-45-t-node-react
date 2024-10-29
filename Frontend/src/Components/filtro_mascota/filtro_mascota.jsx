@@ -64,15 +64,26 @@ const Filtro_mascota = () => {
               ❯
             </button>
           </div>
-          <p>
-            Pertenece a: {mascota.usuario_nombre} {mascota.usuario_apellido}
-          </p>
-          <p>
-            Localidad - Provincia: {mascota.localidad} {mascota.provincia}
-          </p>
-          <p>
-            País: {mascota.pais}
-          </p>
+         
+          <div className="section">
+            <div className="left_section">
+                <div className="nombre-apellido">
+                  <p>Pertenece a: {mascota.usuario_nombre} {mascota.usuario_apellido}</p>
+                </div>
+                <div className="localidad-provincia">
+                  <p>Ubicación: {mascota.localidad}, {mascota.provincia}</p>
+                </div>
+                <div className="pais">
+                  <p>País: {mascota.pais}</p>
+                </div>
+            </div>
+
+            <div className="right_section">
+              <img src="perro_contacto.png" alt="" />
+            </div>
+          </div>
+
+        </div>
 
           <Link to="/formulario-adopcion" state={{ PK_Mascota: mascota.PK_Mascota }}>
             <button className="btn-adoptar"> Solicitar adopción</button>
@@ -113,26 +124,6 @@ const Filtro_mascota = () => {
             <h3>{mascota.detalle}</h3>
           </div>
 
-          <div className="section">
-            <div className="left_section">
-
-                <div className="localidad-provincia">
-                  <p>Ubicación: {mascota.localidad}, {mascota.provincia}</p>
-                </div>
-                <div className="pais">
-                  <p> País: {mascota.pais}</p>
-                </div>
-                <div className="nombre-apellido">
-                  <p>Usuario: {mascota.usuario_nombre} {mascota.usuario_apellido}</p>
-                </div>
-            </div>
-
-            <div className="right_section">
-              <img src="perro_contacto.png" alt="" />
-            </div>
-          </div>
-
-        </div>
       </div>
     </div>
   );
