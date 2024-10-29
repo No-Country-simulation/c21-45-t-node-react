@@ -9,6 +9,7 @@ import enumRoutes from "./routes/enumRoutes.js";
 import usuarioRoutes from "./routes/usuario.routes.js";
 import authRouter from "./routes/auth.routes.js";
 import ubicacionRoutes from "./routes/ubicacionRoutes.js";
+import adopcionRoutes from "./routes/adopcionRoutes.js";
 
 // Configuración de las variables de entorno
 dotenv.config();
@@ -38,6 +39,7 @@ app.use("/api/usuarios", usuarioRoutes);
 app.use("/api/auth", authRouter);
 app.use("/api/enum", enumRoutes);
 app.use("/api/ubicacion", ubicacionRoutes);
+app.use("/api/adopcion", adopcionRoutes);
 
 // Inicializar el servidor
 const PORT = process.env.PORT || 3000;

@@ -28,6 +28,7 @@ const Navbar = () => {
     <header className="header">
       <div className="logo">
         <img src={logo1} alt="logo1" className="logo1" />
+
         <Link to="/"><img src={logo2} alt="logo2" className="logo2" /></Link>
       </div>
       <nav className="navbar">
@@ -41,7 +42,7 @@ const Navbar = () => {
         )}
 
         <div className="user-menu-container" ref={dropdownRef}>
-          {user ? (
+          {user && user.payload ? (
             <div className="user-dropdown">
               <li 
                 className="nav-links" 

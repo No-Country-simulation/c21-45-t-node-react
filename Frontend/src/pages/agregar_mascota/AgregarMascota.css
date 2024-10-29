@@ -8,7 +8,7 @@
 }
 
 .container--agregarMascotas{
-    background-image: url(../../../public/imagen_background.jpg);
+    background-image: url(/imagen_background.jpg);
     background-size: cover;
     border-top-right-radius: 500px;
     border-bottom-right-radius: 500px;

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./filtros.css";
 
-const Filtros = ({ filtro, selectedValue, onFilterChange }) => {
+const Filtros = ({ filtro, onFilterChange }) => {
   const [showOptions, setShowOptions] = useState(false);
   const [selectedAttribute, setSelectedAttribute] = useState("");
 
@@ -11,7 +11,7 @@ const Filtros = ({ filtro, selectedValue, onFilterChange }) => {
 
   const handleSelectOption = (atributo) => {
     setSelectedAttribute(atributo);
-    onFilterChange(filtro.titulo.toLowerCase(), atributo);
+    onFilterChange(filtro.filtro.toLowerCase(), atributo);
     setShowOptions(false);
   };
 
@@ -20,9 +20,7 @@ const Filtros = ({ filtro, selectedValue, onFilterChange }) => {
       <div className="content">
         <img src={filtro.imagen} alt="" />
         <h1>{filtro.titulo}</h1>
-        <p>
-          {selectedAttribute ? selectedAttribute : <span className="placeholder"></span>}
-        </p>
+        <p>{selectedAttribute ? selectedAttribute : <span className="placeholder"></span>}</p>
       </div>
 
       {showOptions && (

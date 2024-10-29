@@ -1,16 +1,14 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import Contacto from "../contacto/contacto";
+// import Contacto from "../contacto/contacto";
 import "./Filtro_mascota.css";
 import { Link } from "react-router-dom";
-import { formatDate } from "../../service/formatoFecha";
-
+// import { formatDate } from "../../service/formatoFecha";
 
 const Filtro_mascota = () => {
   const location = useLocation();
   const { mascota } = location.state || {};
   console.log("mascota adoptar", mascota);
-
 
   if (!mascota) {
     return <h2>No se encontró la información de la mascota</h2>;
@@ -38,12 +36,19 @@ const Filtro_mascota = () => {
 
   // Función para cambiar a la imagen anterior
   const prevImage = () => {
-    setCurrentImageIndex((prevIndex) =>
-      (prevIndex - 1 + imagenesURL.length) % imagenesURL.length
-    );
+    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + imagenesURL.length) % imagenesURL.length);
   };
 
   // Formatear la fecha de nacimiento
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+
 
   return (
     <div className="container-mascota">
@@ -53,24 +58,22 @@ const Filtro_mascota = () => {
 
           {/* Carrusel de imágenes */}
           <div className="carousel">
-            <button onClick={prevImage} className="carousel-button">❮</button>
-            <img
-              src={imagenesURL[currentImageIndex]}
-              alt={`Imagen de ${mascota.nombre}`}
-              className="carousel-image"
-            />
-            <button onClick={nextImage} className="carousel-button">❯</button>
+            <button onClick={prevImage} className="carousel-button">
+              ❮
+            </button>
+            <img src={imagenesURL[currentImageIndex]} alt={`Imagen de ${mascota.nombre}`} className="carousel-image" />
+            <button onClick={nextImage} className="carousel-button">
+              ❯
+            </button>
           </div>
-          <p>Pertenece a: {mascota.usuario_nombre}</p>
-
+          <p>
+            Pertenece a: {mascota.usuario_nombre} {mascota.usuario_apellido}
+          </p>
 
           <Link to="/formulario-adopcion">
             <button className="btn-adoptar"> Solicitar adopcion</button>
           </Link>
-
           <img src="perro_contacto.png" alt="" />
-
-
         </div>
 
         <div className="right">
@@ -88,16 +91,18 @@ const Filtro_mascota = () => {
             <h3>Amigable con gatos</h3>
             <h3>Enfermedades</h3>
             <h3>Detalles</h3>
-            <h3>Localidad - Provincia</h3>
-            <h3>País</h3>
-            <h3>Mascota publicada por</h3>
+            {/* <h3>Localidad - Provincia</h3> */}
+            {/* <h3>País</h3> */}
+            {/* <h3>Mascota publicada por</h3> */}
           </div>
           <div className="respuestas_atributos">
             <h3>{mascota.especie}</h3>
             <h3>{mascota.raza}</h3>
             <h3>{mascota.sexo}</h3>
             <h3>{mascota.tamanio}</h3>
-            <h3>{formatDate(mascota.fecha_nacimiento)} - {mascota.edad}</h3>
+            <h3>
+              {formatDate(mascota.fecha_nacimiento)} - {mascota.edad}
+            </h3>
             <h3>{mascota.castrado === 1 ? "Sí" : "No"}</h3>
             <h3>{mascota.vacunado === 1 ? "Sí" : "No"}</h3>
             <h3>{mascota.amigable_ninos === 1 ? "Sí" : "No"}</h3>
@@ -105,10 +110,43 @@ const Filtro_mascota = () => {
             <h3>{mascota.amigable_gatos === 1 ? "Sí" : "No"}</h3>
             <h3>{mascota.enfermedades}</h3>
             <h3>{mascota.detalle}</h3>
-            <h3>{mascota.localidad} - {mascota.provincia}</h3>
-            <h3>{mascota.pais}</h3>
-            <h3>{mascota.usuario_nombre} {mascota.usuario_apellido}</h3>
+            <h3>
+              {/* {mascota.localidad} - {mascota.provincia} */}
+            </h3>
+            {/* <h3>{mascota.pais}</h3> */}
+            <h3>
+              {/* {mascota.usuario_nombre} {mascota.usuario_apellido} */}
+            </h3>
           </div>
+
+          <div className="contact">
+            <div className="left_contact">
+              <div className="contact_btn">
+                
+                <div className="btn-contact">
+                  <button>Adoptar</button>
+                </div>
+
+                <div className="correo-adopcion">
+                  {/* <img src="/email-refugio.png" alt="" srcset="" /> */}
+                  <p>{mascota.localidad} - {mascota.provincia}</p>
+                </div>
+                <div className="location-refugio">
+                  {/* <img src="/location-refugio.png" alt="" /> */}
+                  <p>{mascota.pais}</p>
+                </div>
+                <div className="name-refugio">
+                  {/* <img src="/nombre-refugio.png" alt="" /> */}
+                  <p>{mascota.usuario_nombre} {mascota.usuario_apellido}</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="right_contact">
+              <img src="perro_contacto.png" alt="" />
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
