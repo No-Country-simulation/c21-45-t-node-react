@@ -9,27 +9,37 @@ import axios from "axios";
 const Mascotas = () => {
   const location = useLocation();
   const [filters, setFilters] = useState(location.state || {});
-  const [filtrosConfig, setFiltrosConfig] = useState(filtrosData); // Crear estado para filtros dinámicos
+  const [filtrosConfig, setFiltrosConfig] = useState(filtrosData);
 
   const handleFilterClick = (titulo, atributo) => {
+    const value = atributo.value;
     setFilters((prevFilters) => ({
       ...prevFilters,
-      [titulo.toLowerCase()]: atributo,
+      [titulo.toLowerCase()]: value,
     }));
-    console.log("filters", filters);
   };
 
   useEffect(() => {
-    // Llamada al endpoint para obtener las localidades con mascotas
+    console.log("antes de fetch ubicaciones");
     const fetchUbicaciones = async () => {
       try {
         const response = await axios.get("http://localhost:3000/api/ubicacion/localidadConMascotas");
-        console.log("response.data", response.data);
-        const localidades = response.data.map((localidad) => `${localidad.localidad}`);
-        console.log(localidades);
-        // Actualizar el filtro de "UBICACIÓN" con las localidades obtenidas
-        const updatedFiltros = filtrosConfig.map((filtro) => (filtro.filtro === "ubicacion" ? { ...filtro, atributos: localidades } : filtro));
-        setFiltrosConfig(updatedFiltros);
+        console.log("fetch ubicaciones", response.data);
+        // Actualizar la configuración de filtros para incluir las ubicaciones
+        const updatedFiltrosConfig = filtrosData.map((filtro) => {
+          if (filtro.filtro === "ubicacion") {
+            return {
+              ...filtro,
+              atributos: response.data.map((ubicacion) => ({
+                display: `${ubicacion.localidad} ${ubicacion.provincia}`,
+                value: ubicacion.localidad,
+              })),
+            };
+          }
+          return filtro;
+        });
+        console.log("filtros actualizados", updatedFiltrosConfig);
+        setFiltrosConfig(updatedFiltrosConfig);
       } catch (error) {
         console.error("Error al obtener las ubicaciones:", error);
       }
