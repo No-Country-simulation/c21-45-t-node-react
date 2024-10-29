@@ -76,8 +76,8 @@ const Filtro_mascota = () => {
             País: {mascota.pais}
           </p>
 
-          <Link to="/formulario-adopcion">
-            <button className="btn-adoptar"> Solicitar adopcion</button>
+          <Link to="/formulario-adopcion" state={{ PK_Mascota: mascota.PK_Mascota }}>
+            <button className="btn-adoptar"> Solicitar adopción</button>
           </Link>
           <img src="perro_contacto.png" alt="" />
         </div>
