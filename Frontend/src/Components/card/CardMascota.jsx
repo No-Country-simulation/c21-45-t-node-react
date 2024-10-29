@@ -16,7 +16,7 @@ function CardMascota({ mascota }) {
 
   return (
     <div className="container-card">
-      <Link to="/cards" className="link-card">
+      <Link to="/detalle-mascota" className="link-card">
         <figure className="container-img">
           <img src={imagenURL} alt={`Imagen de ${mascota.nombre}`} />
         </figure>
