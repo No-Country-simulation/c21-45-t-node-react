@@ -1,44 +1,124 @@
 import { useContext, useState } from "react";
 import { formatDate } from "../../service/formatoFecha";
-import './TablaMascotas.css'; // Asegúrate de importar el archivo CSS
+import './TablaMascotas.css'; 
 import { UserContext } from "../../context/UserContext";
+import Swal from 'sweetalert2';
 
 function TablaMascotas({ mascotas }) {
     const { user } = useContext(UserContext);
-    console.log("usuario tabla", user);
-
-    const [showModal, setShowModal] = useState(false);
+  
+    const [showModalEliminar, setShowModalEliminar] = useState(false);
     const [selectedMascotaId, setSelectedMascotaId] = useState(null);
+    const [selectedMascotaNombre, setSelectedMascotaNombre] = useState(''); 
+    const [showModalEditar, setShowModalEditar] = useState(false); 
+    const [selectedMascota, setSelectedMascota] = useState(null); 
+    const [editFormData, setEditFormData] = useState({});
 
-    const handleOpenModal = (id) => {
+    const handleOpenModalEliminar = (id, nombre) => {
         setSelectedMascotaId(id);
-        setShowModal(true);
+        setSelectedMascotaNombre(nombre); 
+        setShowModalEliminar(true);
     };
 
-    const handleCloseModal = () => {
-        setShowModal(false);
+    const handleCloseModalEliminar = () => {
+        setShowModalEliminar(false);
         setSelectedMascotaId(null);
+        setSelectedMascotaNombre(''); 
     };
 
     const handleConfirmDelete = async () => {
         if (selectedMascotaId) {
             await handleEliminarMascota(selectedMascotaId);
         }
-        handleCloseModal();
+        handleCloseModalEliminar();
     };
 
     const handleEliminarMascota = async (id) => {
         try {
-            const response = await fetch(`/api/mascotas/${id}`, { method: 'DELETE' });
+            const response = await fetch(`http://localhost:3000/api/mascota/${id}`, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' }
+            });
             if (response.ok) {
-                // Filtra la lista para remover la mascota eliminada
-                setMascotas((prevMascotas) => prevMascotas.filter(mascota => mascota.id !== id));
-                console.log(`Mascota con ID ${id} eliminada exitosamente.`);
+                await Swal.fire({
+                    icon: 'success',
+                    title: '¡Eliminado!',
+                    text: `Mascota ${selectedMascotaNombre} eliminada exitosamente.`,
+                    confirmButtonText: 'Aceptar'
+                });
+                window.location.reload();
             } else {
-                console.error("Error al eliminar la mascota.");
+                await Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'No se pudo eliminar la mascota. Inténtalo de nuevo.',
+                    confirmButtonText: 'Aceptar'
+                });
             }
         } catch (error) {
+            await Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Error en la solicitud de eliminación: ' + error.message,
+                confirmButtonText: 'Aceptar'
+            });
             console.error("Error en la solicitud de eliminación:", error);
+        }
+    };
+
+    const handleOpenModalEditar = (mascota) => {
+        setSelectedMascota(mascota); 
+        setEditFormData({ ...mascota,  fecha_nacimiento: new Date(mascota.fecha_nacimiento).toISOString().split('T')[0],}); // Establece los datos iniciales en el formulario
+        setShowModalEditar(true); 
+    };
+
+    const handleCloseModalEditar = () => {
+        setShowModalEditar(false);
+        setSelectedMascota(null); 
+        setEditFormData({}); 
+    };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setEditFormData({ ...editFormData, [name]: value }); 
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault(); 
+        try {
+            const response = await fetch(`http://localhost:3000/api/mascota/${selectedMascota.PK_Mascota}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(editFormData), 
+            });
+
+            if (response.ok) {
+                await Swal.fire({
+                    icon: 'success',
+                    title: '¡Actualizado!',
+                    text: `Mascota ${editFormData.nombre} actualizada exitosamente.`,
+                    confirmButtonText: 'Aceptar'
+                });
+                handleCloseModalEditar();
+                window.location.reload();
+            } else {
+                await Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'No se pudo actualizar la mascota. Inténtalo de nuevo.',
+                    confirmButtonText: 'Aceptar'
+                });
+            }
+        } catch (error) {
+            await Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Error en la solicitud de actualización: ' + error.message,
+                confirmButtonText: 'Aceptar'
+            });
+            console.error("Error en la solicitud de actualización:", error);
         }
     };
 
@@ -50,13 +130,13 @@ function TablaMascotas({ mascotas }) {
                 <table className="tabla-mascotas">
                     <thead>
                         <tr>
+                            <th>Nombre</th>
                             <th>Especie</th>
                             <th>Raza</th>
                             <th>Género</th>
                             <th>Tamaño</th>
                             <th>Fecha de nacimiento</th>
                             <th>Edad</th>
-                            {/* Mostrar columnas condicionalmente */}
                             {!isAdmin && (
                                 <>
                                     <th>Castrado</th>
@@ -72,7 +152,6 @@ function TablaMascotas({ mascotas }) {
                             <th>Provincia</th>
                             <th>País</th>
                             {isAdmin && <th>Publicada por</th>}
-
                             <th>Adoptada</th>
                             {!isAdmin && <th>Editar</th>}
                             <th>Eliminar</th>
@@ -80,15 +159,15 @@ function TablaMascotas({ mascotas }) {
                     </thead>
                     <tbody>
                         {mascotas && mascotas.length > 0 ? (
-                            mascotas.map((mascota, index) => (
-                                <tr key={index}>
+                            mascotas.map((mascota) => (
+                                <tr key={mascota.PK_Mascota}>
+                                    <td>{mascota.nombre}</td>
                                     <td>{mascota.especie}</td>
                                     <td>{mascota.raza}</td>
                                     <td>{mascota.sexo}</td>
                                     <td>{mascota.tamanio}</td>
                                     <td>{formatDate(mascota.fecha_nacimiento)}</td>
                                     <td>{mascota.edad}</td>
-                                    {/* Mostrar columnas condicionalmente */}
                                     {!isAdmin && (
                                         <>
                                             <td>{mascota.castrado ? "Sí" : "No"}</td>
@@ -105,16 +184,15 @@ function TablaMascotas({ mascotas }) {
                                     <td>{mascota.pais}</td>
                                     {isAdmin && (
                                         <td>{mascota.usuario_nombre} {mascota.usuario_apellido}</td>
-
                                     )}
                                     <td>{mascota.adoptada ? "Sí" : "No"}</td>
                                     {!isAdmin && (
                                         <td>
-                                            <button onClick={() => handleEdit(mascota.id)}>Editar</button>
+                                            <button onClick={() => handleOpenModalEditar(mascota)}>Editar</button>
                                         </td>
                                     )}
                                     <td>
-                                        <button onClick={() => handleOpenModal(mascota.id)}>Eliminar</button>
+                                        <button onClick={() => handleOpenModalEliminar(mascota.PK_Mascota, mascota.nombre)}>Eliminar</button>
                                     </td>
                                 </tr>
                             ))
@@ -127,14 +205,94 @@ function TablaMascotas({ mascotas }) {
                 </table>
             </div>
 
-            {/* Modal de confirmación */}
-            {showModal && (
+            {showModalEliminar && (
                 <div className="modal">
                     <div className="modal-content">
                         <h2>Confirmar Eliminación</h2>
-                        <p>¿Estás seguro de que deseas eliminar esta mascota?</p>
+                        <p>¿Estás seguro de que deseas eliminar la mascota <strong>{selectedMascotaNombre}</strong>?</p>
                         <button onClick={handleConfirmDelete}>Eliminar</button>
-                        <button onClick={handleCloseModal}>Cancelar</button>
+                        <button onClick={handleCloseModalEliminar}>Cancelar</button>
+                    </div>
+                </div>
+            )}
+
+            {showModalEditar && selectedMascota && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <h2>Editar Mascota</h2>
+                        <form onSubmit={handleSubmit}>
+                            <div>
+                                <label>Nombre:</label>
+                                <input
+                                    type="text"
+                                    name="nombre"
+                                    value={editFormData.nombre || ''}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label>Especie:</label>
+                                <input
+                                    type="text"
+                                    name="especie"
+                                    value={editFormData.especie || ''}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label>Raza:</label>
+                                <input
+                                    type="text"
+                                    name="raza"
+                                    value={editFormData.raza || ''}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label>Sexo:</label>
+                                <input
+                                    type="text"
+                                    name="sexo"
+                                    value={editFormData.sexo || ''}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label>Tamaño:</label>
+                                <input
+                                    type="text"
+                                    name="tamanio"
+                                    value={editFormData.tamanio || ''}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label>Fecha de Nacimiento:</label>
+                                <input
+                                    type="date"
+                                    name="fecha_nacimiento"
+                                    value={editFormData.fecha_nacimiento || ''}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label>Detalles:</label>
+                                <textarea
+                                    name="detalle"
+                                    value={editFormData.detalle || ''}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                           
+                            <button type="submit">Guardar Cambios</button>
+                            <button type="button" onClick={handleCloseModalEditar}>Cancelar</button>
+                        </form>
                     </div>
                 </div>
             )}
