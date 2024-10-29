@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import Contacto from "../contacto/contacto";
+// import Contacto from "../contacto/contacto";
 import "./Filtro_mascota.css";
 import { Link } from "react-router-dom";
 
@@ -89,9 +89,9 @@ const Filtro_mascota = () => {
             <h3>Amigable con gatos</h3>
             <h3>Enfermedades</h3>
             <h3>Detalles</h3>
-            <h3>Localidad - Provincia</h3>
-            <h3>País</h3>
-            <h3>Mascota publicada por</h3>
+            {/* <h3>Localidad - Provincia</h3> */}
+            {/* <h3>País</h3> */}
+            {/* <h3>Mascota publicada por</h3> */}
           </div>
           <div className="respuestas_atributos">
             <h3>{mascota.especie}</h3>
@@ -109,13 +109,42 @@ const Filtro_mascota = () => {
             <h3>{mascota.enfermedades}</h3>
             <h3>{mascota.detalle}</h3>
             <h3>
-              {mascota.localidad} - {mascota.provincia}
+              {/* {mascota.localidad} - {mascota.provincia} */}
             </h3>
-            <h3>{mascota.pais}</h3>
+            {/* <h3>{mascota.pais}</h3> */}
             <h3>
-              {mascota.usuario_nombre} {mascota.usuario_apellido}
+              {/* {mascota.usuario_nombre} {mascota.usuario_apellido} */}
             </h3>
           </div>
+
+          <div className="contact">
+            <div className="left_contact">
+              <div className="contact_btn">
+                
+                <div className="btn-contact">
+                  <button>Adoptar</button>
+                </div>
+
+                <div className="correo-adopcion">
+                  {/* <img src="/email-refugio.png" alt="" srcset="" /> */}
+                  <p>{mascota.localidad} - {mascota.provincia}</p>
+                </div>
+                <div className="location-refugio">
+                  {/* <img src="/location-refugio.png" alt="" /> */}
+                  <p>{mascota.pais}</p>
+                </div>
+                <div className="name-refugio">
+                  {/* <img src="/nombre-refugio.png" alt="" /> */}
+                  <p>{mascota.usuario_nombre} {mascota.usuario_apellido}</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="right_contact">
+              <img src="perro_contacto.png" alt="" />
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
