@@ -280,10 +280,10 @@ const mascotaService = {
     }
   },
 
-  // Filtrar mascotas por edad, sexo, tamaño, especie, país, provincia y localidad
+  // Filtrar mascotas por edad, sexo, tamaño, especie, límite, ubicación, país, provincia y localidad
   async filtroMascotas(filterData) {
     try {
-      const { edad, sexo, tamanio, especie, ubicacion, pais, provincia, localidad } = filterData;
+      const { edad, sexo, tamanio, especie, limite, ubicacion, pais, provincia, localidad } = filterData;
 
       // Base de la consulta
       let query = `
@@ -341,6 +341,10 @@ const mascotaService = {
         query += ` AND pais.PK_Pais = ?`;
         params.push(pais);
       }
+      if (limite) {
+        query += ` LIMIT ?`;
+        params.push(parseInt(limite, 10));
+      }      
 
       const [rows] = await pool.query(query, params);
       if (rows.length === 0) {
