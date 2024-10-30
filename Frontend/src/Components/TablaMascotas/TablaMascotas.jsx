@@ -230,7 +230,7 @@ function TablaMascotas({ mascotas }) {
                         <h2>Editar Mascota</h2>
                         <form onSubmit={handleSubmit}>
                             <div>
-                                <label>Nombre:</label>
+                                <label>Nombre:
                                 <input
                                     type="text"
                                     name="nombre"
@@ -238,19 +238,18 @@ function TablaMascotas({ mascotas }) {
                                     onChange={handleChange}
                                     required
                                 />
+                                </label>
                             </div>
                             <div>
-                                <label>Especie:</label>
-                                <input
-                                    type="text"
-                                    name="especie"
-                                    value={editFormData.especie || ''}
-                                    onChange={handleChange}
-                                    required
-                                />
+                                <label>Especie:
+                                    <select name="especie" value={editFormData.especie || ''} onChange={handleChange} required>
+                                            <option value="Perro">Perro</option>
+                                            <option value="Gato">Gato</option>
+                                    </select>
+                                </label>
                             </div>
                             <div>
-                                <label>Raza:</label>
+                                <label>Raza:
                                 <input
                                     type="text"
                                     name="raza"
@@ -258,29 +257,27 @@ function TablaMascotas({ mascotas }) {
                                     onChange={handleChange}
                                     required
                                 />
+                                </label>
                             </div>
                             <div>
-                                <label>Sexo:</label>
-                                <input
-                                    type="text"
-                                    name="sexo"
-                                    value={editFormData.sexo || ''}
-                                    onChange={handleChange}
-                                    required
-                                />
+                                <label>Género:
+                                <select name="sexo" value={editFormData.sexo || ''} onChange={handleChange} required>
+                                        <option value="Macho">Macho</option>
+                                        <option value="Hembra">Hembra</option>
+                                    </select>
+                                </label>
                             </div>
                             <div>
-                                <label>Tamaño:</label>
-                                <input
-                                    type="text"
-                                    name="tamanio"
-                                    value={editFormData.tamanio || ''}
-                                    onChange={handleChange}
-                                    required
-                                />
+                                <label>Tamaño:
+                                <select name="tamanio" value={editFormData.tamanio || ''} onChange={handleChange} required>
+                                        <option value="Pequeño">Pequeño</option>
+                                        <option value="Mediano">Mediano</option>
+                                        <option value="Grande">Grande</option>
+                                    </select>
+                                </label>
                             </div>
                             <div>
-                                <label>Fecha de Nacimiento:</label>
+                                <label>Fecha de Nacimiento:
                                 <input
                                     type="date"
                                     name="fecha_nacimiento"
@@ -288,14 +285,16 @@ function TablaMascotas({ mascotas }) {
                                     onChange={handleChange}
                                     required
                                 />
+                                </label>
                             </div>
                             <div>
-                                <label>Detalles:</label>
+                                <label>Detalles:
                                 <textarea
                                     name="detalle"
                                     value={editFormData.detalle || ''}
                                     onChange={handleChange}
                                 />
+                                </label>
                             </div>
                            
                             <button type="submit">Guardar Cambios</button>
