@@ -177,3 +177,18 @@
     font-size: 1.5rem;
   }
 }
+
+.btn-adoptar {
+  margin-top: 40px;
+  width: 100%;
+  font-size: 44px;
+  font-family: "Lilita One", sans-serif;
+}
+
+/* Nuevo estilo para el botón deshabilitado */
+.btn-adoptar:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  opacity: 0.7;
+}

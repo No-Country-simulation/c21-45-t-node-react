@@ -6,6 +6,7 @@ import './solicitudes.css';
 function Solicitudes() {
     const { user } = useContext(UserContext);
     const PK_Usuario = user ? user.payload.PK_Usuario : null;
+    const FK_Rol = user ? user.payload.FK_Rol : null;
 
     const [solicitudesEnviadas, setSolicitudesEnviadas] = useState([]);
     const [showModal, setShowModal] = useState(false);
@@ -15,7 +16,7 @@ function Solicitudes() {
 
     useEffect(() => {
         const fetchSolicitudesEnviadas = async () => {
-            if (PK_Usuario) {
+            if (PK_Usuario && FK_Rol !== 3) {
                 try {
                     const response = await fetch(`http://localhost:3000/api/adopcion/enviadas/${PK_Usuario}`);
                     if (response.ok) {
@@ -190,6 +191,8 @@ function Solicitudes() {
     return (
         <>
             <div style={{ overflowX: "auto" }} className="container-tablas">
+                {FK_Rol !== 3 && ( // Ocultar esta sección si el rol es 3
+                        <>
                 <h2>Solicitudes enviadas</h2>
                 <table className="tabla-solicitudes-enviadas">
                     <thead>
@@ -231,6 +234,8 @@ function Solicitudes() {
                         )}
                     </tbody>
                 </table>
+                </>
+                )}
 
                 <h2>Solicitudes recibidas</h2>
                 <table className="tabla-solicitud-recibidas">
