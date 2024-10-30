@@ -7,7 +7,7 @@ function MisMascotas() {
     const { user } = useContext(UserContext)
     const [mascotas, setMascotas] = useState([]);
     const PK_Usuario = user ? user.payload.PK_Usuario : null;
-    console.log("id", PK_Usuario);
+    
 
 
     // Función para obtener las mascotas de un usuario
