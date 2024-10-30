@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import "./Filtro_mascota.css";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../context/UserContext";
 // import { formatDate } from "../../service/formatoFecha";
 
 const Filtro_mascota = () => {
+  const { user } = useContext(UserContext);
   const location = useLocation();
   const { mascota } = location.state || {};
+  const FK_Rol = user ? user.payload.FK_Rol : null;
   console.log("mascota adoptar", mascota);
 
   if (!mascota) {
@@ -85,9 +88,11 @@ const Filtro_mascota = () => {
 
         </div>
 
-          <Link to="/formulario-adopcion" state={{ PK_Mascota: mascota.PK_Mascota }}>
-            <button className="btn-adoptar"> Solicitar adopción</button>
-          </Link>
+        <Link to="/formulario-adopcion" state={{ PK_Mascota: mascota.PK_Mascota }}>
+          <button className="btn-adoptar" disabled={FK_Rol !== 2}>
+            Solicitar adopción
+          </button>
+        </Link>
           <img src="perro_contacto.png" alt="" />
         </div>
 

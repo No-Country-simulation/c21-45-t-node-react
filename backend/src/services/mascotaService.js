@@ -69,7 +69,7 @@ const mascotaService = {
                 ELSE 'Senior'
               END AS edad,
               u.nombre AS usuario_nombre,
-              u.apellido AS usuario_apellido
+              COALESCE(u.apellido, '') AS usuario_apellido
             FROM Mascota m
             JOIN Usuario u ON m.FK_Usuario = u.PK_Usuario
             JOIN Direccion d ON u.FK_Direccion = d.PK_Direccion
