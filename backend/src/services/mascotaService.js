@@ -69,7 +69,7 @@ const mascotaService = {
                 ELSE 'Senior'
               END AS edad,
               u.nombre AS usuario_nombre,
-              u.apellido AS usuario_apellido
+              COALESCE(u.apellido, '') AS usuario_apellido
             FROM Mascota m
             JOIN Usuario u ON m.FK_Usuario = u.PK_Usuario
             JOIN Direccion d ON u.FK_Direccion = d.PK_Direccion
@@ -96,7 +96,12 @@ const mascotaService = {
       if (rows.length === 0) {
         return "El usuario solicitado no existe.";
       } else {
-        const [rows] = await pool.query("SELECT * FROM Mascota WHERE FK_Usuario = ? AND eliminada = 0", [FK_Usuario]);
+        const [rows] = await pool.query(`SELECT m.*, 
+                CASE
+                WHEN TIMESTAMPDIFF(MONTH, m.fecha_nacimiento, CURDATE()) <= 6 THEN 'Cachorro'
+                WHEN TIMESTAMPDIFF(YEAR, m.fecha_nacimiento, CURDATE()) <= 7 THEN 'Adulto'
+                ELSE 'Senior'
+                END AS edad FROM Mascota m WHERE FK_Usuario = ? AND eliminada = 0`, [FK_Usuario]);
         if (rows.length === 0) {
           return "El usuario no tiene mascotas cargadas.";
         } else {
@@ -275,10 +280,10 @@ const mascotaService = {
     }
   },
 
-  // Filtrar mascotas por edad, sexo, tamaño, especie, país, provincia y localidad
+  // Filtrar mascotas por edad, sexo, tamaño, especie, límite, ubicación, país, provincia y localidad
   async filtroMascotas(filterData) {
     try {
-      const { edad, sexo, tamanio, especie, ubicacion, pais, provincia, localidad } = filterData;
+      const { edad, sexo, tamanio, especie, limite, ubicacion, pais, provincia, localidad } = filterData;
 
       // Base de la consulta
       let query = `
@@ -336,6 +341,10 @@ const mascotaService = {
         query += ` AND pais.PK_Pais = ?`;
         params.push(pais);
       }
+      if (limite) {
+        query += ` LIMIT ?`;
+        params.push(parseInt(limite, 10));
+      }      
 
       const [rows] = await pool.query(query, params);
       if (rows.length === 0) {

@@ -106,87 +106,49 @@
   flex-direction: column;
 }
 
-/* Contacto */
-.contact {
+/* Sección */
+.section {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   padding: 20px;
   background-color: #f9f9f9;
+  width: 500px;
+  border-radius: 15px;
+  margin: 20px;
 }
 
-.left_contact {
+.left_section {
   flex: 1;
 }
 
-.right_contact {
+.right_section {
   flex: 1;
   display: flex;
   justify-content: center;
 }
 
-.right_contact img {
-  max-width: 50%;
+.right_section img {
+  max-width: 40%;
   height: auto;
-  margin-left: 300px;
+  margin-left: 150px;
 }
 
-
-/* Estilos para los botones */
-.btn-contact {
-  margin-top: 20px;
-}
-
-.btn-contact button {
-  display: flex;
-  justify-content: center;
-  width: 100px;
-  height: 45px;
-  background-color: #f87171;
-  color: white;
-  padding-top: 12px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-}
-
-.btn-contact button:hover {
-  background-color: #ef4444;
-}
-
-.btn-contact a {
-  text-decoration: none;
-}
-
-.btn-contact a button {
-  display: inline-block;
-  margin-bottom: 20px;
-}
-
-.correo-adopcion,
-.location-refugio,
-.name-refugio {
+.localidad-provincia,
+.pais,
+.nombre-apellido {
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
-.correo-adopcion img,
-.location-refugio img,
-.name-refugio img {
-  width: 40px;
-  height: 40px;
-  margin-right: 15px;
-}
-
-.correo-adopcion p,
-.location-refugio p,
-.name-refugio p {
+.localidad-provincia p,
+.pais p,
+.nombre-apellido p {
   font-size: 20px;
   color: #8C8C8C;
-font-family: Manrope;
-margin-top: 20px;
+  font-family: sans-serif;
+  margin-top: 10px;
 
 }
 
@@ -214,4 +176,19 @@ margin-top: 20px;
     height: 30px;
     font-size: 1.5rem;
   }
+}
+
+.btn-adoptar {
+  margin-top: 40px;
+  width: 100%;
+  font-size: 44px;
+  font-family: "Lilita One", sans-serif;
+}
+
+/* Nuevo estilo para el botón deshabilitado */
+.btn-adoptar:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  opacity: 0.7;
 }

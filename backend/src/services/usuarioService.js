@@ -64,34 +64,34 @@ const usuarioService = {
   },
 
   // Método para registrar el usuario
-  async addUsuario(email, password, tipoUsuario, nombre, apellido, nro_org) {
-    try {
-      let FK_Rol;
-      // TODO: Falta cambiar a buscar el rol por nombre y no por id!!
+// Método para registrar el usuario
+async addUsuario(email, password, tipoUsuario, nombre, apellido, nro_org) {
+  try {
+    let FK_Rol;
 
-      // Determinamos el FK_Rol dependiendo del tipo de usuario
-      if (tipoUsuario === "particular") {
-        FK_Rol = 2; // Suponiendo que 2 es el rol de particular
-        await pool.query(
-          `
-          INSERT INTO Usuario (email, password, nombre, apellido, FK_Rol, FK_Direccion)
-          VALUES (?, ?, ?, ?, ?, null)`,
-          [email, password, nombre, apellido, FK_Rol]
-        );
-      } else if (tipoUsuario === "organizacion") {
-        FK_Rol = 3; // Suponiendo que 3 es el rol de org
-        await pool.query(
-          `
-          INSERT INTO Usuario (email, password, nro_org, FK_Rol, FK_Direccion)
-          VALUES (?, ?, ?, ?, null)`,
-          [email, password, nro_org, FK_Rol]
-        );
-      }
-    } catch (error) {
-      console.log("error al agregar usuario", error);
-      throw new Error(`Error al agregar usuario: ${error.message}`);
+    // Determinamos el FK_Rol dependiendo del tipo de usuario
+    if (tipoUsuario === "particular") {
+      FK_Rol = 2; // Suponiendo que 2 es el rol de particular
+      await pool.query(
+        `
+        INSERT INTO Usuario (email, password, nombre, apellido, FK_Rol, FK_Direccion)
+        VALUES (?, ?, ?, ?, ?, null)`,
+        [email, password, nombre, apellido, FK_Rol]
+      );
+    } else if (tipoUsuario === "organizacion") {
+      FK_Rol = 3; // Suponiendo que 3 es el rol de org
+      await pool.query(
+        `
+        INSERT INTO Usuario (email, password, nro_org, nombre, FK_Rol, FK_Direccion)
+        VALUES (?, ?, ?, ?, ?, null)`,
+        [email, password, nro_org, nombre, FK_Rol]
+      );
     }
-  },
+  } catch (error) {
+    console.log("error al agregar usuario", error);
+    throw new Error(`Error al agregar usuario: ${error.message}`);
+  }
+},
 
   // Actualizar un usuario por ID
   async updateUsuario(userId, userData) {

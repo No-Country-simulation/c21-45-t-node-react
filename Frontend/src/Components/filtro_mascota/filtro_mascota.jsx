@@ -1,13 +1,15 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useLocation } from "react-router-dom";
-// import Contacto from "../contacto/contacto";
 import "./Filtro_mascota.css";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../context/UserContext";
 // import { formatDate } from "../../service/formatoFecha";
 
 const Filtro_mascota = () => {
+  const { user } = useContext(UserContext);
   const location = useLocation();
   const { mascota } = location.state || {};
+  const FK_Rol = user ? user.payload.FK_Rol : null;
   console.log("mascota adoptar", mascota);
 
   if (!mascota) {
@@ -49,7 +51,6 @@ const Filtro_mascota = () => {
     return `${day}/${month}/${year}`;
   };
 
-
   return (
     <div className="container-mascota">
       <div className="container">
@@ -66,19 +67,34 @@ const Filtro_mascota = () => {
               ❯
             </button>
           </div>
-          <p>
-            Pertenece a: {mascota.usuario_nombre} {mascota.usuario_apellido}
-          </p>
-          <p>
-            Localidad - Provincia: {mascota.localidad} {mascota.provincia}
-          </p>
-          <p>
-            País: {mascota.pais}
-          </p>
+         
+          <div className="section">
+            <div className="left_section">
+                <div className="nombre-apellido">
+                  <p>Pertenece a: {mascota.usuario_nombre} {mascota.usuario_apellido}</p>
+                </div>
+                <div className="localidad-provincia">
+                  <p>Ubicación: {mascota.localidad}, {mascota.provincia}</p>
+                </div>
+                <div className="pais">
+                  <p>País: {mascota.pais}</p>
+                </div>
+            </div>
 
-          <Link to="/formulario-adopcion" state={{ PK_Mascota: mascota.PK_Mascota }}>
-            <button className="btn-adoptar"> Solicitar adopción</button>
-          </Link>
+            <div className="right_section">
+              <img src="perro_contacto.png" alt="" />
+            </div>
+          </div>
+
+        </div>
+
+        <Link to="/formulario-adopcion" state={{ PK_Mascota: mascota.PK_Mascota }}>
+        {/* deshabilitar si FK_Rol es distinto de 2 o de null */}
+
+          <button className="btn-adoptar" disabled={FK_Rol !== 2 && FK_Rol !== null}>
+            Solicitar adopción
+          </button>
+        </Link>
           <img src="perro_contacto.png" alt="" />
         </div>
 
@@ -115,35 +131,6 @@ const Filtro_mascota = () => {
             <h3>{mascota.detalle}</h3>
           </div>
 
-          <div className="contact">
-            <div className="left_contact">
-              <div className="contact_btn">
-                
-                <div className="btn-contact">
-                  <button>Adoptar</button>
-                </div>
-
-                <div className="correo-adopcion">
-                  {/* <img src="/email-refugio.png" alt="" srcset="" /> */}
-                  <p>{mascota.localidad} - {mascota.provincia}</p>
-                </div>
-                <div className="location-refugio">
-                  {/* <img src="/location-refugio.png" alt="" /> */}
-                  <p>{mascota.pais}</p>
-                </div>
-                <div className="name-refugio">
-                  {/* <img src="/nombre-refugio.png" alt="" /> */}
-                  <p>{mascota.usuario_nombre} {mascota.usuario_apellido}</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="right_contact">
-              <img src="perro_contacto.png" alt="" />
-            </div>
-          </div>
-
-        </div>
       </div>
     </div>
   );

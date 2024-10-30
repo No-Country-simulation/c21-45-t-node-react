@@ -10,7 +10,7 @@ const Filtros = ({ filtro, onFilterChange }) => {
   };
 
   const handleSelectOption = (atributo) => {
-    setSelectedAttribute(atributo);
+    setSelectedAttribute(atributo.display);
     onFilterChange(filtro.filtro.toLowerCase(), atributo);
     setShowOptions(false);
   };
@@ -28,7 +28,7 @@ const Filtros = ({ filtro, onFilterChange }) => {
           <ul>
             {filtro.atributos.map((atributo, index) => (
               <li key={index} onClick={() => handleSelectOption(atributo)}>
-                {atributo}
+                {atributo.display}
               </li>
             ))}
           </ul>

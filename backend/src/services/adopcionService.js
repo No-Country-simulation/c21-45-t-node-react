@@ -66,10 +66,14 @@ async listAdopcionSolicitada(FK_Usuario) {
 async listAdopcionRecibida(FK_Usuario) {
   try {
     const [result] = await pool.query(
-      `SELECT a.*, m.nombre FROM Adopcion a 
+      `SELECT a.*, m.nombre,
+        u.nombre AS nombre_usuario, u.apellido AS apellido_usuario, u.email AS email_usuario, u.telefono AS telefono_usuario 
+        FROM Adopcion a
         JOIN Mascota m ON a.FK_Mascota = m.PK_Mascota 
-        JOIN Usuario u ON m.FK_Usuario = u.PK_Usuario 
-        WHERE m.FK_Usuario = ? AND a.eliminada = 0`, [FK_Usuario]);
+        JOIN Usuario u ON a.FK_Usuario = u.PK_Usuario 
+        WHERE m.FK_Usuario = ? AND a.eliminada = 0`, 
+      [FK_Usuario]
+    );
 
         return result;
   } catch (error) {
