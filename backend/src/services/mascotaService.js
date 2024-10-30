@@ -96,7 +96,12 @@ const mascotaService = {
       if (rows.length === 0) {
         return "El usuario solicitado no existe.";
       } else {
-        const [rows] = await pool.query("SELECT * FROM Mascota WHERE FK_Usuario = ? AND eliminada = 0", [FK_Usuario]);
+        const [rows] = await pool.query(`SELECT m.*, 
+                CASE
+                WHEN TIMESTAMPDIFF(MONTH, m.fecha_nacimiento, CURDATE()) <= 6 THEN 'Cachorro'
+                WHEN TIMESTAMPDIFF(YEAR, m.fecha_nacimiento, CURDATE()) <= 7 THEN 'Adulto'
+                ELSE 'Senior'
+                END AS edad FROM Mascota m WHERE FK_Usuario = ? AND eliminada = 0`, [FK_Usuario]);
         if (rows.length === 0) {
           return "El usuario no tiene mascotas cargadas.";
         } else {

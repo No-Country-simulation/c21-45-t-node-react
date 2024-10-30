@@ -10,6 +10,7 @@ function Solicitudes() {
     const [solicitudesEnviadas, setSolicitudesEnviadas] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [showModalAprobar, setShowModalAprobar] = useState(false); // Nuevo estado para el modal de aprobación
+    const [showModalRechazar, setShowModalRechazar] = useState(false);
     const [selectedSolicitudId, setSelectedSolicitudId] = useState(null);
 
     useEffect(() => {
@@ -42,6 +43,7 @@ function Solicitudes() {
         setShowModal(false);
         setSelectedSolicitudId(null);
         setShowModalAprobar(false); // Cerrar modal de aprobación
+        setShowModalRechazar(false);
     };
 
     const handleCancelarSolicitud = async () => {
@@ -141,6 +143,49 @@ function Solicitudes() {
         }
         handleCloseModal();
     };
+
+    // Nueva función para rechazar solicitud
+    const handleRechazarSolicitud = (id) => {
+        setSelectedSolicitudId(id);
+        setShowModalRechazar(true); // Abrir modal de rechazo
+    };
+
+    const handleConfirmarRechazo = async () => {
+        if (selectedSolicitudId) {
+            try {
+                const response = await fetch(`http://localhost:3000/api/adopcion/rechazar/${selectedSolicitudId}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
+
+                if (response.ok) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Solicitud rechazada exitosamente',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    setSolicitudesRecibidas(solicitudesRecibidas.filter(solicitud => solicitud.PK_Adopcion !== selectedSolicitudId));
+                } else {
+                    const errorData = await response.json();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error al rechazar la solicitud',
+                        text: errorData.error || 'Intenta nuevamente más tarde.'
+                    });
+                }
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error en la solicitud de rechazo',
+                    text: error.message || 'Ocurrió un error inesperado.'
+                });
+            }
+        }
+        handleCloseModal();
+    };
     
     return (
         <>
@@ -149,9 +194,9 @@ function Solicitudes() {
                 <table className="tabla-solicitudes-enviadas">
                     <thead>
                         <tr>
-                            <th>Nombre mascota</th>
-                            <th>Fecha de solicitud</th>
-                            <th>Fecha de aprobación</th>
+                            <th>Nombre Mascota</th>
+                            <th>Fecha de Solicitud</th>
+                            <th>Fecha de Aprobación</th>
                             <th>Estado</th>
                             <th>Cancelar</th>
                         </tr>
@@ -163,7 +208,15 @@ function Solicitudes() {
                                     <td>{solicitud.nombre}</td>
                                     <td>{new Date(solicitud.fecha_solicitud).toLocaleDateString()}</td>
                                     <td>{solicitud.fecha_aprobacion ? new Date(solicitud.fecha_aprobacion).toLocaleDateString() : "Pendiente"}</td>
-                                    <td>{solicitud.FK_Estado === 1 ? "En proceso" : "Aceptada"}</td>
+                                    <td>
+                                        {solicitud.FK_Estado === 1 
+                                            ? "Iniciada" 
+                                            : solicitud.FK_Estado === 2 
+                                            ? "Aprobada" 
+                                            : solicitud.FK_Estado === 3 
+                                            ? "Denegada" 
+                                            : "Desconocido"}
+                                    </td>
                                     <td>
                                         <button onClick={() => handleOpenModal(solicitud.PK_Adopcion)}>
                                             Cancelar
@@ -190,9 +243,13 @@ function Solicitudes() {
                             <th>Patio</th>
                             <th>Cerramiento</th>
                             <th>Compromiso</th>
-                            <th>Nombre</th>
+                            <th>Nombre Mascota</th>
+                            <th>Nombre Adoptante</th>
+                            <th>Email Adoptante</th>
+                            <th>Teléfono Adoptante</th>
+                            <th>Estado</th>
                             <th>Aprobar</th>
-                            <th>Cancelar</th>
+                            <th>Rechazar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -207,14 +264,26 @@ function Solicitudes() {
                                     <td>{solicitud.cerramiento}</td>
                                     <td>{solicitud.compromiso}</td>
                                     <td>{solicitud.nombre}</td>
+                                    <td>{solicitud.nombre_usuario} {solicitud.apellido_usuario}</td>
+                                    <td>{solicitud.email_usuario}</td>
+                                    <td>{solicitud.telefono_usuario}</td>
+                                    <td>
+                                        {solicitud.FK_Estado === 1 
+                                            ? "Iniciada" 
+                                            : solicitud.FK_Estado === 2 
+                                            ? "Aprobada" 
+                                            : solicitud.FK_Estado === 3 
+                                            ? "Denegada" 
+                                            : "Desconocido"}
+                                    </td>
                                     <td>
                                         <button onClick={() => handleAprobarSolicitud(solicitud.PK_Adopcion)}>
                                             Aprobar
                                         </button>
                                     </td>
                                     <td>
-                                        <button onClick={() => handleOpenModal(solicitud.PK_Adopcion)}>
-                                            Cancelar
+                                        <button onClick={() => handleRechazarSolicitud(solicitud.PK_Adopcion)}>
+                                            Rechazar
                                         </button>
                                     </td>
                                 </tr>
@@ -234,7 +303,7 @@ function Solicitudes() {
                     <div className="modal-content">
                         <h3>Confirmación</h3>
                         <p>¿Estás seguro de que deseas cancelar esta solicitud?</p>
-                        <button onClick={handleCancelarSolicitud}>Sí</button>
+                        <button onClick={handleCancelarSolicitud}>Si</button>
                         <button onClick={handleCloseModal}>No</button>
                     </div>
                 </div>
@@ -246,7 +315,19 @@ function Solicitudes() {
                     <div className="modal-content">
                         <h3>Confirmación</h3>
                         <p>¿Estás seguro de que deseas aprobar esta solicitud?</p>
-                        <button onClick={handleConfirmarAprobacion}>Sí</button>
+                        <button onClick={handleConfirmarAprobacion}>Si</button>
+                        <button onClick={handleCloseModal}>No</button>
+                    </div>
+                </div>
+            )}
+
+            {/* Modal para rechazar solicitud */}
+            {showModalRechazar && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <h3>Confirmación</h3>
+                        <p>¿Estás seguro de que deseas rechazar esta solicitud?</p>
+                        <button onClick={handleConfirmarRechazo}>Si</button>
                         <button onClick={handleCloseModal}>No</button>
                     </div>
                 </div>

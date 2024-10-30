@@ -148,10 +148,14 @@ function TablaMascotas({ mascotas }) {
                                 </>
                             )}
                             <th>Detalles</th>
+                            {isAdmin && (
+                            <>
                             <th>Localidad</th>
                             <th>Provincia</th>
                             <th>País</th>
-                            {isAdmin && <th>Publicada por</th>}
+                            <th>Publicada por</th>
+                            </>
+                            )}
                             <th>Adoptada</th>
                             {!isAdmin && <th>Editar</th>}
                             <th>Eliminar</th>
@@ -170,20 +174,22 @@ function TablaMascotas({ mascotas }) {
                                     <td>{mascota.edad}</td>
                                     {!isAdmin && (
                                         <>
-                                            <td>{mascota.castrado ? "Sí" : "No"}</td>
-                                            <td>{mascota.vacunado ? "Sí" : "No"}</td>
-                                            <td>{mascota.amigable_ninos ? "Sí" : "No"}</td>
-                                            <td>{mascota.amigable_perros ? "Sí" : "No"}</td>
-                                            <td>{mascota.amigable_gatos ? "Sí" : "No"}</td>
-                                            <td>{mascota.enfermedades ? "Sí" : "No"}</td>
+                                            <td>{mascota.castrado === 1 ? "Si" : "No"}</td>
+                                            <td>{mascota.vacunado === 1 ? "Si" : "No"}</td>
+                                            <td>{mascota.amigable_ninos === 1 ? "Si" : "No"}</td>
+                                            <td>{mascota.amigable_perros === 1 ? "Si" : "No"}</td>
+                                            <td>{mascota.amigable_gatos === 1 ? "Si" : "No"}</td>
+                                            <td>{mascota.enfermedades}</td>
                                         </>
                                     )}
                                     <td>{mascota.detalle}</td>
-                                    <td>{mascota.localidad}</td>
-                                    <td>{mascota.provincia}</td>
-                                    <td>{mascota.pais}</td>
                                     {isAdmin && (
+                                        <>
+                                        <td>{mascota.localidad}</td>
+                                        <td>{mascota.provincia}</td>
+                                        <td>{mascota.pais}</td>
                                         <td>{mascota.usuario_nombre} {mascota.usuario_apellido}</td>
+                                        </>
                                     )}
                                     <td>{mascota.adoptada ? "Sí" : "No"}</td>
                                     {!isAdmin && (
