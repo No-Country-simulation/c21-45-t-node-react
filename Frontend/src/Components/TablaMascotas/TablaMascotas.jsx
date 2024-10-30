@@ -27,11 +27,13 @@ function TablaMascotas({ mascotas }) {
     };
 
     const handleConfirmDelete = async () => {
+        handleCloseModalEliminar(); // Cierra el modal antes de mostrar el SweetAlert
+    
         if (selectedMascotaId) {
             await handleEliminarMascota(selectedMascotaId);
         }
-        handleCloseModalEliminar();
     };
+    
 
     const handleEliminarMascota = async (id) => {
         try {
