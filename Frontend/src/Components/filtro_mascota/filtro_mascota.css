@@ -6,23 +6,50 @@
 }
 
 .left {
-  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 30%;
+  margin-left: 40px;
 }
+
+.right {
+  display: flex;
+  /* Asegúrate de que sea un contenedor flexible */
+  flex-direction: row;
+  margin-left: 30px;
+  width: 60%;
+  justify-content: space-around;
+}
+
+.btnAdoptar {
+  display: flex;
+  justify-content: center;
+}
+
+.atributos,
+.respuestas_atributos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Centra el contenido */
+}
+
+
 
 .left h1 {
-  margin-bottom: 10px;
-  font-size: 74px;
+
+  margin-top: 0;
+  font-size: 60px;
 }
 
-.btn-adoptar{
+.btn-adoptar {
   margin-top: 40px;
   width: 100%;
   font-size: 44px;
-  font-family: "Lilita One", sans-serif;;
+  font-family: "Lilita One", sans-serif;
+  ;
 }
 
 /* Estilo del carrusel */
@@ -31,7 +58,7 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  width: 500px;
+  width: 200px;
   height: auto;
 }
 
@@ -42,8 +69,10 @@
 }
 
 .carousel-button {
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
-  color: #fff; /* Color del texto del botón */
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Fondo semi-transparente */
+  color: #fff;
+  /* Color del texto del botón */
   border: none;
   font-size: 2rem;
   cursor: pointer;
@@ -60,21 +89,15 @@
 }
 
 .carousel-button:first-child {
-  left: -50px; /* Ajusta la posición del botón izquierdo */
+  left: -50px;
+  /* Ajusta la posición del botón izquierdo */
 }
 
 .carousel-button:last-child {
-  right: -50px; /* Ajusta la posición del botón derecho */
+  right: -50px;
+  /* Ajusta la posición del botón derecho */
 }
 
-.right {
-  margin-left: 30px;
-  flex: 1;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-top: 75px;
-}
 
 .atributos h3,
 .respuestas_atributos h3 {
@@ -152,36 +175,9 @@
 
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-  }
-
-  .right {
-    grid-template-columns: 1fr;
-  }
-
-  .atributos,
-  .respuestas_atributos {
-    align-items: center;
-  }
-
-  .carousel {
-    width: 100%;
-  }
-
-  .carousel-button {
-    width: 30px;
-    height: 30px;
-    font-size: 1.5rem;
-  }
-}
-
 .btn-adoptar {
   margin-top: 40px;
-  width: 100%;
-  font-size: 44px;
+  font-size: 30px;
   font-family: "Lilita One", sans-serif;
 }
 

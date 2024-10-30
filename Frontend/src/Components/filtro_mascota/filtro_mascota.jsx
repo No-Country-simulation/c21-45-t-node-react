@@ -53,50 +53,57 @@ const Filtro_mascota = () => {
 
   return (
     <div className="container-mascota">
+
       <div className="container">
+
         <div className="left">
           <h1>{mascota.nombre}</h1>
 
           {/* Carrusel de imágenes */}
           <div className="carousel">
-            <button onClick={prevImage} className="carousel-button">
-              ❮
-            </button>
+
+            <button onClick={prevImage} className="carousel-button"> ❮ </button>
+
             <img src={imagenesURL[currentImageIndex]} alt={`Imagen de ${mascota.nombre}`} className="carousel-image" />
-            <button onClick={nextImage} className="carousel-button">
-              ❯
-            </button>
+
+            <button onClick={nextImage} className="carousel-button"> ❯ </button>
+
           </div>
-         
+
           <div className="section">
+
             <div className="left_section">
-                <div className="nombre-apellido">
-                  <p>Pertenece a: {mascota.usuario_nombre} {mascota.usuario_apellido}</p>
-                </div>
-                <div className="localidad-provincia">
-                  <p>Ubicación: {mascota.localidad}, {mascota.provincia}</p>
-                </div>
-                <div className="pais">
-                  <p>País: {mascota.pais}</p>
-                </div>
+
+              <div className="nombre-apellido">
+                <p>Pertenece a: {mascota.usuario_nombre} {mascota.usuario_apellido}</p>
+              </div>
+
+              <div className="localidad-provincia">
+                <p>Ubicación: {mascota.localidad}, {mascota.provincia}</p>
+              </div>
+
+              <div className="pais">
+                <p>País: {mascota.pais}</p>
+              </div>
+            <div className="btnAdoptar">
+            <Link to="/formulario-adopcion" state={{ PK_Mascota: mascota.PK_Mascota }}>
+                {/* deshabilitar si FK_Rol es distinto de 2 o de null */}
+
+                <button className="btn-adoptar" disabled={FK_Rol !== 2 && FK_Rol !== null}>
+                  Solicitar adopción
+                </button>
+              </Link>
+            </div>
             </div>
 
-            <div className="right_section">
-              <img src="perro_contacto.png" alt="" />
-            </div>
+
           </div>
 
         </div>
 
-        <Link to="/formulario-adopcion" state={{ PK_Mascota: mascota.PK_Mascota }}>
-        {/* deshabilitar si FK_Rol es distinto de 2 o de null */}
 
-          <button className="btn-adoptar" disabled={FK_Rol !== 2 && FK_Rol !== null}>
-            Solicitar adopción
-          </button>
-        </Link>
-          <img src="perro_contacto.png" alt="" />
-        </div>
+
+
 
         <div className="right">
           {/* Aquí van los atributos de la mascota */}
@@ -131,6 +138,7 @@ const Filtro_mascota = () => {
             <h3>{mascota.detalle}</h3>
           </div>
 
+        </div>
       </div>
     </div>
   );
