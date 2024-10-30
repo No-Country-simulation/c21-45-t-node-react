@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/UserContext";
 import axios from "axios";
 import "./perfil.css";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 import editarImg from "/editar.png";
 
 const Perfil = () => {
@@ -81,6 +81,10 @@ const Perfil = () => {
     });
   };
 
+  const handleCancel = () => {
+    setLoading(false);
+    setIsEditing(false);
+  };
   const handleSave = async () => {
     setLoading(true);
     setErrorMessage("");
@@ -90,18 +94,18 @@ const Perfil = () => {
 
       console.log("Datos actualizados:", response.data);
       Swal.fire({
-        icon: 'success',
-        title: 'Perfil actualizado exitosamente',
+        icon: "success",
+        title: "Perfil actualizado exitosamente",
         showConfirmButton: false,
-        timer: 1500
+        timer: 1500,
       });
       setIsEditing(false);
     } catch (error) {
       console.error(error);
       Swal.fire({
-        icon: 'error',
-        title: 'Error al actualizar el perfil',
-        text: error.response?.data?.message || "Intenta de nuevo más tarde."
+        icon: "error",
+        title: "Error al actualizar el perfil",
+        text: error.response?.data?.message || "Intenta de nuevo más tarde.",
       });
     } finally {
       setLoading(false);
@@ -118,8 +122,10 @@ const Perfil = () => {
 
   return (
     <div className="container-perfil">
-      <img src={formData.foto_perfil} alt="Perfil" className="perfil-image" />
-      <h1>Perfil de Usuario</h1>
+      <div className="perfil-header">
+        <img src={formData.foto_perfil} alt="Perfil" className="perfil-image" />
+        <h1>Perfil de Usuario</h1>
+      </div>
       {errorMessage && <div className="error-message">{errorMessage}</div>}
       <p>
         <strong>Nombre:</strong>
@@ -317,9 +323,14 @@ const Perfil = () => {
       </p>
 
       {isEditing && (
-        <button onClick={handleSave} disabled={loading}>
-          {loading ? "Guardando..." : "Guardar Cambios"}
-        </button>
+        <div className="button-container">
+          <button className="button-disabled" onClick={handleCancel} disabled={loading}>
+            Cancelar
+          </button>
+          <button onClick={handleSave} disabled={loading}>
+            {loading ? "Guardando..." : "Guardar Cambios"}
+          </button>
+        </div>
       )}
     </div>
   );
