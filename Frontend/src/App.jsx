@@ -20,6 +20,7 @@ import RequireAdmin from "./RequireAdmin"; // Importa el componente de redirecci
 import Perfil from "./pages/perfil/perfil";
 import ProcesoAdopcion from "./pages/Proceso_adopcion/ProcesoAdopcion";
 import MisMascotas from "./pages/misMascotas/misMascotas";
+import Solicitudes from "./pages/solicitudes/solicitudes";
 
 function App() {
   return (
@@ -56,6 +57,7 @@ function App() {
           <Route path="/perfil" element={< Perfil/>} />
           <Route path="/mis-mascotas" element={<MisMascotas/>}/>
           <Route path="/admin" element={<Admin />} />
+          <Route path="/solicitudes" element={<Solicitudes/>}/>
         </Routes>
       </RequireAdmin>
 

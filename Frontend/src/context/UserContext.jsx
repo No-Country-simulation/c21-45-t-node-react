@@ -12,14 +12,13 @@ export const UserProvider = ({ children }) => {
    const fetchUsers = async () => {
     try {
       const response = await axios.get("http://localhost:3000/api/usuarios");
-      console.log("respuesta axios",response.data); 
+      
       setUsers(response.data); 
     } catch (error) {
       console.error("Error al obtener las usuarios:", error);
     }
   };
-  console.log("lista de usuarios", users);
-  
+ 
   
   // Llamar a la función fetchMascotas cuando se monta el componente
   useEffect(() => {
@@ -52,7 +51,7 @@ export const UserProvider = ({ children }) => {
         localStorage.removeItem('user');
         setIsLoggedIn(false); 
     };
-    console.log("user del contexto", user);
+   
     
 
     return (
