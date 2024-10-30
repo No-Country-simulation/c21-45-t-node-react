@@ -1,32 +1,32 @@
-import React, { useContext, useState } from 'react';
-import axios from 'axios';
-import Swal from 'sweetalert2';
-import './AgregarMascota.css';
-import { UserContext } from '../../context/UserContext';
+import React, { useContext, useState } from "react";
+import axios from "axios";
+import Swal from "sweetalert2";
+import "./AgregarMascota.css";
+import { UserContext } from "../../context/UserContext";
 
 // Enum para el tipo de mascota
 const TipoMascota = Object.freeze({
-  PERRO: 'Perro',
-  GATO: 'Gato',
+  PERRO: "Perro",
+  GATO: "Gato",
 });
 
 // Enum para el sexo de la mascota
 const SexoMascota = Object.freeze({
-  MACHO: 'Macho',
-  HEMBRA: 'Hembra',
+  MACHO: "Macho",
+  HEMBRA: "Hembra",
 });
 
 // Enum para el tamaño de la mascota
 const TamañoMascota = Object.freeze({
-  PEQUEÑO: 'Pequeño',
-  MEDIANO: 'Mediano',
-  GRANDE: 'Grande',
+  PEQUEÑO: "Pequeño",
+  MEDIANO: "Mediano",
+  GRANDE: "Grande",
 });
 
 // Enum positivo/negativo
 const PositivoNegativo = Object.freeze({
-  SI: 'Si',
-  NO: 'No',
+  SI: "Si",
+  NO: "No",
 });
 
 const AgregarMascota = ({ addPet }) => {
@@ -34,19 +34,19 @@ const AgregarMascota = ({ addPet }) => {
   const PK_Usuario = user ? user.payload.PK_Usuario : null;
 
   // Estados para los campos del formulario
-  const [name, setName] = useState('');
-  const [type, setType] = useState('');
-  const [race, setRace] = useState('');
-  const [sex, setSex] = useState('');
-  const [size, setSize] = useState('');
-  const [birth, setBirth] = useState('');
-  const [cas, setCas] = useState('');
-  const [vac, setVac] = useState('');
-  const [amn, setAmn] = useState('');
-  const [amp, setAmp] = useState('');
-  const [amg, setAmg] = useState('');
-  const [enf, setEnf] = useState('');
-  const [details, setDetails] = useState('');
+  const [name, setName] = useState("");
+  const [type, setType] = useState("");
+  const [race, setRace] = useState("");
+  const [sex, setSex] = useState("");
+  const [size, setSize] = useState("");
+  const [birth, setBirth] = useState("");
+  const [cas, setCas] = useState("");
+  const [vac, setVac] = useState("");
+  const [amn, setAmn] = useState("");
+  const [amp, setAmp] = useState("");
+  const [amg, setAmg] = useState("");
+  const [enf, setEnf] = useState("");
+  const [details, setDetails] = useState("");
   const [image, setImage] = useState([]);
   const [previewImages, setPreviewImages] = useState([]); // URLs temporales para previsualización
 
@@ -59,27 +59,26 @@ const AgregarMascota = ({ addPet }) => {
     setPreviewImages(previewURLs);
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (user) {
-      const convertToBinary = (value) => value === 'Si' ? 1 : 0;
+      const convertToBinary = (value) => (value === "Si" ? 1 : 0);
 
       const formData = new FormData();
-      formData.append('nombre', name);
-      formData.append('especie', type);
-      formData.append('raza', race);
-      formData.append('sexo', sex);
-      formData.append('tamanio', size);
-      formData.append('fecha_nacimiento', birth);
-      formData.append('castrado', convertToBinary(cas));
-      formData.append('vacunado', convertToBinary(vac));
-      formData.append('amigable_ninos', convertToBinary(amn));
-      formData.append('amigable_perros', convertToBinary(amp));
-      formData.append('amigable_gatos', convertToBinary(amg));
-      formData.append('enfermedades', enf);
-      formData.append('detalle', details);
-      formData.append('FK_Usuario', PK_Usuario);
+      formData.append("nombre", name);
+      formData.append("especie", type);
+      formData.append("raza", race);
+      formData.append("sexo", sex);
+      formData.append("tamanio", size);
+      formData.append("fecha_nacimiento", birth);
+      formData.append("castrado", convertToBinary(cas));
+      formData.append("vacunado", convertToBinary(vac));
+      formData.append("amigable_ninos", convertToBinary(amn));
+      formData.append("amigable_perros", convertToBinary(amp));
+      formData.append("amigable_gatos", convertToBinary(amg));
+      formData.append("enfermedades", enf);
+      formData.append("detalle", details);
+      formData.append("FK_Usuario", PK_Usuario);
 
       // Añadir imágenes al FormData
       image.forEach((image) => {
@@ -88,58 +87,62 @@ const AgregarMascota = ({ addPet }) => {
       console.log("formData antes de enviar:", [...formData.entries()]); // Debugging
 
       try {
-        const response = await axios.post('http://localhost:3000/api/mascota', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        });
+        const response = await axios.post(
+          "http://localhost:3000/api/mascota",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
 
-        console.log('Respuesta de la API:', response.data); // Debugging
+        console.log("Respuesta de la API:", response.data); // Debugging
 
         if (response.data.success) {
           Swal.fire({
-            title: 'Éxito',
-            text: 'Mascota agregada con éxito',
-            icon: 'success',
+            title: "Éxito",
+            text: "Mascota agregada con éxito",
+            icon: "success",
           });
           // Limpiar los estados después de agregar la mascota
-          setName('');
-          setType('');
-          setRace('');
-          setSex('');
-          setSize('');
-          setBirth('');
-          setCas('');
-          setVac('');
-          setAmn('');
-          setAmp('');
-          setAmg('');
-          setEnf('');
-          setDetails('');
+          setName("");
+          setType("");
+          setRace("");
+          setSex("");
+          setSize("");
+          setBirth("");
+          setCas("");
+          setVac("");
+          setAmn("");
+          setAmp("");
+          setAmg("");
+          setEnf("");
+          setDetails("");
           setImage([]);
           setPreviewImages([]); // Limpiar la previsualización
         }
       } catch (error) {
-        console.error('Error al agregar la mascota:', error.response || error);
+        console.error("Error al agregar la mascota:", error.response || error);
         Swal.fire({
-          title: 'Error',
-          text: 'Hubo un error al agregar la mascota',
-          icon: 'error',
+          title: "Error",
+          text: "Hubo un error al agregar la mascota",
+          icon: "error",
         });
       }
     } else {
       Swal.fire({
-        title: 'Advertencia',
-        text: 'Debe iniciar sesión',
-        icon: 'warning',
+        title: "Advertencia",
+        text: "Debe iniciar sesión",
+        icon: "warning",
       });
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className='container--agregarMascotas'>
+    <form onSubmit={handleSubmit} className="container--agregarMascotas">
       <input
-        className='info--agregarMascotas'
+        className="info--agregarMascotas"
         type="text"
         placeholder="Nombre de la mascota"
         value={name}
@@ -147,7 +150,7 @@ const AgregarMascota = ({ addPet }) => {
         required
       />
       <select
-        className='info--agregarMascotas'
+        className="info--agregarMascotas"
         value={type}
         onChange={(e) => setType(e.target.value)}
         required
@@ -157,7 +160,7 @@ const AgregarMascota = ({ addPet }) => {
         <option value={TipoMascota.GATO}>{TipoMascota.GATO}</option>
       </select>
       <input
-        className='info--agregarMascotas'
+        className="info--agregarMascotas"
         type="text"
         placeholder="Raza"
         value={race}
@@ -165,7 +168,7 @@ const AgregarMascota = ({ addPet }) => {
         required
       />
       <select
-        className='info--agregarMascotas'
+        className="info--agregarMascotas"
         value={sex}
         onChange={(e) => setSex(e.target.value)}
         required
@@ -175,7 +178,7 @@ const AgregarMascota = ({ addPet }) => {
         <option value={SexoMascota.HEMBRA}>{SexoMascota.HEMBRA}</option>
       </select>
       <select
-        className='info--agregarMascotas'
+        className="info--agregarMascotas"
         value={size}
         onChange={(e) => setSize(e.target.value)}
         required
@@ -185,18 +188,16 @@ const AgregarMascota = ({ addPet }) => {
         <option value={TamañoMascota.MEDIANO}>{TamañoMascota.MEDIANO}</option>
         <option value={TamañoMascota.GRANDE}>{TamañoMascota.GRANDE}</option>
       </select>
-      <label className='info--agregarMascotas'>
-        Fecha de nacimiento:
-      </label>
+      <label className="info--agregarMascotas">Fecha de nacimiento:</label>
       <input
-        className='info--agregarMascotas'
+        className="info--agregarMascotas"
         type="date"
         value={birth}
         onChange={(e) => setBirth(e.target.value)}
         required
       />
       <select
-        className='info--agregarMascotas'
+        className="info--agregarMascotas"
         value={cas}
         onChange={(e) => setCas(e.target.value)}
         required
@@ -206,7 +207,7 @@ const AgregarMascota = ({ addPet }) => {
         <option value={PositivoNegativo.NO}>{PositivoNegativo.NO}</option>
       </select>
       <select
-        className='info--agregarMascotas'
+        className="info--agregarMascotas"
         value={vac}
         onChange={(e) => setVac(e.target.value)}
         required
@@ -216,7 +217,7 @@ const AgregarMascota = ({ addPet }) => {
         <option value={PositivoNegativo.NO}>{PositivoNegativo.NO}</option>
       </select>
       <select
-        className='info--agregarMascotas'
+        className="info--agregarMascotas"
         value={amn}
         onChange={(e) => setAmn(e.target.value)}
         required
@@ -226,7 +227,7 @@ const AgregarMascota = ({ addPet }) => {
         <option value={PositivoNegativo.NO}>{PositivoNegativo.NO}</option>
       </select>
       <select
-        className='info--agregarMascotas'
+        className="info--agregarMascotas"
         value={amp}
         onChange={(e) => setAmp(e.target.value)}
         required
@@ -236,7 +237,7 @@ const AgregarMascota = ({ addPet }) => {
         <option value={PositivoNegativo.NO}>{PositivoNegativo.NO}</option>
       </select>
       <select
-        className='info--agregarMascotas'
+        className="info--agregarMascotas"
         value={amg}
         onChange={(e) => setAmg(e.target.value)}
         required
@@ -246,7 +247,7 @@ const AgregarMascota = ({ addPet }) => {
         <option value={PositivoNegativo.NO}>{PositivoNegativo.NO}</option>
       </select>
       <input
-        className='info--agregarMascotas'
+        className="info--agregarMascotas"
         type="text"
         placeholder="Enfermedades"
         value={enf}
@@ -254,21 +255,26 @@ const AgregarMascota = ({ addPet }) => {
         required
       />
       <textarea
-        className='info--agregarMascotas'
-        type= "text"
+        className="info--agregarMascotas, textarea"
+        type="text"
         placeholder="Detalles"
         value={details}
         onChange={(e) => setDetails(e.target.value)}
         required
       />
-      <input
-        className='info--agregarMascotas'
-        type="file"
-        accept="image/*"
-        multiple
-        onChange={handleImageChange}
-        required
-      />
+    <label htmlFor="file-upload" className="file-label-btn">
+    Agregar Imágenes
+</label>
+<input
+    id="file-upload"
+    className="info--agregarMascotas-btn"
+    type="file"
+    accept="image/*"
+    multiple
+    onChange={handleImageChange}
+    required
+/>
+
 
       {/* Mostrar previsualización de las imágenes seleccionadas */}
       <div className="image-preview">
@@ -276,10 +282,9 @@ const AgregarMascota = ({ addPet }) => {
           <img key={index} src={img} alt={`preview ${index}`} />
         ))}
       </div>
-      <button className='button-agregarMascotas' type="submit">
+      <button className="button-agregarMascotas" type="submit">
         Agregar mascota
       </button>
-
     </form>
   );
 };

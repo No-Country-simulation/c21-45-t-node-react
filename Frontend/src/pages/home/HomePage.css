@@ -1,9 +1,9 @@
 .home-container {
+  height: 100vh;
   background-color: #1e9dba;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: calc(100vh - 110px);
   margin-top: 110px;
 }
 
@@ -30,6 +30,7 @@
   background-color: #fff;
   border-radius: 12px;
   padding: 30px;
+  margin-top: -50px;
   text-align: center;
 }
 

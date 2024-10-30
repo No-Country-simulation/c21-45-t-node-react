@@ -130,11 +130,12 @@ export const FormularioAdopcion = () => {
                     <br />
 
                     <label htmlFor="tipoVivienda">Tipo de vivienda (casa, departamento, chalet, loft, etc.)</label>
-                    <input type="text" id="tipoVivienda" value={tipoVivienda}
+                    <input className='form-text' type="text" id="tipoVivienda" value={tipoVivienda}
                     onChange={(e) => setTipoVivienda(e.target.value)} required/>
                     <br />
 
                     <label htmlFor="patio">¿Cuentas con patio en casa?</label>
+                    <div className="si-no">
                     <label>
                         <input
                             type="radio"
@@ -153,9 +154,11 @@ export const FormularioAdopcion = () => {
                         />
                         No
                     </label>
+                    </div>
                     <br />
 
                     <label htmlFor="seguridad">¿Tu vivienda cuenta con un perímetro delimitado seguro?</label>
+                    <div className="si-no">
                     <label>
                         <input
                             type="radio"
@@ -174,9 +177,11 @@ export const FormularioAdopcion = () => {
                         />
                         No
                     </label>
+                    </div>
                     <br />
 
                     <label htmlFor="otrasMascotas">¿Tienes otras mascotas?</label>
+                    <div className="si-no">
                     <label>
                         <input
                             type="radio"
@@ -195,6 +200,7 @@ export const FormularioAdopcion = () => {
                         />
                         No
                     </label>
+                    </div>
                     <br />
 
                     <div className={otrasMascotas === 'No' ? 'hidden' : ''}>
@@ -210,6 +216,7 @@ export const FormularioAdopcion = () => {
                     <br />
 
                     <label htmlFor="otrasMascotas">¿Se compromete a ofrecer los cuidados que necesite su mascota, su alimentación y brindarle cariño?</label>
+                    <div className="si-no">
                     <label>
                         <input
                             type="radio"
@@ -228,6 +235,7 @@ export const FormularioAdopcion = () => {
                         />
                         No
                     </label>
+                    </div>
                     <br />
 
                 </div>
