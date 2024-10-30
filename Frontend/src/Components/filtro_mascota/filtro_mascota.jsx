@@ -89,7 +89,9 @@ const Filtro_mascota = () => {
         </div>
 
         <Link to="/formulario-adopcion" state={{ PK_Mascota: mascota.PK_Mascota }}>
-          <button className="btn-adoptar" disabled={FK_Rol !== 2}>
+        {/* deshabilitar si FK_Rol es distinto de 2 o de null */}
+
+          <button className="btn-adoptar" disabled={FK_Rol !== 2 && FK_Rol !== null}>
             Solicitar adopción
           </button>
         </Link>
