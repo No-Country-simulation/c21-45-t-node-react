@@ -85,7 +85,7 @@ const HomePage = () => {
       </div>
 
       <div className="search-component">
-        <Search />
+        <Search filters={{ limite: 8 }} />
       </div>
       <div className="btn-container">
         <Link to="/mascotas">
