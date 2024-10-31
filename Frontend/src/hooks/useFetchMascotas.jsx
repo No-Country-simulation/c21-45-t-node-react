@@ -11,6 +11,7 @@ const useFetchMascotas = (filters) => {
       try {
         const response = await axios.post("http://localhost:3000/api/mascota/filtro", filters);
         setMascotas(response.data);
+        console.log("mascotas devueltas", mascotas);
       } catch (error) {
         console.error("Error al obtener las mascotas:", error);
       } finally {

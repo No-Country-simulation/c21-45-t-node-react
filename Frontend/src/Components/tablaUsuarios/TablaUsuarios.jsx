@@ -110,8 +110,11 @@ function TablaUser({ users, setUsers }) {
                     <div className="modal-content">
                         <h2>Confirmar Eliminación</h2>
                         <p>¿Estás seguro de que deseas eliminar el usuario <strong>{selectedUserName}</strong>?</p>
-                        <button onClick={handleConfirDeleteUsuario}>Eliminar</button>
-                        <button onClick={handleCloseModalEliminar}>Cancelar</button>
+
+                        <div className="button-container">
+                            <button onClick={handleConfirDeleteUsuario}>Eliminar</button>
+                            <button onClick={handleCloseModalEliminar}>Cancelar</button>
+                        </div>
                     </div>
                 </div>
             )}

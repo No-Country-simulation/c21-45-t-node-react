@@ -3,10 +3,11 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import './FormularioAdopcion.css';
 import {UserContext} from '../../context/UserContext';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export const FormularioAdopcion = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const { PK_Mascota } = location.state || {}; // Recuperar PK_Mascota del estado
 
     const homeImage = "/home_image.png"
@@ -79,7 +80,10 @@ export const FormularioAdopcion = () => {
                 title: 'Éxito',
                 text: 'Formulario enviado',
                 icon: 'success',
-              });
+              }).then(() => {
+                // Redirigir después de cerrar el modal de éxito
+                navigate("/solicitudes");
+            });
               // Limpiar los estados del formulario
               setPatio('');
               setOtrasMascotas('');
