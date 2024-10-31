@@ -54,8 +54,8 @@ const HomePage = () => {
             <h2>¡Encuentra a tu compañero!</h2>
             <p>¿Qué mascota estás buscando?</p>
             <div className="container-masc">
-              <img className={selectedEspecie === "gato" ? "selected" : ""} src={gato} alt="Gato" onClick={() => setFiltroEspecie("gato")} />
-              <img className={selectedEspecie === "perro" ? "selected" : ""} src={perro} alt="Perro" onClick={() => setFiltroEspecie("perro")} />
+              <img className={selectedEspecie === "Gato" ? "selected" : ""} src={gato} alt="Gato" onClick={() => setFiltroEspecie("Gato")} />
+              <img className={selectedEspecie === "Perro" ? "selected" : ""} src={perro} alt="Perro" onClick={() => setFiltroEspecie("Perro")} />
             </div>
             <p>¿De dónde eres?</p>
 
