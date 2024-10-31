@@ -54,7 +54,7 @@ const Navbar = () => {
             <div className="user-dropdown">
               <li className="nav-links" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
                 <div to="" className="dropdown-link">
-                  Hola, {user.payload.nombre}!!
+                  Hola, {user.payload.nombre}!
                 </div>
               </li>
 
@@ -71,17 +71,17 @@ const Navbar = () => {
                     // Menú completo para otros usuarios
                     <>
                       <li>
-                        <Link to="/perfil" className="dropdown-link">
+                        <Link to="/perfil" className="dropdown-link" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
                           Perfil
                         </Link>
                       </li>
                       <li>
-                        <Link to="/mis-mascotas" className="dropdown-link">
+                        <Link to="/mis-mascotas" className="dropdown-link" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
                           Mis mascotas
                         </Link>
                       </li>
                       <li>
-                        <Link to="/solicitudes" className="dropdown-link">
+                        <Link to="/solicitudes" className="dropdown-link" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
                           Mis solicitudes
                         </Link>
                       </li>

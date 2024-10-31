@@ -1,94 +1,94 @@
 .container--agregarMascotas {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding-left:100px;
-    padding-bottom:40px;
-    margin-top: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 100px;
+  padding-bottom: 40px;
+  margin-top: 150px;
 }
 
-.container--agregarMascotas{
-    background-image: url(/imagen_background.jpg);
-    background-size: cover;
-    border-top-right-radius: 500px;
-    border-bottom-right-radius: 500px;
+.container--agregarMascotas {
+  background-image: url(/imagen_background.jpg);
+  background-size: cover;
+  border-top-right-radius: 500px;
+  border-bottom-right-radius: 500px;
 }
 
 .info--agregarMascotas {
-    margin-top: 20px;
-    margin-left: 2rem;
-    width: 400px;
-    border-radius: 8px;
-    height: auto;
-    font-size: 15px;
-    font-family: manrope;
+  margin-top: 20px;
+  margin-left: 2rem;
+  width: 400px;
+  border-radius: 8px;
+  height: auto;
+  font-size: 15px;
+  font-family: manrope;
 }
-.textarea{
-    font-family: manrope;
-    
-    width: 400px;
-    height: 100px;
-    border-radius: 8px;
-    text-decoration: none;
-    margin: 30px;
+.textarea {
+  font-family: manrope;
+
+  width: 400px;
+  height: 100px;
+  border-radius: 8px;
+  text-decoration: none;
+  margin: 30px;
 }
 
 .image-preview {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 10px;
-    margin-left: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  margin-left: 30px;
 }
 
 .image-preview img {
-    width: 400px;
-    height: auto; 
-    margin-right: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc; 
-    border-radius: 5px;
+  width: 400px;
+  height: auto;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
 .button-agregarMascotas {
-    width: 30%;
-    padding: 10px;
-    background-color: #ff6f61;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin: 30px 30px 30px 30px;
+  width: 30%;
+  padding: 10px;
+  background-color: #ff6f61;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 30px 30px 30px 30px;
 }
 
-input[type="date"], 
+.container--agregarMascotas input[type="date"],
 select {
   width: 380px;
   border-radius: 8px;
 }
-input[type="text"], 
+.container--agregarMascotas input[type="text"],
 select {
   width: 380px;
   border-radius: 8px;
 }
-.info--agregarMascotas-btn{
-    display: none; /* Oculta el input de archivo real */
+.info--agregarMascotas-btn {
+  display: none; /* Oculta el input de archivo real */
 }
 
 .file-label-btn {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #4CAF50; /* Color de fondo del botón */
-    color: white; /* Color de texto */
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-    transition: background-color 0.3s ease;
-    margin-left: 100px;
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #4caf50; /* Color de fondo del botón */
+  color: white; /* Color de texto */
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  margin-left: 100px;
 }
 
 .file-label-btn:hover {
-    background-color: #45a049; /* Color de fondo en hover */
+  background-color: #45a049; /* Color de fondo en hover */
 }

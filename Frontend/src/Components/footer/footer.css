@@ -1,10 +1,10 @@
-
 .footer {
   display: flex;
   flex-direction: column; /* Cambia a columna para que el logo esté encima de las columnas */
   padding: 20px;
   background-color: #f8f9fa; /* Color de fondo del footer */
   border-top: 1px solid #dee2e6;
+  min-height: 115px;
 }
 
 .footer-columns {
@@ -22,14 +22,14 @@
   height: 40px;
   margin-right: 10px;
 }
-a{
+a {
   text-decoration: none;
 }
 
 .footer-logo-text {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #1E9DBA;
+  color: #1e9dba;
   text-decoration: none;
 }
 
@@ -40,7 +40,7 @@ a{
 
 .footer-links {
   list-style-type: none;
-  padding: 0; 
+  padding: 0;
 }
 
 .footer-links li {
@@ -48,7 +48,7 @@ a{
 }
 
 .footer-links li a {
-  color: #8C8C8C;
+  color: #8c8c8c;
   font-family: Manrope;
   text-decoration: none;
   font-size: 16px;
@@ -56,12 +56,10 @@ a{
 
 .footer-links li a:hover {
   text-decoration: underline; /* Cambia a subrayado al pasar el mouse */
-  color: #1E9DBA; /* Color del enlace al pasar el mouse */
+  color: #1e9dba; /* Color del enlace al pasar el mouse */
 }
 
-
 .redes-sociales {
-  
   display: flex; /* Usar flexbox para alinear elementos en una línea */
   justify-content: center; /* Centrar los iconos de las redes sociales horizontalmente */
   align-items: center; /* Centrar los iconos verticalmente */
@@ -74,8 +72,8 @@ a{
 .redes-sociales ul {
   display: flex; /* Mostrar los elementos de la lista en línea */
   list-style-type: none; /* Eliminar puntos de la lista */
-  padding: 0; 
-  margin: 0; 
+  padding: 0;
+  margin: 0;
 }
 
 .redes-sociales li {
@@ -85,6 +83,6 @@ a{
 
 /* Tamaño del logo */
 .social-logo {
-  width: 30px; 
-  height: 30px; 
+  width: 30px;
+  height: 30px;
 }

@@ -1,58 +1,71 @@
-
 .tabla-mascotas {
-       width: 100%;
-    border-collapse: collapse;
-    table-layout: auto;
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
 }
 
-.tabla-mascotas th, .tabla-mascotas td {
-    padding: 8px;
-    border: 1px solid #ddd;
-    font-size: 14px;
-    text-align: center;
+.tabla-mascotas th,
+.tabla-mascotas td {
+  padding: 8px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  text-align: center;
 }
-
 
 .tabla-mascotas thead th {
-    background-color: #4CAF50;
-    color: white;
-    font-weight: bold;
+  background-color: #4caf50;
+  color: white;
+  font-weight: bold;
 }
 
-
 .tabla-mascotas tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
+  background-color: #f9f9f9;
 }
 
 .tabla-mascotas tbody tr:hover {
-    background-color: #f1f1f1;
+  background-color: #f1f1f1;
 }
-
 
 .tabla-mascotas img {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
 }
 
+.tabla-mascotas * button {
+  max-width: 110px;
+}
 
 .modal {
-    position: fixed; /* o absolute */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
-    display: flex; /* Centrar el contenido */
-    justify-content: center; /* Centrar horizontalmente */
-    align-items: center; /* Centrar verticalmente */
-    z-index: 9999; /* Asegúrate de que sea alto */
+  position: fixed; /* o absolute */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+  display: flex; /* Centrar el contenido */
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+  z-index: 9999; /* Asegúrate de que sea alto */
 }
 
 .modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    z-index: 10000; /* Asegúrate de que sea más alto que el modal */
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 10000; /* Asegúrate de que sea más alto que el modal */
+}
+
+.modal-content > form > div > label {
+  font-family: Manrope;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal-content > form > div > label > textarea {
+  font-family: Manrope;
+  width: 80%;
+  min-height: 50px;
 }

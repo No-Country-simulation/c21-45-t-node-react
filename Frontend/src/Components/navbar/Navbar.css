@@ -50,7 +50,7 @@
   position: relative;
   color: #ff6f61;
   font-family: "Lilita One";
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .nav-links li a::before {
@@ -75,7 +75,7 @@
   align-items: center;
   border-radius: 8px;
   font-family: "Lilita One";
-  font-size: 18px;
+  font-size: 20px;
   color: black;
   background-color: #fff;
   border: 2px black;
@@ -102,7 +102,7 @@
   text-decoration: none;
   color: #ff6f61; /* Color aplicado al enlace del saludo */
   font-family: "Lilita One"; /* Mantiene la misma fuente */
-  font-size: 18px; /* Tamaño de fuente igual */
+  font-size: 20px; /* Tamaño de fuente igual */
   position: relative; /* Necesario para el pseudo-elemento */
   cursor: pointer;
 }
@@ -155,7 +155,7 @@
 .dropdown-menu li button {
   text-decoration: none;
   color: #ff6f61; /* Color aplicado a los enlaces y botones del dropdown */
-  font-size: 16px;
+  font-size: 20px;
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -172,7 +172,7 @@
   background-color: transparent;
   border: none;
   font-family: "Lilita One";
-  font-size: 18px;
+  font-size: 20px;
   color: #ff6f61;
   cursor: pointer;
 }
