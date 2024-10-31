@@ -1,5 +1,5 @@
 .home-container {
-  height: 100vh;
+  height: calc(100vh - 110px);
   background-color: #1e9dba;
   display: flex;
   justify-content: space-between;
@@ -13,9 +13,9 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 30px;
+  gap: 60px;
   text-align: center;
-  padding: 0 40px;
+  padding: 0 50px;
 }
 
 .main-title {
