@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios"; 
+import axios from "axios";
 import "./FormularioRegistro.css";
 
 const FormularioRegistro = () => {
@@ -10,7 +10,7 @@ const FormularioRegistro = () => {
     apellido: "",
     email: "",
     password: "",
-    confirmarPassword: ""
+    confirmarPassword: "",
   });
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -37,13 +37,13 @@ const FormularioRegistro = () => {
     const dataToSend = {
       email: formData.email,
       password: formData.password,
-      tipoUsuario: formData.rol === "persona" ? "particular" : "organizacion", 
+      tipoUsuario: formData.rol === "persona" ? "particular" : "organizacion",
       nombre: formData.nombre,
-      apellido: formData.rol === "persona" ? formData.apellido : undefined 
+      apellido: formData.rol === "persona" ? formData.apellido : undefined,
     };
 
     console.log("usuario nuevo", dataToSend);
-    
+
     setLoading(true); // Muestra indicador de carga
 
     // Enviar los datos al backend
@@ -51,13 +51,14 @@ const FormularioRegistro = () => {
       const response = await axios.post("http://localhost:3000/api/auth/register", dataToSend);
       console.log(response.data);
       alert("Registro exitoso");
-      setFormData({ // Resetea el formulario después del registro exitoso
+      setFormData({
+        // Resetea el formulario después del registro exitoso
         rol: "persona",
         nombre: "",
         apellido: "",
         email: "",
         password: "",
-        confirmarPassword: ""
+        confirmarPassword: "",
       });
     } catch (error) {
       console.error(error);
@@ -77,63 +78,28 @@ const FormularioRegistro = () => {
         {errorMessage && <div className="error-message">{errorMessage}</div>} {/* Mensaje de error */}
         <div className="container--datos">
           <form onSubmit={handleSubmit}>
-            <div>
-              <label htmlFor="rol">Rol:</label>
-              <select
-                id="rol"
-                name="rol"
-                value={formData.rol}
-                onChange={handleChange}
-              >
-                <option value="persona">Persona</option>
-                <option value="organizacion">Organización</option>
-              </select>
-            </div>
-            
+            <label htmlFor="rol">Rol:</label>
+            <select id="rol" name="rol" value={formData.rol} onChange={handleChange}>
+              <option value="persona">Persona</option>
+              <option value="organizacion">Organización</option>
+            </select>
+
             <label htmlFor="nombre">Nombre:</label>
-            <input
-              type="text"
-              id="nombre"
-              name="nombre"
-              value={formData.nombre}
-              onChange={handleChange}
-              required
-            />
-          
+            <input type="text" id="nombre" name="nombre" value={formData.nombre} onChange={handleChange} required />
+
             {formData.rol === "persona" && (
               <>
                 <label htmlFor="apellido">Apellido:</label>
-                <input
-                  type="text"
-                  id="apellido"
-                  name="apellido"
-                  value={formData.apellido}
-                  onChange={handleChange}
-                  required
-                />
+                <input type="text" id="apellido" name="apellido" value={formData.apellido} onChange={handleChange} required />
               </>
             )}
-            
+
             <label htmlFor="email">Correo Electrónico:</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          
+            <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
+
             <label htmlFor="password">Contraseña:</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
-          
+            <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} required />
+
             <label htmlFor="confirmarPassword">Repetir Contraseña:</label>
             <input
               type="password"
@@ -143,7 +109,7 @@ const FormularioRegistro = () => {
               onChange={handleChange}
               required
             />
-          
+
             <button type="submit" disabled={loading}>
               {loading ? "Cargando..." : "Registrarse"}
             </button>

@@ -87,15 +87,11 @@ const AgregarMascota = ({ addPet }) => {
       console.log("formData antes de enviar:", [...formData.entries()]); // Debugging
 
       try {
-        const response = await axios.post(
-          "http://localhost:3000/api/mascota",
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
+        const response = await axios.post("http://localhost:3000/api/mascota", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
 
         console.log("Respuesta de la API:", response.data); // Debugging
 
@@ -141,6 +137,7 @@ const AgregarMascota = ({ addPet }) => {
 
   return (
     <form onSubmit={handleSubmit} className="container--agregarMascotas">
+      <h2 className="container--agregarMascotas-title">Ingresa los datos de tu mascota</h2>
       <input
         className="info--agregarMascotas"
         type="text"
@@ -149,111 +146,51 @@ const AgregarMascota = ({ addPet }) => {
         onChange={(e) => setName(e.target.value)}
         required
       />
-      <select
-        className="info--agregarMascotas"
-        value={type}
-        onChange={(e) => setType(e.target.value)}
-        required
-      >
+      <select className="info--agregarMascotas" value={type} onChange={(e) => setType(e.target.value)} required>
         <option value="">Selecciona si tu mascota es perro o gato</option>
         <option value={TipoMascota.PERRO}>{TipoMascota.PERRO}</option>
         <option value={TipoMascota.GATO}>{TipoMascota.GATO}</option>
       </select>
-      <input
-        className="info--agregarMascotas"
-        type="text"
-        placeholder="Raza"
-        value={race}
-        onChange={(e) => setRace(e.target.value)}
-        required
-      />
-      <select
-        className="info--agregarMascotas"
-        value={sex}
-        onChange={(e) => setSex(e.target.value)}
-        required
-      >
+      <input className="info--agregarMascotas" type="text" placeholder="Raza" value={race} onChange={(e) => setRace(e.target.value)} required />
+      <select className="info--agregarMascotas" value={sex} onChange={(e) => setSex(e.target.value)} required>
         <option value="">Selecciona si tu mascota es hembra o macho</option>
         <option value={SexoMascota.MACHO}>{SexoMascota.MACHO}</option>
         <option value={SexoMascota.HEMBRA}>{SexoMascota.HEMBRA}</option>
       </select>
-      <select
-        className="info--agregarMascotas"
-        value={size}
-        onChange={(e) => setSize(e.target.value)}
-        required
-      >
+      <select className="info--agregarMascotas" value={size} onChange={(e) => setSize(e.target.value)} required>
         <option value="">Selecciona el tamaño de tu mascota</option>
         <option value={TamañoMascota.PEQUEÑO}>{TamañoMascota.PEQUEÑO}</option>
         <option value={TamañoMascota.MEDIANO}>{TamañoMascota.MEDIANO}</option>
         <option value={TamañoMascota.GRANDE}>{TamañoMascota.GRANDE}</option>
       </select>
       <label className="info--agregarMascotas">Fecha de nacimiento:</label>
-      <input
-        className="info--agregarMascotas"
-        type="date"
-        value={birth}
-        onChange={(e) => setBirth(e.target.value)}
-        required
-      />
-      <select
-        className="info--agregarMascotas"
-        value={cas}
-        onChange={(e) => setCas(e.target.value)}
-        required
-      >
+      <input className="info--agregarMascotas" type="date" value={birth} onChange={(e) => setBirth(e.target.value)} required />
+      <select className="info--agregarMascotas" value={cas} onChange={(e) => setCas(e.target.value)} required>
         <option value="">¿Tu mascota está esterilizada/castrada?</option>
         <option value={PositivoNegativo.SI}>{PositivoNegativo.SI}</option>
         <option value={PositivoNegativo.NO}>{PositivoNegativo.NO}</option>
       </select>
-      <select
-        className="info--agregarMascotas"
-        value={vac}
-        onChange={(e) => setVac(e.target.value)}
-        required
-      >
+      <select className="info--agregarMascotas" value={vac} onChange={(e) => setVac(e.target.value)} required>
         <option value="">¿Tu mascota está vacunada?</option>
         <option value={PositivoNegativo.SI}>{PositivoNegativo.SI}</option>
         <option value={PositivoNegativo.NO}>{PositivoNegativo.NO}</option>
       </select>
-      <select
-        className="info--agregarMascotas"
-        value={amn}
-        onChange={(e) => setAmn(e.target.value)}
-        required
-      >
+      <select className="info--agregarMascotas" value={amn} onChange={(e) => setAmn(e.target.value)} required>
         <option value="">¿Tu mascota es amigable con niños?</option>
         <option value={PositivoNegativo.SI}>{PositivoNegativo.SI}</option>
         <option value={PositivoNegativo.NO}>{PositivoNegativo.NO}</option>
       </select>
-      <select
-        className="info--agregarMascotas"
-        value={amp}
-        onChange={(e) => setAmp(e.target.value)}
-        required
-      >
+      <select className="info--agregarMascotas" value={amp} onChange={(e) => setAmp(e.target.value)} required>
         <option value="">¿Tu mascota es amigable con perros?</option>
         <option value={PositivoNegativo.SI}>{PositivoNegativo.SI}</option>
         <option value={PositivoNegativo.NO}>{PositivoNegativo.NO}</option>
       </select>
-      <select
-        className="info--agregarMascotas"
-        value={amg}
-        onChange={(e) => setAmg(e.target.value)}
-        required
-      >
+      <select className="info--agregarMascotas" value={amg} onChange={(e) => setAmg(e.target.value)} required>
         <option value="">¿Tu mascota es amigable con gatos?</option>
         <option value={PositivoNegativo.SI}>{PositivoNegativo.SI}</option>
         <option value={PositivoNegativo.NO}>{PositivoNegativo.NO}</option>
       </select>
-      <input
-        className="info--agregarMascotas"
-        type="text"
-        placeholder="Enfermedades"
-        value={enf}
-        onChange={(e) => setEnf(e.target.value)}
-        required
-      />
+      <input className="info--agregarMascotas" type="text" placeholder="Enfermedades" value={enf} onChange={(e) => setEnf(e.target.value)} required />
       <textarea
         className="info--agregarMascotas, textarea"
         type="text"
@@ -262,19 +199,10 @@ const AgregarMascota = ({ addPet }) => {
         onChange={(e) => setDetails(e.target.value)}
         required
       />
-    <label htmlFor="file-upload" className="file-label-btn">
-    Agregar Imágenes
-</label>
-<input
-    id="file-upload"
-    className="info--agregarMascotas-btn"
-    type="file"
-    accept="image/*"
-    multiple
-    onChange={handleImageChange}
-    required
-/>
-
+      <label htmlFor="file-upload" className="file-label-btn">
+        Agregar Imágenes
+      </label>
+      <input id="file-upload" className="info--agregarMascotas-btn" type="file" accept="image/*" multiple onChange={handleImageChange} required />
 
       {/* Mostrar previsualización de las imágenes seleccionadas */}
       <div className="image-preview">
