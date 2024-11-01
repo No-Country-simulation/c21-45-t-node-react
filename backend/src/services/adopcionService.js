@@ -125,17 +125,41 @@ async deleteAdopcion(id) {
 // Aceptar una solicitud de adopción
 async acceptAdopcion(id) {
   try {
-    //Fecha de aprobación de adopción (día actual en formato date YYYY-MM-DD)
+    // Fecha de aprobación de adopción (día actual en formato date YYYY-MM-DD)
     const fecha_aprobacion = new Date().toISOString().slice(0, 10);
 
     // Estado de la solicitud de adopción
     const FK_Estado = 2;
 
-    const [result] = await pool.query(
+    // Actualizar el estado de la solicitud de adopción
+    const [adopcionResult] = await pool.query(
       `UPDATE Adopcion SET FK_Estado = ?, fecha_aprobacion = ? WHERE PK_Adopcion = ?`,
       [FK_Estado, fecha_aprobacion, id]
     );
-      return result.affectedRows;
+
+    if (adopcionResult.affectedRows === 0) {
+      throw new Error('No se encontró la solicitud de adopción con el ID proporcionado.');
+    }
+
+    // Obtener el FK_Mascota asociado con la solicitud de adopción
+    const [adopcionData] = await pool.query(
+      `SELECT FK_Mascota FROM Adopcion WHERE PK_Adopcion = ?`,
+      [id]
+    );
+
+    if (adopcionData.length === 0) {
+      throw new Error('No se encontró la mascota asociada a la solicitud de adopción.');
+    }
+
+    const FK_Mascota = adopcionData[0].FK_Mascota;
+
+    // Actualizar la tabla Mascota para establecer eliminada = 1
+    const [mascotaResult] = await pool.query(
+      `UPDATE Mascota SET eliminada = 1 WHERE PK_Mascota = ?`,
+      [FK_Mascota]
+    );
+
+    return mascotaResult.affectedRows;
   } catch (error) {
     throw new Error(`Error al aceptar solicitud de adopción: ${error.message}`);
   }
