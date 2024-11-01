@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./filtros.css";
 
 export const FiltrosAplicados = ({ filters, onRemoveFilter }) => (
@@ -15,10 +14,7 @@ export const FiltrosAplicados = ({ filters, onRemoveFilter }) => (
 );
 
 const Filtros = ({ filtro, onFilterChange, isActive, onToggle }) => {
-  const [selectedAttribute, setSelectedAttribute] = useState("");
-
   const handleSelectOption = (atributo) => {
-    setSelectedAttribute(atributo.display);
     onFilterChange(filtro.filtro.toLowerCase(), atributo);
     onToggle(); // Cierra el filtro después de seleccionar
   };

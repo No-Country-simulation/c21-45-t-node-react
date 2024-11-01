@@ -67,11 +67,12 @@
 
 /* Cuando se muestran las características, su altura se ajusta */
 .filtros.show-options .caracteristicas {
-  height: 110px; /* Ajusta la altura según la cantidad de contenido */
+  min-height: 110px; /* Ajusta la altura según la cantidad de contenido */
   /* margin-top: 130px; */
   transition: max-height 0.5s ease-in-out;
   border-bottom-left-radius: 18px;
   border-bottom-right-radius: 18px;
+  z-index: 1000;
 }
 .filtros .caracteristicas li {
   font-family: "Lilita One", sans-serif;

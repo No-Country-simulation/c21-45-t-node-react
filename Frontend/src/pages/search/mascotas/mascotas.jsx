@@ -23,7 +23,7 @@ const Mascotas = () => {
             return {
               ...filtro,
               atributos: response.data.map((ubicacion) => ({
-                display: `${ubicacion.localidad} ${ubicacion.provincia}`,
+                display: `${ubicacion.localidad}, ${ubicacion.provincia}`,
                 value: ubicacion.localidad,
               })),
             };
