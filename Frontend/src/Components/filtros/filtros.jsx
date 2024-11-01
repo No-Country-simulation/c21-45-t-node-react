@@ -1,33 +1,43 @@
-import { useState } from "react";
 import "./filtros.css";
 
-const Filtros = ({ filtro, onFilterChange }) => {
-  const [showOptions, setShowOptions] = useState(false);
-  const [selectedAttribute, setSelectedAttribute] = useState("");
+export const FiltrosAplicados = ({ filters, onRemoveFilter }) => (
+  <div className="filtros-aplicados">
+    {Object.entries(filters).map(([key, value]) => (
+      <div key={key} className="filtro-aplicado">
+        {value}
+        <span className="remove-filter" onClick={() => onRemoveFilter(key)}>
+          ✕
+        </span>
+      </div>
+    ))}
+  </div>
+);
 
-  const toggleOptions = () => {
-    setShowOptions(!showOptions);
-  };
-
+const Filtros = ({ filtro, onFilterChange, isActive, onToggle }) => {
   const handleSelectOption = (atributo) => {
-    setSelectedAttribute(atributo.display);
     onFilterChange(filtro.filtro.toLowerCase(), atributo);
-    setShowOptions(false);
+    onToggle(); // Cierra el filtro después de seleccionar
   };
 
   return (
-    <div className={`filtros ${showOptions ? "show-options" : ""}`} onClick={toggleOptions}>
+    <div className={`filtros ${isActive ? "show-options" : ""}`} onClick={onToggle}>
       <div className="content">
         <img src={filtro.imagen} alt="" />
         <h1>{filtro.titulo}</h1>
-        <p>{selectedAttribute ? selectedAttribute : <span className="placeholder"></span>}</p>
+        {/* <p>{selectedAttribute ? selectedAttribute : <span className="placeholder">Seleccionar</span>}</p> */}
       </div>
 
-      {showOptions && (
+      {isActive && (
         <div className="caracteristicas">
           <ul>
             {filtro.atributos.map((atributo, index) => (
-              <li key={index} onClick={() => handleSelectOption(atributo)}>
+              <li
+                key={index}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleSelectOption(atributo);
+                }}
+              >
                 {atributo.display}
               </li>
             ))}

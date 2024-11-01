@@ -221,7 +221,7 @@ function Solicitudes() {
                           : "Desconocido"}
                       </td>
                       <td>
-                        <button onClick={() => handleOpenModal(solicitud.PK_Adopcion)}>Cancelar</button>
+                        <button onClick={() => handleOpenModal(solicitud.PK_Adopcion)} disabled={solicitud.FK_Estado === 2}>Cancelar</button>
                       </td>
                     </tr>
                   ))

@@ -56,13 +56,23 @@
   position: absolute; /* Permite que el contenido se posicione sobre la nube */
 }
 
+.filtros .caracteristicas {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  padding: 10px;
+  margin-top: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
 /* Cuando se muestran las características, su altura se ajusta */
 .filtros.show-options .caracteristicas {
-  height: 110px; /* Ajusta la altura según la cantidad de contenido */
+  min-height: 110px; /* Ajusta la altura según la cantidad de contenido */
   /* margin-top: 130px; */
   transition: max-height 0.5s ease-in-out;
   border-bottom-left-radius: 18px;
   border-bottom-right-radius: 18px;
+  z-index: 1000;
 }
 .filtros .caracteristicas li {
   font-family: "Lilita One", sans-serif;
@@ -72,6 +82,17 @@
   color: #8c8c8c;
   text-decoration: none; /* Elimina cualquier subrayado en los textos */
   list-style-type: none; /* Elimina cualquier estilo de lista (viñetas, números) */
+}
+
+.filtros .caracteristicas li {
+  font-size: 18px;
+  color: #333;
+  cursor: pointer;
+  padding: 8px 0;
+}
+
+.filtros .caracteristicas li:hover {
+  background-color: #f1f1f1;
 }
 
 .filtros .caracteristicas li:last-child {
@@ -89,4 +110,42 @@
   font-size: 14px;
   color: #8c8c8c;
   margin-top: 0px; /* Ajusta el espacio entre el título y el atributo */
+}
+
+.filtros-aplicados-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-self: center;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.filtros-aplicados {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.filtro-aplicado {
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  padding: 4px 12px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  font-family: Manrope;
+}
+
+.remove-filter {
+  margin-left: 8px;
+  cursor: pointer;
+  color: #888;
+  padding: 8px;
+}
+
+.remove-filter:hover {
+  background-color: #f1f1f1;
 }
